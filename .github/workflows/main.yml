@@ -37,9 +37,17 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
 
     steps:
+      - name: Setup pages
+        uses: actions/configure-pages@v5
+        
       - name: Deploy Flask application
+        uses: actions/deploy-pages@v4.0.5
         run: |
-          nohup python3 main.py
+          nohup python3 main.py &
       
