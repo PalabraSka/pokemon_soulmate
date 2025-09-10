@@ -1,4 +1,4 @@
-from dorenv import load_dotenv
+from dotenv import load_dotenv
 from pprint import pprint
 import requests
 import os
