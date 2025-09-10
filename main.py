@@ -1,13 +1,10 @@
-from dorenv import load_dotenv
-from pprint import pprint
-import requests
-import os
+from flask import Flask, render_template, request
+from pokemon import get_pokemon
 
-load_dotenv()
+app = Flask(__name__)
 
-def get_pokemon(pokemon="pikachu"):
-  request_url = f'https://pokeapi.co/api/v2/pokemon/' + pokemon
-  pokemon_data = requests.get(request_url).json()
-
-  return pokemon_data
+@app.route('/')
+@app.route('/index')
+def index():
+  return "Hello World!"
 
