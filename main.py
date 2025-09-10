@@ -15,9 +15,9 @@ def get_pokemon():
   pokemon_data = get_pokemon(pokemon)
   return render_template(
     "pokemon.html",
-    name=pokemon_data["name"].capitalize()
-    sprite=pokemon_data["sprites"]["front_defaul"]
-    type1=pokemon_data["types"]["0"]["type"]["name"]
+    name=pokemon_data["name"].capitalize(),
+    sprite=pokemon_data["sprites"]["front_defaul"],
+    type1=pokemon_data["types"]["0"]["type"]["name"],
     type2="null"
   )
 
