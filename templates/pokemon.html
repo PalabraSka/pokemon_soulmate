@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}'s data</title>
+    <title>{{ name }}'s data</title>
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 
 <body>
-    <h1>{{ title }}'s data</h1>
-    <p>{{ type1 }}{{ type2}}</p>
+    <h1>{{ name }}'s data</h1>
+    <img src={{ sprite}} alt="{{ name }}'s front_sprite">
+    <p>{{ type1 }}</p>
     
     <form action="/pokemon">
         <input type="text" name="pokemon" id="pokemon" placeholder="Enter a pokemon" />
