@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Soulmate</title>
+    <title>{{ title }}'s data</title>
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 
 <body>
-    <h1>Get Pokemon</h1>
-    <form action="/weather">
+    <h1>{{ title }}'s data</h1>
+    <p>{{ type1 }}{{ type2}}</p>
+    
+    <form action="/pokemon">
         <input type="text" name="pokemon" id="pokemon" placeholder="Enter a pokemon" />
         <button type="submit">Submit</button>
     </form>
