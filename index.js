@@ -2,6 +2,7 @@ let encounters = ["ditto", "pikachu"];
 
 
 const encounters_div = document.getElementById("encounters_div")
+const encounter_name = document.getElementById("encounter_name")
 
 function load_encounters() {}
 
@@ -37,7 +38,18 @@ render_encounters()
 
 function save_encounters() {}
 
-function add_encounter() {}
+function add_encounter() {
+  const value = encounter_name.value;
+
+  if not(!value) {
+    alert("Not a pokemon !")
+    return
+  }
+
+  encounters.push(value)
+  render_encounter()
+  encounter_name.value = ""
+}
 
 function remove_encounter(idx) {
   encounters.splice(idx, 1)
