@@ -26,6 +26,7 @@ function render_encounters() {
     button_del.onclick = () => remove_encounter(idx)
 
     container.appendChild(text)
+    container.appendChild(button_edit)
     container.appendChild(button_del)
     
     encounters_div.appendChild(container)
