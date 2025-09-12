@@ -8,7 +8,7 @@ function load_encounters() {}
 function render_encounters() {
   encounters_div.innerHTML = null;
 
-  for (const [idx, item] of Object.entries(items)) {
+  for (const [idx, item] of Object.entries(encounters)) {
     const text = document.createElement("p")
     text.textContent = item;
     encounters_div.appendChild(text)
