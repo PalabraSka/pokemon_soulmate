@@ -4,6 +4,7 @@ let encounters = ["ditto", "pikachu"];
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
 
+
 function load_encounters() {}
 
 function render_encounters() {
@@ -34,8 +35,6 @@ function render_encounters() {
   }
 }
 
-render_encounters()
-
 function save_encounters() {}
 
 function add_encounter() {
@@ -47,7 +46,7 @@ function add_encounter() {
   }
 
   encounters.push(value)
-  render_encounter()
+  render_encounters()
   encounter_name.value = ""
 }
 
@@ -65,3 +64,6 @@ function reset_encouters() {
   render_encounters()
 }
 
+
+// tests
+render_encounters()
