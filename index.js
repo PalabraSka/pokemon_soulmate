@@ -1,7 +1,7 @@
 let encounters = ["ditto", "pikachu"];
 
 
-const encouters_div = document.getElementById("encouters")
+const encouters_div = document.getElementById("encouters_div")
 
 function load_encounters() {}
 
