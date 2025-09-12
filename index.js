@@ -1,4 +1,4 @@
-let encounters = ["ditto", "pikachu"];
+let encounters = [];
 
 
 const encounters_div = document.getElementById("encounters_div")
