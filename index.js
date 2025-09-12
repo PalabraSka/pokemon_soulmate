@@ -45,5 +45,10 @@ function remove_encounter(idx) {
 
 function edit_encounter(idx) {}
 
-function reset_encouters() {}
+function save_encounter(idx) {}
+
+function reset_encouters() {
+  encounters = []
+  render_encounters()
+}
 
