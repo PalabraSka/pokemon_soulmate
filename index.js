@@ -14,7 +14,7 @@ function render_encounters() {
     encounters_div.appendChild(text)
   }
 }
-
+#test
 render_encounters()
 
 function save_encounters() {}
