@@ -4,6 +4,7 @@ let encounters = [];
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
 const encounters_key = "encounters"
+const encounter_id = "encounter_"
 
 
 function load_encounters() {
@@ -12,7 +13,6 @@ function load_encounters() {
     encounters = JSON.parse(old_encounters)
     render_encounters()
   }
-  
 }
 
 function render_encounters() {
@@ -21,6 +21,7 @@ function render_encounters() {
   for (const [idx, item] of Object.entries(encounters)) {
     const container = document.createElement("div")
     container.style.marginBottom = "10px"
+    container.id = encounter_id + toString(idx)
     
     const text = document.createElement("p")
     text.textContent = item
@@ -69,7 +70,9 @@ function remove_encounter(idx) {
   save_encounters()
 }
 
-function edit_encounter(idx) {}
+function edit_encounter(idx) {
+  encounters[idx]
+}
 
 function save_encounter(idx) {}
 
