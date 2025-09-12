@@ -32,6 +32,7 @@ function render_encounters() {
     input.type = "text"
     input.id = encounter_id + toString(idx) + "_input"
     input.placeholder = item
+    input.textContent = item
     input.style.display = "inline"
     input.style.marginRight = "20px"
 
