@@ -23,10 +23,17 @@ function render_encounters() {
     container.style.marginBottom = "10px"
     container.id = encounter_id + toString(idx)
     
-    const text = document.createElement("p")
-    text.textContent = item
-    text.style.display = "inline"
-    text.style.marginRight = "10px"
+    //const text = document.createElement("input")
+    //text.textContent = item
+    //text.style.display = "inline"
+    //text.style.marginRight = "10px"
+
+    const input = document.createElement("input")
+    input.type = "text"
+    input.id = encounter_id + toString(idx) + "_input"
+    input.placeholder = item
+    input.style.display = "inline"
+    input.style.marginRight = "20px"
 
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
@@ -71,7 +78,7 @@ function remove_encounter(idx) {
 }
 
 function edit_encounter(idx) {
-  encounters[idx]
+  encounters[idx] = document.getElementById(encounter_id + toString(idx) + "_input").value
 }
 
 function save_encounter(idx) {}
