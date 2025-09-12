@@ -13,8 +13,14 @@ function render_encounters() {
     container.style.marginBottom = "10px"
     
     const text = document.createElement("p")
-    text.textContent = item;
+    text.textContent = item
+    text.style.display = "inline"
+    text.style.marginRight = "10px"
 
+    const button_edit = document.createElement("button")
+    button_edit.textContent = "edit"
+    button_edit.onclick = () => edit_encounter(idx)
+    
     const button_del = document.createElement("button")
     button_del.textContent = "delete"
     button_del.onclick = () => remove_encounter(idx)
@@ -33,6 +39,8 @@ function save_encounters() {}
 function add_encounter() {}
 
 function remove_encounter(idx) {}
+
+function edit_encounter(idx) {}
 
 function reset_encouters() {}
 
