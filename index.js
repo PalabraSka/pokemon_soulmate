@@ -40,7 +40,7 @@ function save_encounters() {}
 function add_encounter() {
   const value = encounter_name.value;
 
-  if not(!value) {
+  if (!value) {
     alert("Not a pokemon !")
     return
   }
