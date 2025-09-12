@@ -38,7 +38,10 @@ function save_encounters() {}
 
 function add_encounter() {}
 
-function remove_encounter(idx) {}
+function remove_encounter(idx) {
+  encounters.splice(idx, 1)
+  render_encounters()
+}
 
 function edit_encounter(idx) {}
 
