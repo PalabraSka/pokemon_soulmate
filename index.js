@@ -3,9 +3,17 @@ let encounters = ["ditto", "pikachu"];
 
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
+const encounters_key = "encounters"
 
 
-function load_encounters() {}
+function load_encounters() {
+  const old_encounters = localStorage.getItem(encounters_key)
+  if (old_encounters) {
+    encounters = JSON.parse(old_encounters)
+    render_encounters()
+  }
+  
+}
 
 function render_encounters() {
   encounters_div.innerHTML = null;
@@ -35,7 +43,11 @@ function render_encounters() {
   }
 }
 
-function save_encounters() {}
+function save_encounters() {
+  const string_encounters = JSON.stringify(encounters)
+
+  localStorage.setItem(encounters_key, string_encounters)
+}
 
 function add_encounter() {
   const value = encounter_name.value;
@@ -47,12 +59,14 @@ function add_encounter() {
 
   encounters.push(value)
   render_encounters()
+  save_encounters()
   encounter_name.value = ""
 }
 
 function remove_encounter(idx) {
   encounters.splice(idx, 1)
   render_encounters()
+  save_encounters()
 }
 
 function edit_encounter(idx) {}
@@ -65,5 +79,5 @@ function reset_encouters() {
 }
 
 
-// tests
-render_encounters()
+// loading
+document.addEventListener("DOMContentLoaded", load_encounters)
