@@ -1,12 +1,12 @@
 let encounters = ["ditto", "pikachu"];
 
 
-const encouters_div = document.getElementById("encouters_div")
+const encounters_div = document.getElementById("encounters_div")
 
 function load_encounters() {}
 
 function render_encounters() {
-  encouters_div.innerHTML = null;
+  encounters_div.innerHTML = null;
 
   for (const [idx, item] of Object.entries(items)) {
     const text = document.createElement("p")
