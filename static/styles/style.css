@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'PokemonClassic';
-    src: url('Pokemon Classic.ttf')
+    src: url('Pokemon Classic.ttf');
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'PokemonClassic' 
+    font-family: 'PokemonClassic';
 }
 
 body {
@@ -25,5 +25,5 @@ body {
 input, button {
     font-size: 2rem;
     padding: 1rem;
-    border-radius: 1000px;
+    border-radius: 10px;
 }
