@@ -20,8 +20,8 @@ function render_encounters() {
 
   for (const [idx, item] of Object.entries(encounters)) {
     const container = document.createElement("div")
-    container.id = encounter_id + toString(idx)
-    container.class = encounter_class
+    container.id = encounter_id + idx.toString()
+    container.className = encounter_class
     
     //const text = document.createElement("input")
     //text.textContent = item
@@ -30,21 +30,21 @@ function render_encounters() {
 
     const input = document.createElement("input")
     input.type = "text"
-    input.id = encounter_id + toString(idx) + "_input"
+    input.id = encounter_id + idx.toString() + "_input"
     input.placeholder = item
     input.value = item
     input.style.display = "inline"
-    input.class = encounter_class
+    input.className = encounter_class
 
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
     button_edit.onclick = () => edit_encounter(idx)
-    button_edit.class = encounter_class
+    button_edit.className = encounter_class
     
     const button_del = document.createElement("button")
     button_del.textContent = "delete"
     button_del.onclick = () => remove_encounter(idx)
-    button_del.class = encounter_class
+    button_del.className = encounter_class
 
     container.appendChild(input)
     container.appendChild(button_edit)
