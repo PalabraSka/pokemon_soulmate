@@ -1,13 +1,13 @@
+@font-face {
+    font-family: 'PokemonClassic'
+    src: url('static/styles/Pokemon Classic.ttf')
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font: 
-}
-
-@font-face {
-    font-family: 'PokemonClassic'
-    src: url('static/styles/Pokemon Classic.ttf')
+    font-family: 'PokemonClassic' 
 }
 
 body {
