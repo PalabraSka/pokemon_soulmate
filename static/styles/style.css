@@ -13,18 +13,43 @@
 body {
     padding: 2rem;
     background-color: #3333;
-    color: whitesmoke;
+    color: black;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    font-size: 2rem;
+    gap: 1rem;
+    font-size: 0.5rem;
 }
 
-input, button {
-    display: inline;
-    font-size: 2rem;
-    padding: 1rem;
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* encounter styles */
+.encounter {
+    font-size: 0.8rem;
+    padding: 0.5rem;
     border-radius: 10px;
+}
+
+div.encounter {
+    margin-bottom: 0.5rem;
+    padding: 5px;
+    border-radius: 12px;
+}
+
+div.encounter:hover {
+    background: #FEFEFE;
+}
+
+input.encounter {
+    display: inline;
+}
+
+button.encounter {
+    display: inline;
+    margin-left: 5px;
 }
