@@ -5,7 +5,7 @@ const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
 const encounters_key = "encounters"
 const encounter_id = "encounter_"
-
+const encounter_class = "encounter"
 
 function load_encounters() {
   const old_encounters = localStorage.getItem(encounters_key)
@@ -21,6 +21,7 @@ function render_encounters() {
   for (const [idx, item] of Object.entries(encounters)) {
     const container = document.createElement("div")
     container.id = encounter_id + toString(idx)
+    container.class = encounter_class
     
     //const text = document.createElement("input")
     //text.textContent = item
@@ -33,14 +34,17 @@ function render_encounters() {
     input.placeholder = item
     input.value = item
     input.style.display = "inline"
+    input.class = encounter_class
 
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
     button_edit.onclick = () => edit_encounter(idx)
+    button_edit.class = encounter_class
     
     const button_del = document.createElement("button")
     button_del.textContent = "delete"
     button_del.onclick = () => remove_encounter(idx)
+    button_del.class = encounter_class
 
     container.appendChild(input)
     container.appendChild(button_edit)
