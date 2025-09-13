@@ -23,6 +23,7 @@ body {
 }
 
 input, button {
+    display: inline;
     font-size: 2rem;
     padding: 1rem;
     border-radius: 10px;
