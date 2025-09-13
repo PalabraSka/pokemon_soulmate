@@ -20,7 +20,6 @@ function render_encounters() {
 
   for (const [idx, item] of Object.entries(encounters)) {
     const container = document.createElement("div")
-    container.style.marginBottom = "10px"
     container.id = encounter_id + toString(idx)
     
     //const text = document.createElement("input")
@@ -34,7 +33,6 @@ function render_encounters() {
     input.placeholder = item
     input.value = item
     input.style.display = "inline"
-    input.style.marginRight = "20px"
 
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
