@@ -41,7 +41,7 @@ img {
     z-index: 2;
 }
 
-#encounter_pop-up {
+#pop-up_encounter {
     background-color: rgba(1,1,1,0.7);
     width: 800px;
     height: 400px;
