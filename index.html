@@ -13,20 +13,28 @@
 </head>
 
 <body>
+    <!-- Pop up div -->
     <div class="pop-up" role="dialog" aria-modal="true">
+        
+        <!-- New encounter pop up / edit -->
         <div id="encounter_pop-up">
-            <input type="text" id="encounter_location" placeholder="Enter a pokemon" display="inline" />
+            <input type="text" id="encounter_location" placeholder="Location name" display="inline" />
             <input type="text" id="encounter_pokemon_1" placeholder="Enter a pokemon" display="inline" />
-            <input type="text" id="encounter_name" placeholder="Enter a pokemon" display="inline" />
+            <input type="text" id="encounter_name" placeholder="Pokemons nickname" display="inline" />
             <input type="text" id="encounter_pokemon_2" placeholder="Enter a pokemon" display="inline" />
         </div>
     </div>
+
+    <!-- Title -->
     <h1>Pokemon Soulmate</h1>
+
+    <!-- Encounters list divs -->
     <h2>Encounters</h2>
     <div id="encounters_div"></div>
     <input type="text" name="pokemon" id="encounter_name" placeholder="Enter a pokemon" display="inline" />
     <button onclick="add_encounter()">New encounter</button>
 
+    <!-- script -->
     <script src="index.js"></script>
 </body>
 
@@ -34,7 +42,7 @@
     <span>Made by <strong>Ska</strong></span>
     <br>
         All content &amp; design © Pokémon Soulmate, 2025. <a href="LICENSE">GNU GENERAL PUBLIC LICENSE</a>
-    <br class="hidden md:block">
+    <br>
   Pokémon images &amp; names © 1995-2025 Nintendo/Creatures Inc./GAME FREAK inc. TM
 </footer>
     
