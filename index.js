@@ -1,5 +1,11 @@
 let encounters = [];
 
+const encounter = {
+  location: "",
+  name: "",
+  pokemon_1: "",
+  pokemon_2: ""
+}
 
 const pop_up = document.getElementById("pop-up_main")
 const pop_up_encounter = document.getElementById("pop-up_encounter")
@@ -10,16 +16,6 @@ const encounters_key = "encounters"
 const encounter_id = "encounter_"
 const encounter_class = "encounter"
 
-function load_encounters() {
-  const old_encounters = localStorage.getItem(encounters_key)
-  if (old_encounters) {
-    encounters = JSON.parse(old_encounters)
-    render_encounters()
-  }
-
-  pop_up.style.display = "none"
-  pop_up_encounter.style.display = "none"
-}
 
 function render_encounters() {
   encounters_div.innerHTML = null;
@@ -60,12 +56,32 @@ function render_encounters() {
   }
 }
 
+
+// Load and save data
 function save_encounters() {
   const string_encounters = JSON.stringify(encounters)
 
   localStorage.setItem(encounters_key, string_encounters)
 }
 
+function load_encounters() {
+  const old_encounters = localStorage.getItem(encounters_key)
+  if (old_encounters) {
+    encounters = JSON.parse(old_encounters)
+    render_encounters()
+  }
+
+  pop_up.style.display = "none"
+  pop_up_encounter.style.display = "none"
+}
+
+function reset_encouters() {
+  encounters = []
+  render_encounters()
+}
+
+
+// New encounter / edit / remove encounter process
 function open_encounter(idx = -1) {
   if (idx < 0) {}
   pop_up.style.display = "block"
@@ -101,11 +117,5 @@ function save_encounter(idx = -1) {
   encounter_name.value = ""
 }
 
-function reset_encouters() {
-  encounters = []
-  render_encounters()
-}
-
-
-// loading
+// loading page
 document.addEventListener("DOMContentLoaded", load_encounters)
