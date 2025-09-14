@@ -1,8 +1,8 @@
 let encounters = [];
 
 
-const pop_up = document.getElementById("pop-up")
-const pop_up_encounter = document.getElementById("encounter_pop-up")
+const pop_up = document.getElementById("pop-up_main")
+const pop_up_encounter = document.getElementById("pop-up_encounter")
 
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
