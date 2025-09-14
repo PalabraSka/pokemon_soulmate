@@ -103,8 +103,21 @@ function load_pokedex() {
   if (!api_request.ok) {
     throw new Error('Failed to retrieve JSON at "https://pokeapi.co/". Response status : ${api_request.status}') 
   }
+}
+
+function update_pokedex() {
+  const api_request
+  const pokedex_gen_1 = []
+  
+  
 
   
+  const pokedex_gen_2 = []
+  const pokedex_gen_3 = []
+  const pokedex_gen_4 = []
+  const pokedex_gen_5 = []
+  const pokedex_gen_6 = []
+  const pokedex_gen_7 = []
   
 }
 
