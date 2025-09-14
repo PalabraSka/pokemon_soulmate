@@ -19,9 +19,14 @@
         <!-- New encounter pop up / edit -->
         <div id="pop-up_encounter">
             <input type="text" id="encounter_location" placeholder="Location name" display="inline" />
-            <input type="text" id="encounter_pokemon_1" placeholder="Enter a pokemon" display="inline" />
+            <input type="text-input" id="encounter_pokemon_1" placeholder="Enter a pokemon" list="pokedex" display="inline" />
             <input type="text" id="encounter_name" placeholder="Pokemons nickname" display="inline" />
-            <input type="text" id="encounter_pokemon_2" placeholder="Enter a pokemon" display="inline" />
+            <input type="text" id="encounter_pokemon_2" placeholder="Enter a pokemon" list="pokedex" display="inline" />
+
+            <datalist id="pokedex">
+                <option value="ditto"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"></option>
+                <option value="pikechu"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"></option>
+            </datalist>
             <button onclick="close_encounter()">cancel</button>
             <button onclick="save_encounter()">save</button>
         </div>
