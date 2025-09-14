@@ -1,10 +1,16 @@
 let encounters = [];
 
+const pokemon = {
+  sprite: "",
+  type1: null,
+  type2: null
+}
+
 const encounter = {
   location: "",
   name: "",
-  pokemon_1: "",
-  pokemon_2: ""
+  pokemon_1: Object.create(pokemon),
+  pokemon_2: Object.create(pokemon)
 }
 
 const pop_up = document.getElementById("pop-up_main")
