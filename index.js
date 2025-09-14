@@ -72,6 +72,11 @@ function open_encounter(idx = -1) {
   pop_up_encounter.style.display = "block"
 }
 
+function close_encounter() {
+  pop_up.style.display = "none"
+  pop_up_encounter.style.display = "none"
+}
+
 function remove_encounter(idx) {
   encounters.splice(idx, 1)
   render_encounters()
