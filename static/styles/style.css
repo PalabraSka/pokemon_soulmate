@@ -11,7 +11,6 @@
 }
 
 body {
-    padding: 2rem;
     background-color: #3333;
     color: black;
     min-height: 100vh;
@@ -27,6 +26,25 @@ footer {
     flex-direction: column;
     align-items: center;
 }
+
+/* pop-ups */
+.pop-up {
+    background: rgba(1,1,1,0.7);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    padding: 1rem;
+    z-index: 2;
+}
+
+#encounter_pop-up {
+    padding: 2rem;
+   
+}
+
 
 /* encounter styles */
 .encounter {
