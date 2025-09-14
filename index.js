@@ -1,4 +1,5 @@
-let encounters = [];
+let encounters = []
+let pokedex = []
 
 const pokemon = {
   sprite: "",
@@ -21,6 +22,9 @@ const encounter_name = document.getElementById("encounter_name")
 const encounters_key = "encounters"
 const encounter_id = "encounter_"
 const encounter_class = "encounter"
+
+const pokedex_key = "pokedex"
+const pokedex_link = "https://pokeapi.co/api/v2/pokemon/"
 
 
 function render_encounters() {
@@ -84,6 +88,24 @@ function load_encounters() {
 function reset_encouters() {
   encounters = []
   render_encounters()
+}
+
+// Load pokedex
+function load_pokedex() {
+  pokedex = localStorage.getItem(pokedex_key)
+  
+  if (pokedex) {
+    return
+  }
+  
+  const api_request = fetch(pokedex_link)
+  
+  if (!api_request.ok) {
+    throw new Error('Failed to retrieve JSON at "https://pokeapi.co/". Response status : ${api_request.status}') 
+  }
+
+  
+  
 }
 
 
