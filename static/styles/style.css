@@ -67,8 +67,8 @@ h1 {
     text-align: center;
 }
 
-#encounter_name {
-    display:block;
+.encounter_pokemon {
+    display: block;
 }
 
 #encounter_pokemon_1 {
@@ -80,6 +80,11 @@ h1 {
     display: block;
     margin-left: auto;
 }
+
+#encounter_name {
+    display:block;
+}
+
 
 /* encounter styles */
 .encounter {
