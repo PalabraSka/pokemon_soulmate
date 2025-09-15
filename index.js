@@ -89,7 +89,7 @@ function reset_encouters() {
 
 function load_page() {
   close_encounter()
-  load_encounter()
+  load_encounters()
 }
 
 // Load pokedex
