@@ -59,6 +59,27 @@ h1 {
    
 }
 
+/* position of pop encounter elements */
+#encounter_location {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+}
+
+#encounter_name {
+    display:block;
+}
+
+#encounter_pokemon_1 {
+    display: inline;
+    margin-right: auto;
+}
+
+#encounter_pokemon_2 {
+    display: block;
+    margin-left: auto;
+}
 
 /* encounter styles */
 .encounter {
