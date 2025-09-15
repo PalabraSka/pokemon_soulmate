@@ -80,9 +80,6 @@ function load_encounters() {
     encounters = JSON.parse(old_encounters)
     render_encounters()
   }
-
-  pop_up.style.display = "none"
-  pop_up_encounter.style.display = "none"
 }
 
 function reset_encouters() {
@@ -111,12 +108,7 @@ function load_pokedex() {
 }
 
 function update_pokedex() {
-  const api_request
   const pokedex_gen_1 = []
-  
-  
-
-  
   const pokedex_gen_2 = []
   const pokedex_gen_3 = []
   const pokedex_gen_4 = []
