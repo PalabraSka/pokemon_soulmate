@@ -90,6 +90,11 @@ function reset_encouters() {
   render_encounters()
 }
 
+function load_page() {
+  close_encounter()
+  load_encounter()
+}
+
 // Load pokedex
 function load_pokedex() {
   pokedex = localStorage.getItem(pokedex_key)
@@ -159,4 +164,4 @@ function save_encounter(idx = -1) {
 }
 
 // loading page
-document.addEventListener("DOMContentLoaded", load_encounters)
+document.addEventListener("DOMContentLoaded", load_page)
