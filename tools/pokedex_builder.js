@@ -1,22 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+const api_url = "https://pokeapi.co/api/v2/"
+const generation_url = "generation/"
+const generations = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ name }}'s data</title>
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-</head>
+const pokemon = {
+  sprite: "",
+  species: "",
+  type1: null,
+  type2: null
+}
 
-<body>
-    <h1>{{ name }}'s data</h1>
-    <img src={{ sprite}} alt="{{ name }}'s front_sprite">
-    <p>{{ type1 }}</p>
+function build_pokedex(generation) {
+    if (generation < 0 || generation >= generations.length) {
+        return
+    }
+
+    var pokedex = []
+    const nb_species = count_species(generation)
     
-    <form action="/pokemon">
-        <input type="text" name="pokemon" id="pokemon" placeholder="Enter a pokemon" />
-        <button type="submit">Submit</button>
-    </form>
-</body>
+}
 
-</html>
+function count_species(generation) {
+    var current_gen = 0
+    
+    while (current_gen <= generation) {
+        var nb_species = 0
+        
+        fetch(api_url + generation_url + generations[current_gen])
+            .then(response => response.json())
+            .then(function(pokemon_species){
+                nb_species = nb_species + pokemon_species.length
+            })
+              
+        current_gen = ++current_gen
+    }
+
+    return nb_species
+}
+
+function fetch_json(link) {
+    if (!typeof link === 'string'){
+        return null
+    }
+    
+    let result
+    fetch(link)
+        .then(res => res.json())
+        .then(data => {
+            result = data
+        })
+    return result
+}
