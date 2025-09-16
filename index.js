@@ -3,6 +3,7 @@ let pokedex = []
 
 const pokemon = {
   sprite: "",
+  species: "",
   type1: null,
   type2: null
 }
@@ -16,6 +17,9 @@ const encounter = {
 
 const pop_up = document.getElementById("pop-up_main")
 const pop_up_encounter = document.getElementById("pop-up_encounter")
+
+const pop_up_encounter_location = document.getElementById("encounter_location")
+const pop_up_encounter_
 
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
@@ -50,7 +54,7 @@ function render_encounters() {
 
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
-    button_edit.onclick = () => edit_encounter(idx)
+    button_edit.onclick = () => open_encounter(idx)
     button_edit.className = encounter_class
     
     const button_del = document.createElement("button")
@@ -121,7 +125,9 @@ function update_pokedex() {
 
 // New encounter / edit / remove encounter process
 function open_encounter(idx = -1) {
-  if (idx < 0) {}
+  if (idx < 0) {
+    
+  }
   pop_up.style.display = "block"
   pop_up_encounter.style.display = "block"
 }
