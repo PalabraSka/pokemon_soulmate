@@ -47,8 +47,8 @@ h1 {
 
 #pop-up_encounter {
     background-color: rgba(1,1,1,0.7);
-    width: 800px;
-    height: 400px;
+    width: 690px;
+    height: 310px;
     position: absolute;
     top:0;
     bottom: 0;
@@ -116,6 +116,20 @@ h1 {
 .encounter_pokemon_input {
     width: 200px;
     margin-top: 10px;
+}
+
+.encounter_button {
+    position: absolute;
+    top: 250px;
+    width: 80px;
+}
+
+#encounter_button_save {
+    left: 260px;    
+}
+
+#encounter_button_cancel {
+    left: 350px;
 }
 
 /* encounter styles */
