@@ -48,14 +48,17 @@ function build_pokedex(generation) {
     .then(response => response.json())
     .then(function(allpokemon) {
       allpokemon.results.forEach(function(pokemon) {
-        fetch_pokemon_data(pokemon, generation)
+        pokedex.append(fetch_pokemon_data(pokemon, generation))
       })
     })
   
+  const string_pokedex = JSON.stringify(pokedex)
+  localStorage.setItem(generations[generation], string_pokedex)
 }
 
 function fetch_pokemon_data(pokemon, gen) {
   let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
+  let new_pokemon
   
   fetch(url)
     .then(response => response.json())
@@ -65,8 +68,10 @@ function fetch_pokemon_data(pokemon, gen) {
         const new_species = get_first_evolution(pokeData)
         const new_type1 = get_type_1(pokeData, gen)
         const new_type2 = get_type_2(pokeData, gen)
-        const new_pokemon = new pokemon_(new_name, new_sprite, new_species, new_type1, new_type2)
+        new_pokemon = new pokemon_(new_name, new_sprite, new_species, new_type1, new_type2)
     })
+
+  return new_pokemon
 }
 
 function get_first_evolution(pokemon){
