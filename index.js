@@ -19,7 +19,16 @@ const pop_up = document.getElementById("pop-up_main")
 const pop_up_encounter = document.getElementById("pop-up_encounter")
 
 const pop_up_encounter_location = document.getElementById("encounter_location")
-const pop_up_encounter_
+const pop_up_encounter_name = document.getElementById("encounter_name")
+const pop_up_encounter_pokemon1 = document.getElementById("encounter_pokemon_1")
+const pop_up_encounter_pokemon1_img = document.getElementById("encounter_pokemon_1_img")
+const pop_up_encounter_pokemon1_type1 = document.getElementById("encounter_pokemon_1_type_1")
+const pop_up_encounter_pokemon1_type2 = document.getElementById("encounter_pokemon_1_type_2")
+const pop_up_encounter_pokemon2 = document.getElementById("encounter_pokemon_2")
+const pop_up_encounter_pokemon2_img = document.getElementById("encounter_pokemon_2_img")
+const pop_up_encounter_pokemon2_type1 = document.getElementById("encounter_pokemon_2_type_1")
+const pop_up_encounter_pokemon2_type2 = document.getElementById("encounter_pokemon_2_type_2")
+const pop_up_encounter_state = document.getElementById("encounter_state")
 
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
