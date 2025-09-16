@@ -148,3 +148,5 @@ function fetch_json(link) {
         })
     return result
 }
+
+render_page()
