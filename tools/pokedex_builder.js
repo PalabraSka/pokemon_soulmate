@@ -6,10 +6,10 @@ const encounters_div = document.getElementById("encounters_div")
 
 function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
   this.name = pk_name
-  this.sprite: pk_sprite
-  this.species: pk_species
-  this.type1: pk_type1
-  this.type2: pk_type2
+  this.sprite = pk_sprite
+  this.species = pk_species
+  this.type1 = pk_type1
+  this.type2 = pk_type2
 }
 
 function render_page() {
