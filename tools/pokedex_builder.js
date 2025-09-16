@@ -20,10 +20,10 @@ function render_page() {
     container.className = encounter_class
     
     const text = document.createElement("p")
-    input.id = i
-    input.value = generations[i]
-    input.style.display = "inline"
-    input.className = encounter_class
+    text.id = i
+    text.value = generations[i]
+    text.style.display = "inline"
+    text.className = encounter_class
 
     const button_create = document.createElement("button")
     button_create.textContent = "edit"
