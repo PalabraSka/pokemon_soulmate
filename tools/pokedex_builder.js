@@ -13,7 +13,7 @@ function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
 }
 
 function render_page() {
-  for (let i = 0; i < generation.length; i++) {
+  for (let i = 0; i < generations.length; i++) {
     const container = document.createElement("div")
     container.id = i
     container.className = encounter_class
