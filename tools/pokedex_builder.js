@@ -9,6 +9,12 @@ const pokemon = {
   type2: null
 }
 
+function render_page() {
+  for (let i = 0; i < generation.length; i++) {
+    const text 
+  }
+}
+
 function build_pokedex(generation) {
     if (generation < 0 || generation >= generations.length) {
         return
