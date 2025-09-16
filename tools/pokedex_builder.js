@@ -26,8 +26,8 @@ function render_page() {
     text.className = encounter_class
 
     const button_create = document.createElement("button")
-    button_create.textContent = "edit"
-    button_create.onclick = () => build_pokedex(idx)
+    button_create.textContent = "download"
+    button_create.onclick = () => build_pokedex(i)
     button_create.className = encounter_class
     
     container.appendChild(text)
