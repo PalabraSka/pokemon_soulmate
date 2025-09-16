@@ -21,7 +21,7 @@ function render_page() {
     
     const text = document.createElement("p")
     text.id = i
-    text.appendChild(generations[i])
+    text.appendChild(document.createTextNode(generations[i]))
     text.style.display = "inline"
     text.className = encounter_class
 
