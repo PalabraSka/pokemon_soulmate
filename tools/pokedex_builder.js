@@ -89,7 +89,7 @@ function get_first_evolution(pokemon){
           species = pokeData2.chain.species.name
         })
       }
-    }
+    })
   return species
 }
 
