@@ -1,6 +1,13 @@
 let encounters = []
 let pokedex = []
 
+const current_run = {
+  name: "",
+  generation: "",
+  pokedex: "",
+  encounters = []
+}
+  
 const pokemon = {
   sprite: "",
   species: "",
@@ -12,7 +19,8 @@ const encounter = {
   location: "",
   name: "",
   pokemon_1: Object.create(pokemon),
-  pokemon_2: Object.create(pokemon)
+  pokemon_2: Object.create(pokemon),
+  alive: true
 }
 
 const pop_up = document.getElementById("pop-up_main")
