@@ -136,7 +136,7 @@ function count_species(generation) {
         fetch(api_url + generation_url + generations[current_gen])
             .then(response => response.json())
             .then(function(pokemon_gen){
-                console.log(pokemon_species)
+                console.log(pokemon_gen.pokemon_species)
                 nb_species = nb_species + pokemon_gen.pokemon_species.length
             })
               
