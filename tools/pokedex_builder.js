@@ -75,19 +75,15 @@ function fetch_pokemon_data(pokemon, gen) {
     .then(function(pokeData){
         const new_name = pokeData.species.name
         const new_sprite = pokeData.sprites.front_default
-        const new_species = get_first_evolution(pokeData)
         const new_type1 = get_type_1(pokeData, gen)
         const new_type2 = get_type_2(pokeData, gen)
-        new_pokemon = new pokemon_(new_name, new_sprite, new_species, new_type1, new_type2)
-        console.log(new_pokemon)
-        pokedex.push(new_pokemon)
+        new_pokemon = new pokemon_(new_name, new_sprite, null, new_type1, new_type2)
+        const new_species = get_first_evolution(pokeData, gen, new_pokemon)
     })
   return new_pokemon
 }
 
-function get_first_evolution(pokemon){
-  let species
-  
+function get_first_evolution(pokemon, gen, poke_obj){
   fetch(pokemon.species.url)
     .then(response => response.json())
     .then(function(pokeData){
@@ -97,11 +93,12 @@ function get_first_evolution(pokemon){
         fetch(pokeData.evolution_chain.url)
         .then(response => response.json())
         .then(function(pokeData2) {
-          species = pokeData2.chain.species.name
+          poke_obj.species = pokeData2.chain.species.name
+          console.log(poke_obj)
+          pokedex.push(poke_obj)
         })
       }
     })
-  return species
 }
 
 function get_type_1(pokemon, gen) {
