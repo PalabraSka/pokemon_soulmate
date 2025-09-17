@@ -16,13 +16,14 @@ function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
 function render_page() {
   for (let i = 0; i < generations.length; i++) {
     const container = document.createElement("div")
-    container.id = i
+    container.id = i.toString()
     container.className = encounter_class
     
     const text = document.createElement("p")
-    text.id = i
+    text.id = i.toString()
     text.appendChild(document.createTextNode(generations[i]))
     text.style.display = "inline"
+    text.width = "200px";
     text.className = encounter_class
 
     const button_create = document.createElement("button")
