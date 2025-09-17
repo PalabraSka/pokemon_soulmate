@@ -5,6 +5,8 @@ const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
 const encounter_class = "encounter"
 const encounters_div = document.getElementById("encounters_div")
 
+let pokedex = []
+
 function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
   this.name = pk_name
   this.sprite = pk_sprite
@@ -43,7 +45,7 @@ function build_pokedex(generation) {
     return
   }
 
-  var pokedex = []
+  pokedex = []
   const nb_species = count_species(generation)
   console.log(nb_species)
 
@@ -52,7 +54,7 @@ function build_pokedex(generation) {
     .then(function(allpokemon) {
       console.log(allpokemon.results)
       allpokemon.results.forEach(function(pokemon) {
-        pokedex.push(fetch_pokemon_data(pokemon, generation))
+        fetch_pokemon_data(pokemon, generation)
       })
     })
   
@@ -74,6 +76,7 @@ function fetch_pokemon_data(pokemon, gen) {
         const new_type1 = get_type_1(pokeData, gen)
         const new_type2 = get_type_2(pokeData, gen)
         new_pokemon = new pokemon_(new_name, new_sprite, new_species, new_type1, new_type2)
+        pokedex.push(new_pokemon)
     })
 
   console.log(new_pokemon)
