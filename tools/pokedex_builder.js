@@ -23,7 +23,7 @@ function render_page() {
     text.id = i.toString()
     text.appendChild(document.createTextNode(generations[i]))
     text.style.display = "inline"
-    text.width = "200px";
+    text.width = "250px";
     text.className = encounter_class
 
     const button_create = document.createElement("button")
