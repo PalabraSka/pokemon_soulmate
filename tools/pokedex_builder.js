@@ -55,6 +55,7 @@ function build_pokedex(generation) {
     })
   
   const string_pokedex = JSON.stringify(pokedex)
+  console.log(string_pokedex)
   download_pokedex(string_pokedex, generations[generation])
 }
 
@@ -73,6 +74,7 @@ function fetch_pokemon_data(pokemon, gen) {
         new_pokemon = new pokemon_(new_name, new_sprite, new_species, new_type1, new_type2)
     })
 
+  console.log(new_pokemon)
   return new_pokemon
 }
 
