@@ -1,7 +1,7 @@
 const api_url = "https://pokeapi.co/api/v2/"
 const generation_url = "generation/"
 const generations = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
-const generations_nb = [5, 100, 135, 107, 156, 72, 88, 96, 120]
+const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
 const encounter_class = "encounter"
 const encounters_div = document.getElementById("encounters_div")
 
