@@ -45,6 +45,7 @@ function build_pokedex(generation) {
 
   var pokedex = []
   const nb_species = count_species(generation)
+  console.log(nb_species)
 
   fetch(api_url + "/pokemon?limit=" + nb_species.toString())
     .then(response => response.json())
@@ -135,6 +136,7 @@ function count_species(generation) {
         fetch(api_url + generation_url + generations[current_gen])
             .then(response => response.json())
             .then(function(pokemon_species){
+                console.log(pokemon_species)
                 nb_species = nb_species + pokemon_species.length
             })
               
@@ -142,20 +144,6 @@ function count_species(generation) {
     }
 
     return nb_species
-}
-
-function fetch_json(link) {
-    if (!typeof link === 'string'){
-        return null
-    }
-    
-    let result
-    fetch(link)
-        .then(res => res.json())
-        .then(data => {
-            result = data
-        })
-    return result
 }
 
 function download_pokedex(exportObj, exportName){
