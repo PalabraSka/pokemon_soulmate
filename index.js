@@ -5,7 +5,7 @@ const current_run = {
   name: "",
   generation: "",
   pokedex: "",
-  encounters = []
+  encounters: []
 }
   
 const pokemon = {
