@@ -6,6 +6,7 @@ const encounter_class = "encounter"
 const encounters_div = document.getElementById("encounters_div")
 
 let pokedex = []
+let dex_size = 0
 
 function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
   this.name = pk_name
@@ -47,6 +48,7 @@ function build_pokedex(generation) {
 
   pokedex = []
   const nb_species = count_species(generation)
+  dex_size = nb_species
   console.log(nb_species)
 
   fetch(api_url + "/pokemon?limit=" + nb_species.toString())
@@ -57,7 +59,10 @@ function build_pokedex(generation) {
         fetch_pokemon_data(pokemon, generation)
       })
     })
+
+  while (pokedex.length < dex_size) {
   
+  }
   const string_pokedex = JSON.stringify(pokedex)
   console.log(string_pokedex)
   download_pokedex(string_pokedex, generations[generation])
