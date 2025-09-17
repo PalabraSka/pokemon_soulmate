@@ -80,7 +80,6 @@ function fetch_pokemon_data(pokemon, gen) {
         new_pokemon = new pokemon_(new_name, new_sprite, null, new_type1, new_type2)
         const new_species = get_first_evolution(pokeData, gen, new_pokemon)
     })
-  return new_pokemon
 }
 
 function get_first_evolution(pokemon, gen, poke_obj){
@@ -148,8 +147,9 @@ function check_dex_size(generation) {
     window.setTimeout(check_dex_size, 100); /* this checks the flag every 100 milliseconds*/
   } else {
     const string_pokedex = JSON.stringify(pokedex)
-    console.log(string_pokedex)
-    download_pokedex(string_pokedex, generations[generation])
+    console.log(pokedex)
+    console.log(generation)
+    download_pokedex(pokedex, generations[generation])
   }
 }
 
