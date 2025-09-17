@@ -152,5 +152,28 @@ function save_encounter(idx = -1) {
   encounter_name.value = ""
 }
 
+// TAB MANAGEMENT
+function open_tab(evt, tab_name) {
+  // Declare all variables
+  var i, tab, tablink;
+
+  // Get all elements with class="tabcontent" and hide them
+  tab = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tab[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablink = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablink[i].className = tablink[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tab_name).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+
 // loading page
 document.addEventListener("DOMContentLoaded", load_page)
