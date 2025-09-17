@@ -42,15 +42,34 @@
             <button class="encounter_button" id="encounter_button_cancel" onclick="close_encounter()">cancel</button>
             <button class="encounter_button" id="encounter_button_save" onclick="save_encounter()">save</button>
         </div>
+
+        <!-- Menu pop up -->
+        <div id="pop-up_menu">
+        </div>
+        
     </div>
 
-    <!-- Title -->
-    <h1>Pokemon Soulmate</h1>
-
-    <!-- Encounters list divs -->
-    <h2>Encounters</h2>
-    <div id="encounters_div"></div>
-    <button onclick="open_encounter()">New encounter</button>
+    <!-- Title + header -->
+    <div class="header_main">
+        <h1>Pokemon Soulmate</h1>
+        <div class="tabs">
+            <button class="tablinks" onclick="open_tab(event, 'encounters)">encounters</button>
+            <button class="tablinks" onclick="open_tab(event, 'Paris')">teams</button>
+        </div>
+    </div>
+    
+    <!-- Encounters tab -->
+    <div class="tab" id="tab_encounters">
+        <div id="encounters_div">
+        </div>
+        <button onclick="open_encounter()">New encounter</button>
+    </div>
+    
+    <!-- Teams tab -->
+    <div class="tab" id="tab_encounters">
+        <p>teams !!</p>
+        <button onclick="open_encounter()">New encounter</button>
+    </div>
 
     <!-- script -->
     <script src="index.js"></script>
@@ -58,8 +77,6 @@
 
 <footer>
     <span>Made by <strong>Ska</strong></span>
-    <br>
-        <a href="tools/pokedex_builder.html">Pokedex builder tool</a>
     <br>
         All content &amp; design (c) Pokémon Soulmate, 2025. <a href="LICENSE">GNU GENERAL PUBLIC LICENSE</a>
     <br>
