@@ -117,11 +117,11 @@ function get_type_2(pokemon, gen) {
           return pokemon.past_types["0"].types[1].type.name
         }
       }
-    }
-    return null
+      return null
+    }    
   }
-  if (pokemon.types["0"].type["1"]) {
-    return pokemon.types["0"].type.name
+  if (pokemon.types["1"].type) {
+    return pokemon.types["1"].type.name
   }
   return null
 }
