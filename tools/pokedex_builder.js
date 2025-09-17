@@ -49,6 +49,7 @@ function build_pokedex(generation) {
   fetch(api_url + "/pokemon?limit=" + nb_species.toString())
     .then(response => response.json())
     .then(function(allpokemon) {
+      console.log(allpokemon.results)
       allpokemon.results.forEach(function(pokemon) {
         pokedex.push(fetch_pokemon_data(pokemon, generation))
       })
