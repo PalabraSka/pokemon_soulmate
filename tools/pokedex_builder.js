@@ -120,7 +120,7 @@ function get_type_2(pokemon, gen) {
       return null
     }    
   }
-  if (pokemon.types["1"].type) {
+  if (pokemon.types.length > 1) {
     return pokemon.types["1"].type.name
   }
   return null
