@@ -96,16 +96,20 @@ function get_first_evolution(pokemon){
 }
 
 function get_type_1(pokemon, gen) {
-  if (pokemon.past_types && is_this_gen_included(pokemon.past_types[0].generation.name, gen)) {
-    return pokemon.past_types[0].types[0].type.name
+  if (pokemon.past_types[0]) {
+    if (is_this_gen_included(pokemon.past_types[0].generation.name, gen)) {
+      return pokemon.past_types[0].types[0].type.name
+    }
   }
   return pokemon.types[0].type.name
 }
 
 function get_type_2(pokemon, gen) {
-  if (pokemon.past_types && is_this_gen_included(pokemon.past_types[0].generation.name, gen)) {
-    if (!pokemon.past_types[0].types[1].type.name) {
-      return pokemon.past_types[0].types[1].type.name
+  if (pokemon.past_types[0]) {
+    if (is_this_gen_included(pokemon.past_types[0].generation.name, gen)) {
+      if (!pokemon.past_types[0].types[1].type.name) {
+        return pokemon.past_types[0].types[1].type.name
+      }
     }
     return null
   }
