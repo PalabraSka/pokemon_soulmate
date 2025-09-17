@@ -60,12 +60,7 @@ function build_pokedex(generation) {
       })
     })
 
-  while (pokedex.length < dex_size) {
-  
-  }
-  const string_pokedex = JSON.stringify(pokedex)
-  console.log(string_pokedex)
-  download_pokedex(string_pokedex, generations[generation])
+  check_dex_size(generation)
 }
 
 function fetch_pokemon_data(pokemon, gen) {
@@ -146,6 +141,16 @@ function count_species(generation) {
     }
 
     return nb_species
+}
+
+function check_dex_size(generation) {
+  if(flag === false) {
+    window.setTimeout(check_dex_size, 100); /* this checks the flag every 100 milliseconds*/
+  } else {
+    const string_pokedex = JSON.stringify(pokedex)
+    console.log(string_pokedex)
+    download_pokedex(string_pokedex, generations[generation])
+  }
 }
 
 function download_pokedex(exportObj, exportName){
