@@ -144,11 +144,10 @@ function count_species(generation) {
 
 function check_dex_size(generation) {
   if(pokedex.length < dex_size) {
-    window.setTimeout(check_dex_size, 100); /* this checks the flag every 100 milliseconds*/
+    window.setTimeout(function() { check_dex_size(generation); }, 100); /* this checks the flag every 100 milliseconds*/
   } else {
     const string_pokedex = JSON.stringify(pokedex)
     console.log(pokedex)
-    console.log(generation)
     download_pokedex(pokedex, generations[generation])
   }
 }
