@@ -50,7 +50,7 @@ function build_pokedex(generation) {
     .then(response => response.json())
     .then(function(allpokemon) {
       allpokemon.results.forEach(function(pokemon) {
-        pokedex.append(fetch_pokemon_data(pokemon, generation))
+        pokedex.push(fetch_pokemon_data(pokemon, generation))
       })
     })
   
