@@ -1,7 +1,7 @@
 const api_url = "https://pokeapi.co/api/v2/"
 const generation_url = "generation/"
 const generations = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
-
+const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
 const encounter_class = "encounter"
 const encounters_div = document.getElementById("encounters_div")
 
@@ -129,18 +129,11 @@ function is_this_gen_included(text, generation) {
 
 function count_species(generation) {
     var current_gen = 0
-    
+    var nb_species = 0
+  
     while (current_gen <= generation) {
-        var nb_species = 0
-        
-        fetch(api_url + generation_url + generations[current_gen])
-            .then(response => response.json())
-            .then(function(pokemon_gen){
-                console.log(pokemon_gen.pokemon_species)
-                nb_species = nb_species + pokemon_gen.pokemon_species.length
-            })
-              
-        current_gen = ++current_gen
+      nb_species = nb_species + generations_nb[current_gen]
+      current_gen = ++current_gen
     }
 
     return nb_species
