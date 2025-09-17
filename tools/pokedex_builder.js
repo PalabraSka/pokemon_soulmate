@@ -121,7 +121,7 @@ function get_type_2(pokemon, gen) {
     return null
   }
   if (pokemon.types["0"].type["1"]) {
-    return pokemon.types["0"].type["1"].name
+    return pokemon.types["0"].type.name
   }
   return null
 }
