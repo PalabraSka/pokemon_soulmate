@@ -113,37 +113,11 @@ function load_page() {
   load_encounters()
 }
 
-// Load pokedex
-function load_pokedex() {
-  pokedex = localStorage.getItem(pokedex_key)
-  
-  if (pokedex) {
-    return
-  }
-  
-  const api_request = fetch(pokedex_link)
-  
-  if (!api_request.ok) {
-    throw new Error('Failed to retrieve JSON at "https://pokeapi.co/". Response status : ${api_request.status}') 
-  }
-}
-
-function update_pokedex() {
-  const pokedex_gen_1 = []
-  const pokedex_gen_2 = []
-  const pokedex_gen_3 = []
-  const pokedex_gen_4 = []
-  const pokedex_gen_5 = []
-  const pokedex_gen_6 = []
-  const pokedex_gen_7 = []
-  
-}
-
-
 // New encounter / edit / remove encounter process
 function open_encounter(idx = -1) {
   if (idx < 0) {
-    
+    pop_up.style.display = "block"
+    pop_up_encounter.style.display = "block"
   }
   pop_up.style.display = "block"
   pop_up_encounter.style.display = "block"
