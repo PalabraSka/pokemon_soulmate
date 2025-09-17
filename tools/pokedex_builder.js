@@ -1,7 +1,7 @@
 const api_url = "https://pokeapi.co/api/v2/"
 const generation_url = "generation/"
 const generations = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
-const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
+const generations_nb = [5, 100, 135, 107, 156, 72, 88, 96, 120]
 const encounter_class = "encounter"
 const encounters_div = document.getElementById("encounters_div")
 
@@ -66,6 +66,9 @@ function build_pokedex(generation) {
 function fetch_pokemon_data(pokemon, gen) {
   let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
   let new_pokemon
+
+  console.log("processing data for pokemon :")
+  console.log(pokemon)
   
   fetch(url)
     .then(response => response.json())
@@ -76,10 +79,9 @@ function fetch_pokemon_data(pokemon, gen) {
         const new_type1 = get_type_1(pokeData, gen)
         const new_type2 = get_type_2(pokeData, gen)
         new_pokemon = new pokemon_(new_name, new_sprite, new_species, new_type1, new_type2)
+        console.log(new_pokemon)
         pokedex.push(new_pokemon)
     })
-
-  console.log(new_pokemon)
   return new_pokemon
 }
 
