@@ -35,6 +35,51 @@ h1 {
     margin-top: 2rem;
 }
 
+/* sticky header */
+.header_main {
+  position: sticky;
+  top: 0;
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+}
+
+ /* Style the tab */
+.tabs {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tablink {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tablink:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tablink.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tab {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+} 
+
 /* pop-ups */
 .pop-up {
     background: rgba(1,1,1,0.7);
