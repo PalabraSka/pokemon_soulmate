@@ -55,7 +55,7 @@ function build_pokedex(generation) {
     })
   
   const string_pokedex = JSON.stringify(pokedex)
-  localStorage.setItem(generations[generation], string_pokedex)
+  download_pokedex(pokedex, generations[generation])
 }
 
 function fetch_pokemon_data(pokemon, gen) {
@@ -153,6 +153,16 @@ function fetch_json(link) {
             result = data
         })
     return result
+}
+
+function download_pokedex(exportObj, exportName){
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+  var downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("download", exportName + ".json");
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
 }
 
 render_page()
