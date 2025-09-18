@@ -211,12 +211,18 @@ h1 {
     text-align: left;
 }
 
-.bt_menu:hover {
-    background-color: #f1f1f1;
+.bt_menu:after{
+  content:'►';
+  position:absolute;
+  top:.5em;
+  right:-2em;
+  opacity:0;
+  transition:all .5s ease-in-out;
 }
 
-.bt_menu.img:hover {
-    visibility: visible;
+.bt_menu:hover:after{
+right:1em;
+opacity:1;
 }
 
 /* encounter tab styles */
