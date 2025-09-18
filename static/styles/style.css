@@ -189,11 +189,13 @@ h1 {
 
 /* Menu tab styles */
 #tab_menu {
-        
-}
-
-.menu_div {
-    border: aqua;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 15px;
 }
 
 .bt_menu {
@@ -211,6 +213,10 @@ h1 {
 
 .bt_menu:hover {
     background-color: #f1f1f1;
+}
+
+.bt_menu.img:hover {
+    visibility: visible;
 }
 
 /* encounter tab styles */
