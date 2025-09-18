@@ -211,12 +211,12 @@ h1 {
     text-align: left;
 }
 
-.bt_menu::before{
-  content:'► >';
-  position:absolute;
-  left:-2em;
+.bt_menu:before{
+  content:url("static/images/arrow.png");
+  position:relative;
+  left:-2px;
   opacity:0;
-  transition:all .5s ease-in-out;
+  transition:all .2s ease-in-out;
 }
 
 .bt_menu:hover:before{
