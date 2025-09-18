@@ -187,6 +187,32 @@ h1 {
 }
 
 
+/* Menu tab styles */
+#tab_menu {
+        
+}
+
+.menu_div {
+    border: aqua;
+}
+
+.bt_menu {
+    background-color: inherit;
+    border: none;
+    display: block;
+    margin: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 180px;
+    text-align: left;
+}
+
+.bt_menu:hover {
+    background-color: #f1f1f1;
+}
+
 /* encounter tab styles */
 .encounter {
     font-size: 0.8rem;
