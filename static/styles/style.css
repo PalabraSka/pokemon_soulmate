@@ -211,8 +211,8 @@ h1 {
     text-align: left;
 }
 
-.bt_menu:after{
-  content:'►';
+.bt_menu:before{
+  content:'► >';
   position:absolute;
   top:.5em;
   right:-2em;
@@ -220,9 +220,9 @@ h1 {
   transition:all .5s ease-in-out;
 }
 
-.bt_menu:hover:after{
-right:1em;
-opacity:1;
+.bt_menu:hover:before{
+    right:1em;
+    opacity:1;
 }
 
 /* encounter tab styles */
