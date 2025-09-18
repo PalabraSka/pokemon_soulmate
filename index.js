@@ -110,7 +110,7 @@ function reset_encouters() {
 
 function load_page() {
   close_encounter()
-  document.getElementById("tablink_menu").click
+  document.getElementById("tablink_menu").click()
   load_encounters()
 }
 
