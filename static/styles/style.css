@@ -65,7 +65,7 @@ h1 {
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
-  width: 20%;
+  width: 30%;
   font-size: 170%;
 }
 
@@ -80,7 +80,7 @@ h1 {
 }
 
 #tablink_menu {
-    margin-left: 20%;
+    margin-left: 5%;
 }
 
 /* Style the tab content */
