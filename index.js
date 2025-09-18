@@ -110,6 +110,7 @@ function reset_encouters() {
 
 function load_page() {
   close_encounter()
+  open_tab(event, 'tab_menu')
   load_encounters()
 }
 
