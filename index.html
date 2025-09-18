@@ -53,9 +53,16 @@
     <div class="header_main">
         <h1>Pokemon Soulmate</h1>
         <div class="tabs">
+            <button class="tablink" onclick="open_tab(event, 'tab_menu')">menu</button>
             <button class="tablink" onclick="open_tab(event, 'tab_encounters')">encounters</button>
             <button class="tablink" onclick="open_tab(event, 'tab_teams')">teams</button>
+            <button class="tablink" onclick="open_tab(event, 'tab_runs')">load runs</button>
         </div>
+    </div>
+
+    <!-- Menu tab -->
+    <div class="tab" id="tab_menu">
+        <p>Menu !!</p>
     </div>
     
     <!-- Encounters tab -->
@@ -68,6 +75,11 @@
     <!-- Teams tab -->
     <div class="tab" id="tab_teams">
         <p>teams !!</p>
+    </div>
+
+    <!-- Runs tab -->
+    <div class="tab" id="tab_runs">
+        <p>Runs historic</p>
     </div>
 
     <!-- script -->
