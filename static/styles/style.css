@@ -69,6 +69,11 @@ h1 {
   font-size: 170%;
 }
 
+/* Change pointer when button is disabled */
+.tablink:disabled {
+  cursor: no-drop;
+}
+
 /* Change background color of buttons on hover */
 .tablink:hover {
   background-color: #ddd;
