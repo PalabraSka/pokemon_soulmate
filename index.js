@@ -44,7 +44,7 @@ const pop_up_encounter_state = document.getElementById("encounter_state")
 
 /* Tab input */
 const tab_menu = document.getElementById("tablink_menu")
-const tab_encounters = document.getElementById("tablink_enouncters")
+const tab_encounters = document.getElementById("tablink_encounters")
 const tab_teams = document.getElementById("tablink_teams")
 
 /* Menu buttons */
