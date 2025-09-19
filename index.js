@@ -96,6 +96,10 @@ function load_runs() {
   }
 }
 
+function load_datalist_generations() {
+  
+}
+
 function save_encounters() {
   const string_encounters = JSON.stringify(encounters)
 
