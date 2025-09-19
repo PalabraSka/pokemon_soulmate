@@ -272,7 +272,7 @@ function load_page() {
 function toggle_pop_up(target) {
   close_all_pop_ups()
   pop_up.style.display = "block"
-  target.display = "block"
+  target.style.display = "block"
 }
 
 function close_all_pop_ups() {
