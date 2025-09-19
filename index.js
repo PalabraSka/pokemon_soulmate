@@ -31,6 +31,10 @@ let current_run_id = -1
 /* saves keys */
 const key_runs = "runs"
 
+/* data lists */
+const datalist_generations = document.getElementById("datalist_generations")
+const datalist_pokedex = document.getElementById("datalist_pokedex")
+
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
 const pop_up_encounter = document.getElementById("pop-up_encounter")
