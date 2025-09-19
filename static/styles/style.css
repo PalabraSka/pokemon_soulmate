@@ -117,6 +117,24 @@ h1 {
     padding: 2rem;
 }
 
+#pop-up_new_run {
+    background-color: rgba(1,1,1,0.7);
+    width: 690px;
+    height: 310px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 2rem;
+}
+
+/* position of pop-up new run elements */
+.pop-up_new_run_elements {
+    display: block;
+}
+
 /* position of pop-up encounter elements */
 #encounter_location {
     margin-left: auto;
