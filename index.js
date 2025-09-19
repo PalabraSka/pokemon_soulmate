@@ -3,6 +3,7 @@ let encounters = []
 let pokedex = []
 
 const run = {
+  idx: -1,
   name: "",
   is_active: true,
   generation: "",
@@ -23,13 +24,18 @@ const encounter = {
   pokemon_1: Object.create(pokemon),
   pokemon_2: Object.create(pokemon),
   alive: true
-}
+} 
 
-let current_run = null
+let current_run_id = -1
 
+/* saves keys */
+const key_runs = "runs"
+
+/* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
 const pop_up_encounter = document.getElementById("pop-up_encounter")
 
+/* Pop-up encounter items */
 const pop_up_encounter_location = document.getElementById("encounter_location")
 const pop_up_encounter_name = document.getElementById("encounter_name")
 const pop_up_encounter_pokemon1 = document.getElementById("encounter_pokemon_1")
@@ -55,14 +61,62 @@ const bt_menu_load = document.getElementById("bt_menu_load_run")
 /* Encounters tab content */
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
-const encounters_key = "encounters"
 const encounter_id = "encounter_"
 const encounter_class = "encounter"
+
+
+/*********************************************************************
+*  Load and save data functions
+*********************************************************************/
+function load_runs() {
+  const local_data = localStorage.getItem(key_runs)
+  var has_active_run = false
+  
+  if (!local_data) {
+    return has_active_run
+  }
+
+  runs = JSON.parse(local_data)
+
+  for (const idx in runs) {
+    runs[idx].idx = idx
+    if (runs[idx].is_active && current_run_id == -1) {
+      current_run_id = idx
+      has_active_run = 1
+    } else {
+      runs[idx].is_active = false
+    }
+  }
+
+  return has_active_run
+}
+
+function save_encounters() {
+  const string_encounters = JSON.stringify(encounters)
+
+  localStorage.setItem(encounters_key, string_encounters)
+}
+
+function load_encounters(_run = -1) {
+  const old_encounters = localStorage.getItem(encounters_key)
+  if (old_encounters) {
+    encounters = JSON.parse(old_encounters)
+    render_encounters()
+  }
+}
 
 /*********************************************************************
 *  Menu tab functions
 *********************************************************************/
 function load_menu() {
+  if (!load_runs()){
+    bt_menu_continue.style.display = "none"
+  } else {
+    load_current_run_display()
+  }
+}
+
+function load_current_run_display() {
   return
 }
 
@@ -192,6 +246,9 @@ function save_encounter(idx = -1) {
 *  Main page functions
 *********************************************************************/
 function load_page() {
+  // load data
+  
+  
   // close pop-ups
   close_encounter_pop_up()
   close_runs_pop_up()
@@ -202,8 +259,7 @@ function load_page() {
   // prepare tabs
   tab_menu.click()
   tab_encounters.disabled = true
-  tab_teams.disabled = true
-  
+  tab_teams.disabled = true 
 }
 
 // TAB MANAGEMENT
