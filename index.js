@@ -2,7 +2,7 @@ let runs = []
 let encounters = []
 let pokedex = []
 
-const current_run = {
+const run = {
   name: "",
   is_active: true,
   generation: "",
@@ -25,6 +25,8 @@ const encounter = {
   alive: true
 }
 
+let current_run = null
+
 const pop_up = document.getElementById("pop-up_main")
 const pop_up_encounter = document.getElementById("pop-up_encounter")
 
@@ -40,16 +42,53 @@ const pop_up_encounter_pokemon2_type1 = document.getElementById("encounter_pokem
 const pop_up_encounter_pokemon2_type2 = document.getElementById("encounter_pokemon_2_type_2")
 const pop_up_encounter_state = document.getElementById("encounter_state")
 
+/* Tab input */
+const tab_menu = document.getElementById("tablink_menu")
+const tab_encounters = document.getElementById("tablink_enouncters")
+const tab_teams = document.getElementById("tablink_teams")
+
+/* Menu buttons */
+const bt_menu_continue = document.getElementById("bt_menu_continue")
+const bt_menu_new = document.getElementById("bt_menu_new_run")
+const bt_menu_load = document.getElementById("bt_menu_load_run")
+
+/* Encounters tab content */
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
 const encounters_key = "encounters"
 const encounter_id = "encounter_"
 const encounter_class = "encounter"
 
-const pokedex_key = "pokedex"
-const pokedex_link = "https://pokeapi.co/api/v2/pokemon/"
+/*********************************************************************
+*  Menu tab functions
+*********************************************************************/
+function load_menu() {
+  return
+}
 
+function continue_run() {
+  return
+}
 
+function new_run() {
+  return
+}
+
+function open_runs_pop_up() {
+  return
+}
+
+function close_runs_pop_up() {
+  return
+}
+
+function load_run() {
+  return
+}
+
+/*********************************************************************
+*  Encounters tab functions
+*********************************************************************/
 function render_encounters() {
   encounters_div.innerHTML = null;
 
@@ -73,7 +112,7 @@ function render_encounters() {
 
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
-    button_edit.onclick = () => open_encounter(idx)
+    button_edit.onclick = () => open_encounter_pop_up(idx)
     button_edit.className = encounter_class
     
     const button_del = document.createElement("button")
@@ -88,7 +127,6 @@ function render_encounters() {
     encounters_div.appendChild(container)
   }
 }
-
 
 // Load and save data
 function save_encounters() {
@@ -110,14 +148,8 @@ function reset_encouters() {
   render_encounters()
 }
 
-function load_page() {
-  close_encounter()
-  document.getElementById("tablink_menu").click()
-  load_encounters()
-}
-
 // New encounter / edit / remove encounter process
-function open_encounter(idx = -1) {
+function open_encounter_pop_up(idx = -1) {
   if (idx < 0) {
     pop_up.style.display = "block"
     pop_up_encounter.style.display = "block"
@@ -126,7 +158,7 @@ function open_encounter(idx = -1) {
   pop_up_encounter.style.display = "block"
 }
 
-function close_encounter() {
+function close_encounter_pop_up() {
   pop_up.style.display = "none"
   pop_up_encounter.style.display = "none"
 }
@@ -155,6 +187,25 @@ function save_encounter(idx = -1) {
   encounter_name.value = ""
 }
 
+
+/*********************************************************************
+*  Main page functions
+*********************************************************************/
+function load_page() {
+  // close pop-ups
+  close_encounter_pop_up()
+  close_runs_pop_up()
+
+  // load tabs content
+  load_menu()
+
+  // prepare tabs
+  tab_menu.click()
+  tab_encounters.disabled = true
+  tab_teams.disabled = true
+  
+}
+
 // TAB MANAGEMENT
 function open_tab(evt, tab_name) {
   // Declare all variables
@@ -176,7 +227,6 @@ function open_tab(evt, tab_name) {
   document.getElementById(tab_name).style.display = "block";
   evt.currentTarget.className += " active";
 }
-
 
 // loading page
 document.addEventListener("DOMContentLoaded", load_page)
