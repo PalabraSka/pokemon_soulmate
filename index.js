@@ -280,7 +280,7 @@ function close_all_pop_ups() {
   
   for (const i = 0; i < pop_up_array.length; i++) {
     pop_up_array[i].style.display = "none"
-    console.log(pop_up_array[i])
+  }
 }
 
 // TAB MANAGEMENT
