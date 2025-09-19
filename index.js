@@ -112,7 +112,7 @@ function load_encounters(_run = -1) {
 function load_menu() {
 
   /* toggle current run info and continue button */
-  if (current_run_id in range(0, runs.length - 1)) {
+  if (current_run_id >= 0 && current_run_id < runs.length) {
     bt_menu_continue.disabled = false
     load_current_run_display()
   } else {
