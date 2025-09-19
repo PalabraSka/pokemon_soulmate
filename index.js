@@ -1,8 +1,10 @@
+let runs = []
 let encounters = []
 let pokedex = []
 
 const current_run = {
   name: "",
+  is_active: true,
   generation: "",
   pokedex: "",
   encounters: []
