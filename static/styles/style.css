@@ -219,6 +219,10 @@ h1 {
     cursor: pointer;
 }
 
+.bt_menu:disabled{
+    display: none;
+}
+
 .bt_menu:hover {
     background-color: #f3f3f3;
 }
