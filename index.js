@@ -34,6 +34,11 @@ const key_runs = "runs"
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
 const pop_up_encounter = document.getElementById("pop-up_encounter")
+const pop_up_new_run = document.getElementById("pop-up_new_run")
+const pop_up_array = [
+  pop_up_encounter,
+  pop_up_new_run
+]
 
 /* Pop-up encounter items */
 const pop_up_encounter_location = document.getElementById("encounter_location")
@@ -70,10 +75,9 @@ const encounter_class = "encounter"
 *********************************************************************/
 function load_runs() {
   const local_data = localStorage.getItem(key_runs)
-  var has_active_run = false
   
   if (!local_data) {
-    return has_active_run
+    return
   }
 
   runs = JSON.parse(local_data)
@@ -82,13 +86,10 @@ function load_runs() {
     runs[idx].idx = idx
     if (runs[idx].is_active && current_run_id == -1) {
       current_run_id = idx
-      has_active_run = 1
     } else {
       runs[idx].is_active = false
     }
   }
-
-  return has_active_run
 }
 
 function save_encounters() {
@@ -109,11 +110,18 @@ function load_encounters(_run = -1) {
 *  Menu tab functions
 *********************************************************************/
 function load_menu() {
-  if (!load_runs()){
-    bt_menu_continue.style.display = "none"
-  } else {
+
+  /* toggle current run info and continue button */
+  if (current_run_id in range(0, runs.length - 1)) {
+    bt_menu_continue.disabled = false
     load_current_run_display()
+  } else {
+    bt_menu_continue.disabled = true
   }
+
+  /* toggle load run button */
+  bt_menu_load.disabled = !(runs.length > 0)
+  
 }
 
 function load_current_run_display() {
@@ -125,7 +133,7 @@ function continue_run() {
 }
 
 function new_run() {
-  return
+  toggle_pop_up(pop_up_new_run)
 }
 
 function open_runs_pop_up() {
@@ -241,17 +249,15 @@ function save_encounter(idx = -1) {
   encounter_name.value = ""
 }
 
-
 /*********************************************************************
 *  Main page functions
 *********************************************************************/
 function load_page() {
   // load data
-  
+  load_runs()
   
   // close pop-ups
-  close_encounter_pop_up()
-  close_runs_pop_up()
+  close_all_pop_ups()
 
   // load tabs content
   load_menu()
@@ -260,6 +266,20 @@ function load_page() {
   tab_menu.click()
   tab_encounters.disabled = true
   tab_teams.disabled = true 
+}
+
+// Pop-up management
+function toggle_pop_up(target) {
+  close_all_pop_ups()
+  pop_up.style.display = "block"
+  target.display = "block"
+}
+
+function close_all_pop_ups() {
+  pop_up.style.display = "none"
+  
+  for (const i = 0; i < pop_up_array.length; i++) {
+    pop_up_array[i].style.display = "none"
 }
 
 // TAB MANAGEMENT
