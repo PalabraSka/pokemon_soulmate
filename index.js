@@ -129,6 +129,10 @@ function load_encounters(_run = -1) {
   }
 }
 
+function get_pokedex(generation) {
+  return "static/data/" + generation + ".json"
+}
+
 /*********************************************************************
 *  Menu tab functions
 *********************************************************************/
