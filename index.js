@@ -294,7 +294,7 @@ function toggle_pop_up(target) {
 function close_all_pop_ups() {
   pop_up.style.display = "none"
   
-   (var i = 0; i < pop_up_array.length; i++) {
+  for (var i = 0; i < pop_up_array.length; i++) {
     pop_up_array[i].style.display = "none"
   }
 }
