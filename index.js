@@ -36,7 +36,7 @@ const datalist_generations = document.getElementById("datalist_generations")
 const datalist_pokedex = document.getElementById("datalist_pokedex")
 
 /* flat data */
-const generations = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
+const generations_array = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
 
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
@@ -100,7 +100,11 @@ function load_runs() {
 }
 
 function load_datalist_generations() {
-  
+  for (var i = 0; generations_array.length-1; i++) {
+    const option = document.createElement("option")
+    option.value = generations_array[i]
+    datalist_generations.appendChild(input)
+  }
 }
 
 function save_encounters() {
@@ -266,6 +270,7 @@ function save_encounter(idx = -1) {
 function load_page() {
   // load data
   load_runs()
+  load_datalist_generations()
   
   // close pop-ups
   close_all_pop_ups()
