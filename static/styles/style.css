@@ -119,20 +119,32 @@ h1 {
 
 #pop-up_new_run {
     background-color: rgba(1,1,1,0.7);
-    width: 690px;
-    height: 310px;
+    width: 320px;
+    height: 320px;
     position: absolute;
     top:0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    padding: 2rem;
+    padding: 35px;
 }
 
 /* position of pop-up new run elements */
 .pop-up_new_run_elements {
     display: block;
+    width: 250px;
+    margin-top: 10px;
+}
+
+button.pop-up_new_run_elements {
+    width: 120px;
+    display: inline;
+}
+
+#new_run_button_cancel {
+    margin-left: 1px;
+    margin-right: 5px;
 }
 
 /* position of pop-up encounter elements */
