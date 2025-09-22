@@ -5,7 +5,9 @@ let pokedex = []
 const run = {
   idx: -1,
   name: "",
-  is_active: true,
+  player_1: "Player 1",
+  player_2: "Player 2,
+  is_active: false,
   generation: "",
   pokedex: "",
   encounters: []
@@ -59,6 +61,12 @@ const pop_up_encounter_pokemon2_img = document.getElementById("encounter_pokemon
 const pop_up_encounter_pokemon2_type1 = document.getElementById("encounter_pokemon_2_type_1")
 const pop_up_encounter_pokemon2_type2 = document.getElementById("encounter_pokemon_2_type_2")
 const pop_up_encounter_state = document.getElementById("encounter_state")
+
+/* Pop-up new run items */
+const pop_up_new_run_name = document.getElementById("new_run_name")
+const pop_up_new_run_generation = document.getElementById("new_run_generation_input")
+const pop_up_new_run_player_1 = document.getElementById("new_run_player_1")
+const pop_up_new_run_player_2 = document.getElementById("new_run_player_2")
 
 /* Tab input */
 const tab_menu = document.getElementById("tablink_menu")
@@ -151,6 +159,45 @@ function new_run() {
   toggle_pop_up(pop_up_new_run)
 }
 
+function start_new_run() {
+  if (pop_up_new_run_generation.value == "") {
+    alert("You need to select a generation to start a new run")
+    return
+  }
+  
+  var new_run = structuredClone(run)
+
+  new_run.idx = runs.length
+
+  if (pop_up_new_run_name.value == "") {
+    new_run.name = "Run " + new_run.idx + 1
+  } else {
+    new_run.name = pop_up_new_run_name.value
+  }
+
+  if (pop_up_new_run_player_1.value == "") {
+    new_run.player_1 = "Player 1"
+  } else {
+    new_run.player_1 = pop_up_new_run_player_1.value
+  }
+
+  if (pop_up_new_run_player_2.value == "") {
+    new_run.player_2 = "Player 2"
+  } else {
+    new_run.player_2 = pop_up_new_run_player_2.value
+  }
+  
+  new_run.is_active = false
+  new_run.generation = pop_up_new_run_generation.value
+  new_run.pokedex = get_pokedex(new_run.generation)
+  new_run.encounters = []
+
+  runs.push(new_run)
+
+  load_run(new_run.idx)
+  close_all_pop_ups()
+}
+
 function open_runs_pop_up() {
   return
 }
@@ -159,8 +206,21 @@ function close_runs_pop_up() {
   return
 }
 
-function load_run() {
-  return
+function load_run(idx) {
+  for (var i = 0; i < runs.length; i++) {
+    runs[i].is_active = false
+  }
+    
+  runs[idx].is_active = true
+  current_run_id = idx
+
+  tab_encounters.disabled = false
+  tab_teams.disabled = false
+  
+  load_menu()
+  render_encounters()
+  generate_teams()
+  
 }
 
 /*********************************************************************
@@ -265,6 +325,13 @@ function save_encounter(idx = -1) {
 }
 
 /*********************************************************************
+*  Teams tab functions
+*********************************************************************/
+function generate_teams() {
+  return
+}
+
+/*********************************************************************
 *  Main page functions
 *********************************************************************/
 function load_page() {
@@ -277,11 +344,17 @@ function load_page() {
 
   // load tabs content
   load_menu()
+  if (current_run_id == -1) {
+    tab_encounters.disabled = true
+    tab_teams.disabled = true   
+  } else {
+    render_encounter()
+    generate_teams()
+  }
 
   // prepare tabs
   tab_menu.click()
-  tab_encounters.disabled = true
-  tab_teams.disabled = true 
+  
 }
 
 // Pop-up management
