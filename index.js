@@ -100,7 +100,7 @@ function load_runs() {
 }
 
 function load_datalist_generations() {
-  for (var i = 0; generations_array.length-1; i++) {
+  for (var i = 0; i < generations_array.length; i++) {
     const option = document.createElement("option")
     option.value = generations_array[i]
     datalist_generations.appendChild(option)
@@ -294,7 +294,7 @@ function toggle_pop_up(target) {
 function close_all_pop_ups() {
   pop_up.style.display = "none"
   
-  for (var i = 0; i < pop_up_array.length; i++) {
+   (var i = 0; i < pop_up_array.length; i++) {
     pop_up_array[i].style.display = "none"
   }
 }
@@ -306,7 +306,7 @@ function open_tab(evt, tab_name) {
 
   // Get all elements with class="tabcontent" and hide them
   tab = document.getElementsByClassName("tab");
-  for (i = 0; i < tab.length; i++) {
+   (i = 0; i < tab.length; i++) {
     tab[i].style.display = "none";
   }
 
