@@ -103,7 +103,7 @@ function load_datalist_generations() {
   for (var i = 0; generations_array.length-1; i++) {
     const option = document.createElement("option")
     option.value = generations_array[i]
-    datalist_generations.appendChild(input)
+    datalist_generations.appendChild(option)
   }
 }
 
