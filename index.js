@@ -6,7 +6,7 @@ const run = {
   idx: -1,
   name: "",
   player_1: "Player 1",
-  player_2: "Player 2,
+  player_2: "Player 2",
   is_active: false,
   generation: "",
   pokedex: "",
