@@ -167,3 +167,5 @@ function download_pokedex(exportObj, exportName){
   downloadAnchorNode.click();
   downloadAnchorNode.remove();
 }
+
+render_page()
