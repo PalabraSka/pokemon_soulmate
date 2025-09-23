@@ -151,7 +151,7 @@ function check_dex_size(generation, download) {
 
     
     
-    if (download) {
+    if (download == true) {
       download_pokedex(pokedex, generations[generation])
     } else {
       localStorage.setItem(generations[generation], string_pokedex)
