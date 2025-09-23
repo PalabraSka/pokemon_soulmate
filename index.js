@@ -39,17 +39,6 @@ const datalist_pokedex = document.getElementById("datalist_pokedex")
 
 /* flat data */
 const generations_array = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
-const pokedex_array = {
-  "generation-i": generation_i,
-  "generation-ii": generation_ii,
-  "generation-iii": generation_iii,
-  "generation-iv": generation_iv,
-  "generation-v": generation_v,
-  "generation-vi": generation_vi,
-  "generation-vii": generation_vii,
-  "generation-viii": generation_viii,
-  "generation-ix": generation_ix
-}
 
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
