@@ -59,6 +59,7 @@ function build_pokedex(generation, download = true) {
         fetch_pokemon_data(pokemon, generation)
       })
     })
+  
   console.log(download)
   check_dex_size(generation, download)
 }
@@ -148,6 +149,7 @@ function check_dex_size(generation, download) {
   } else {
     const string_pokedex = JSON.stringify(pokedex)
     console.log(pokedex.length)
+    console.log(download)
 
     
     
