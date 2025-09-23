@@ -300,26 +300,6 @@ function render_encounters() {
   }
 }
 
-// Load and save data
-function save_encounters() {
-  const string_encounters = JSON.stringify(encounters)
-
-  localStorage.setItem(encounters_key, string_encounters)
-}
-
-function load_encounters() {
-  const old_encounters = localStorage.getItem(encounters_key)
-  if (old_encounters) {
-    encounters = JSON.parse(old_encounters)
-    render_encounters()
-  }
-}
-
-function reset_encouters() {
-  encounters = []
-  render_encounters()
-}
-
 // New encounter / edit / remove encounter process
 function open_encounter_pop_up(idx = -1) {
   if (idx < 0) {
