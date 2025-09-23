@@ -200,6 +200,7 @@ function start_new_run() {
 
   load_run(new_run.idx)
   close_all_pop_ups()
+  tab_encounters.click()
 }
 
 function open_runs_pop_up() {
