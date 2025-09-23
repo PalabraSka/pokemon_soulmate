@@ -147,11 +147,12 @@ function check_dex_size(generation, download) {
     window.setTimeout(function() { check_dex_size(generation); }, 100); /* this checks the flag every 100 milliseconds*/
   } else {
     const string_pokedex = JSON.stringify(pokedex)
-    console.log(pokedex)
+    console.log(pokedex.length)
 
     
     
     if (download == true) {
+      console.log("DOWNLOAD POKEDEX !!")
       download_pokedex(pokedex, generations[generation])
     } else {
       localStorage.setItem(generations[generation], string_pokedex)
