@@ -41,7 +41,7 @@ function render_page() {
   }
 }
 
-function build_pokedex(generation, download = false) {
+function build_pokedex(generation, download = true) {
   if (generation < 0 || generation >= generations.length) {
     return
   }
@@ -149,10 +149,12 @@ function check_dex_size(generation, download) {
     const string_pokedex = JSON.stringify(pokedex)
     console.log(pokedex)
 
-    localStorage.setItem(generations[generation], string_pokedex)
+    
     
     if (download) {
       download_pokedex(pokedex, generations[generation])
+    } else {
+      localStorage.setItem(generations[generation], string_pokedex)
     }
     
   }
