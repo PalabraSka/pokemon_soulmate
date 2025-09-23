@@ -255,7 +255,7 @@ function load_run(idx) {
 }
 
 function load_pokedex(){
-  pokedex = pokedex_array[runs[current_run_id].pokedex_key
+  pokedex = pokedex_array[runs[current_run_id].pokedex_key]
 }
 
 /*********************************************************************
