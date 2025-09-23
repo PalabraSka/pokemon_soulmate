@@ -382,7 +382,7 @@ function close_all_pop_ups() {
 }
 
 // TAB MANAGEMENT
-export function open_tab(evt, tab_name) {
+function open_tab(evt, tab_name) {
   // Declare all variables
   var i, tab, tablink;
 
