@@ -1,13 +1,3 @@
-import generation_i from "./static/data/generation-i.json" with { type: "json" }
-import generation_ii from "./static/data/generation-ii.json" with { type: "json" }
-import generation_iii from "./static/data/generation-iii.json" with { type: "json" }
-import generation_iv from "./static/data/generation-iv.json" with { type: "json" }
-import generation_v from "./static/data/generation-v.json" with { type: "json" }
-import generation_vi from "./static/data/generation-vi.json" with { type: "json" }
-import generation_vii from "./static/data/generation-vii.json" with { type: "json" }
-import generation_viii from "./static/data/generation-viii.json" with { type: "json" }
-import generation_ix from "./static/data/generation-ix.json" with { type: "json" }
-
 let runs = []
 let encounters = []
 let pokedex = []
@@ -255,7 +245,11 @@ function load_run(idx) {
 }
 
 function load_pokedex(){
-  pokedex = pokedex_array[runs[current_run_id].pokedex_key]
+  const data = localStorage.getItem(runs[current_run_id].pokedex_key)
+  if (data != null) {
+    pokedex = data
+  } else {
+    build_pokedex(runs[current_run_id].generation_index)
 }
 
 /*********************************************************************
@@ -407,6 +401,138 @@ export function open_tab(evt, tab_name) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(tab_name).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+/*********************************************************************
+*  POKEDEX BUILDER !!!!!!!!!!!
+*********************************************************************/
+const api_url = "https://pokeapi.co/api/v2/"
+const generation_url = "generation/"
+const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
+
+let dex_size = -1
+
+function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
+  this.name = pk_name
+  this.sprite = pk_sprite
+  this.species = pk_species
+  this.type1 = pk_type1
+  this.type2 = pk_type2
+}
+
+function build_pokedex(generation) {
+  if (generation < 0 || generation >= generations_array.length) {
+    return
+  }
+
+  pokedex = []
+  const nb_species = count_species(generation)
+  dex_size = nb_species
+
+  fetch(api_url + "/pokemon?limit=" + nb_species.toString())
+    .then(response => response.json())
+    .then(function(allpokemon) {
+      console.log(allpokemon.results)
+      allpokemon.results.forEach(function(pokemon) {
+        fetch_pokemon_data(pokemon, generation)
+      })
+    })
+  
+  check_dex_size(generation)
+}
+
+function fetch_pokemon_data(pokemon, gen) {
+  let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
+  let new_pokemon
+
+  console.log("processing data for pokemon :")
+  console.log(pokemon)
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(function(pokeData){
+        const new_name = pokeData.species.name
+        const new_sprite = pokeData.sprites.front_default
+        const new_type1 = get_type_1(pokeData, gen)
+        const new_type2 = get_type_2(pokeData, gen)
+        new_pokemon = new pokemon_(new_name, new_sprite, null, new_type1, new_type2)
+        const new_species = get_first_evolution(pokeData, gen, new_pokemon)
+    })
+}
+
+function get_first_evolution(pokemon, gen, poke_obj){
+  fetch(pokemon.species.url)
+    .then(response => response.json())
+    .then(function(pokeData){
+      if (!pokeData.evolution_chain.url) {
+        species = pokeData.name
+      } else {
+        fetch(pokeData.evolution_chain.url)
+        .then(response => response.json())
+        .then(function(pokeData2) {
+          poke_obj.species = pokeData2.chain.species.name
+          console.log(poke_obj)
+          pokedex.push(poke_obj)
+        })
+      }
+    })
+}
+
+function get_type_1(pokemon, gen) {
+  if (pokemon.past_types["0"]) {
+    if (is_this_gen_included(pokemon.past_types["0"].generation.name, gen)) {
+      return pokemon.past_types["0"].types["0"].type.name
+    }
+  }
+  return pokemon.types["0"].type.name
+}
+
+function get_type_2(pokemon, gen) {
+  if (pokemon.past_types["0"]) {
+    if (is_this_gen_included(pokemon.past_types["0"].generation.name, gen)) {
+      if (pokemon.past_types["0"].types["1"]) {
+        if (!pokemon.past_types["0"].types["0"].type.name) {
+          return pokemon.past_types["0"].types[1].type.name
+        }
+      }
+      return null
+    }    
+  }
+  if (pokemon.types.length > 1) {
+    return pokemon.types["1"].type.name
+  }
+  return null
+}
+
+function is_this_gen_included(generation_to_check, generation_index) {
+  var idx = generations_array.indexOf(generation_to_check)
+
+  if (idx <= generation_index) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function count_species(generation) {
+    var current_gen = 0
+    var nb_species = 0
+  
+    while (current_gen <= generation) {
+      nb_species = nb_species + generations_nb[current_gen]
+      current_gen = ++current_gen
+    }
+
+    return nb_species
+}
+
+function check_dex_size(generation) {
+  if(pokedex.length < dex_size) {
+    window.setTimeout(function() { check_dex_size(generation); }, 100); /* this checks the flag every 100 milliseconds*/
+  } else {
+    const string_pokedex = JSON.stringify(pokedex)
+    localStorage.setItem(generations_array[generation], string_pokedex)
+  }
 }
 
 // loading page
