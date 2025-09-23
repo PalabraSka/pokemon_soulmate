@@ -1,3 +1,13 @@
+import generation_i from "static/data/generation-i.json" with { type: "json" }
+import generation_ii from "static/data/generation-ii.json" with { type: "json" }
+import generation_iii from "static/data/generation-iii.json" with { type: "json" }
+import generation_iv from "static/data/generation-iv.json" with { type: "json" }
+import generation_v from "static/data/generation-v.json" with { type: "json" }
+import generation_vi from "static/data/generation-vi.json" with { type: "json" }
+import generation_vii from "static/data/generation-vii.json" with { type: "json" }
+import generation_viii from "static/data/generation-viii.json" with { type: "json" }
+import generation_ix from "static/data/generation-ix.json" with { type: "json" }
+
 let runs = []
 let encounters = []
 let pokedex = []
@@ -8,8 +18,8 @@ const run = {
   player_1: "Player 1",
   player_2: "Player 2",
   is_active: false,
-  generation: "",
-  pokedex: "",
+  generation_index: "",
+  pokedex_key: "",
   encounters: []
 }
   
@@ -39,6 +49,17 @@ const datalist_pokedex = document.getElementById("datalist_pokedex")
 
 /* flat data */
 const generations_array = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
+const pokedex_array = {
+  "generation-i" = generation_i,
+  "generation-ii" = generation_ii,
+  "generation-iii" = generation_iii,
+  "generation-iv" = generation_iv,
+  "generation-v" = generation_v,
+  "generation-vi" = generation_vi,
+  "generation-vii" = generation_vii,
+  "generation-viii" = generation_viii,
+  "generation-ix" = generation_ix
+}
 
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
@@ -129,8 +150,12 @@ function load_encounters(_run = -1) {
   }
 }
 
-function get_pokedex(generation) {
-  return "static/data/" + generation + ".json"
+function get_generation_index(generation) {
+  if (generations_array.include(generation) {
+    return generations_array.indexOf(generation)
+  } else {
+    return -1
+  }
 }
 
 /*********************************************************************
@@ -192,8 +217,8 @@ function start_new_run() {
   }
   
   new_run.is_active = false
-  new_run.generation = pop_up_new_run_generation.value
-  new_run.pokedex = get_pokedex(new_run.generation)
+  new_run.generation_index = get_generation_index(pop_up_new_run_generation.value)
+  new_run.pokedex_key = pop_up_new_run_generation.value
   new_run.encounters = []
 
   runs.push(new_run)
@@ -223,9 +248,19 @@ function load_run(idx) {
   tab_teams.disabled = false
   
   load_menu()
+  load_pokedex()
   render_encounters()
   generate_teams()
   
+}
+
+function load_pokedex(){
+  if (data == null) {
+    pokedex_builder.build_pokedex(runs[current_run_id].generation_index)
+    check_pokedex_data(runs[current_run_id].pokedex_key)
+  } else {
+    pokedex = JSON.parse(data)
+  }
 }
 
 /*********************************************************************
