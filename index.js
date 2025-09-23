@@ -244,12 +244,13 @@ function load_run(idx) {
   
 }
 
-function load_pokedex(){
+function load_pokedex() {
   const data = localStorage.getItem(runs[current_run_id].pokedex_key)
   if (data != null) {
     pokedex = data
   } else {
     build_pokedex(runs[current_run_id].generation_index)
+  }
 }
 
 /*********************************************************************
