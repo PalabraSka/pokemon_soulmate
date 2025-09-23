@@ -151,7 +151,7 @@ function load_encounters(_run = -1) {
 }
 
 function get_generation_index(generation) {
-  if (generations_array.include(generation) {
+  if (generations_array.include(generation)) {
     return generations_array.indexOf(generation)
   } else {
     return -1
