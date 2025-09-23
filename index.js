@@ -1,12 +1,12 @@
-import generation_i from "static/data/generation-i.json" with { type: "json" }
-import generation_ii from "static/data/generation-ii.json" with { type: "json" }
-import generation_iii from "static/data/generation-iii.json" with { type: "json" }
-import generation_iv from "static/data/generation-iv.json" with { type: "json" }
-import generation_v from "static/data/generation-v.json" with { type: "json" }
-import generation_vi from "static/data/generation-vi.json" with { type: "json" }
-import generation_vii from "static/data/generation-vii.json" with { type: "json" }
-import generation_viii from "static/data/generation-viii.json" with { type: "json" }
-import generation_ix from "static/data/generation-ix.json" with { type: "json" }
+import generation_i from "./static/data/generation-i.json" with { type: "json" }
+import generation_ii from "./static/data/generation-ii.json" with { type: "json" }
+import generation_iii from "./static/data/generation-iii.json" with { type: "json" }
+import generation_iv from "./static/data/generation-iv.json" with { type: "json" }
+import generation_v from "./static/data/generation-v.json" with { type: "json" }
+import generation_vi from "./static/data/generation-vi.json" with { type: "json" }
+import generation_vii from "./static/data/generation-vii.json" with { type: "json" }
+import generation_viii from "./static/data/generation-viii.json" with { type: "json" }
+import generation_ix from "./static/data/generation-ix.json" with { type: "json" }
 
 let runs = []
 let encounters = []
