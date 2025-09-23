@@ -59,7 +59,7 @@ function build_pokedex(generation, download = true) {
         fetch_pokemon_data(pokemon, generation)
       })
     })
-
+  console.log(download)
   check_dex_size(generation, download)
 }
 
