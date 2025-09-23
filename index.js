@@ -255,12 +255,7 @@ function load_run(idx) {
 }
 
 function load_pokedex(){
-  if (data == null) {
-    pokedex_builder.build_pokedex(runs[current_run_id].generation_index)
-    check_pokedex_data(runs[current_run_id].pokedex_key)
-  } else {
-    pokedex = JSON.parse(data)
-  }
+  pokedex = pokedex_array[runs[current_run_id].pokedex_key
 }
 
 /*********************************************************************
