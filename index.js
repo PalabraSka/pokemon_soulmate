@@ -35,8 +35,8 @@ let current_run_id = -1
 const key_runs = "runs"
 
 /* data lists */
-const datalist_generations = document.getElementById("datalist_generations")
-const datalist_pokedex = document.getElementById("datalist_pokedex")
+let datalist_generations = document.getElementById("datalist_generations")
+let datalist_pokedex = document.getElementById("datalist_pokedex")
 
 /* flat data */
 const generations_array = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
@@ -114,6 +114,9 @@ function load_runs() {
 }
 
 function load_datalist_generations() {
+  const new_datalist = document.createElement("datalist")
+  datalist_generations.replaceWith(new_datalist)
+  datalist_generations = new_datalist
   for (var i = 0; i < generations_array.length; i++) {
     const option = document.createElement("option")
     option.value = generations_array[i]
@@ -122,6 +125,10 @@ function load_datalist_generations() {
 }
 
 function load_datalist_pokedex() {
+  const new_datalist = document.createElement("datalist")
+  datalist_pokedex.replaceWith(new_datalist)
+  datalist_pokedex = new_datalist
+  
   console.log(pokedex)
   for (var i = 0; i < pokedex.length; i++) {
     console.log(pokedex[i])
@@ -262,7 +269,7 @@ function load_run(idx) {
 function load_pokedex() {
   const data = localStorage.getItem(runs[current_run_id].pokedex_key)
   if (data != null) {
-    pokedex = data
+    pokedex = JSON.parse(data)
     load_datalist_pokedex()
   } else {
     build_pokedex(runs[current_run_id].generation_index)
@@ -366,7 +373,7 @@ function render_pokemon_1(_pokemon) {
 
 pop_up_encounter_pokemon1.addEventListener('input', function (evt) {
   const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon1.value)
-  if (!new_pokemon == null) {
+  if (new_pokemon != null) {
       console.log(new_pokemon)
       render_pokemon_1(new_pokemon)
   }
