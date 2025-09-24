@@ -164,7 +164,7 @@ function get_generation_index(generation) {
 }
 
 function get_pokemon_data(name) {
-  console.log("got :'", name, "', return :")
+  console.log("got :", name, "| return :")
   for (let i = 0; i < pokedex.length; i++) {
     if (pokedex[i].name == name) {
       console.log(pokedex[i])
