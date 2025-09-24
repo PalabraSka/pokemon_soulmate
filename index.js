@@ -395,7 +395,8 @@ function render_pokemon_2(_pokemon) {
 }
 
 pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
-    const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon2.value)
+  const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon2.value)
+  console.log(new_pokemon)
   if (!new_pokemon == null) {
       render_pokemon_2(new_pokemon)
   }
