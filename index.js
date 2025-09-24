@@ -39,8 +39,11 @@ const datalist_pokedex = document.getElementById("datalist_pokedex")
 
 /* flat data */
 const generations_array = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
-const sprites_location = "static/images/types/"
-const sprites_format = ".png"
+const types_location = "static/images/types/"
+const types_format = ".png"
+const type_unknown = "Unknown"
+const type_null = "Unknown"
+const sprite_unknown = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201-question.png"
 
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
@@ -114,6 +117,14 @@ function load_datalist_generations() {
     const option = document.createElement("option")
     option.value = generations_array[i]
     datalist_generations.appendChild(option)
+  }
+}
+
+function load_datalist_pokedex() {
+  for (var i = 0; i < pokedex.length; i++) {
+    const option = document.createElement("option")
+    option.value = pokedex[i]
+    datalist_pokedex.appendChild(option)
   }
 }
 
@@ -239,8 +250,18 @@ function load_pokedex() {
   const data = localStorage.getItem(runs[current_run_id].pokedex_key)
   if (data != null) {
     pokedex = data
+    load_datalist_pokedex()
   } else {
     build_pokedex(runs[current_run_id].generation_index)
+    wait_pokedex(count_species(runs[current_run_id].generation_index)
+  }
+}
+
+function wait_pokedex(dex_size) {
+  if(pokedex.length < dex_size) {
+    window.setTimeout(function() { wait_pokedex(dex_size); }, 50); /* this checks the flag every 50 milliseconds*/
+  } else {
+    load_datalist_pokedex()
   }
 }
 
@@ -286,52 +307,63 @@ function render_encounters() {
   }
 }
 
-// New encounter / edit / remove encounter process
-function open_encounter_pop_up(idx = -1) {
-  if (idx < 0) {
-    pop_up.style.display = "block"
-    pop_up_encounter.style.display = "block"
-  }
-  pop_up.style.display = "block"
-  pop_up_encounter.style.display = "block"
-}
-
 /*********************************************************************
 *  Encounter pop-up functions
 *********************************************************************/
+function open_encounter_pop_up(idx = -1) {
+  if (idx < 0) {
+    render_encounter_pop_up()
+  } else {
+    render_encounter_pop_up(runs[current_run_id].encounters[idx])
+  }
+  toggle_pop_up(pop_up_encounter)
+}
+
 function render_encounter_pop_up(encounter = null) {
   if (encounter == null){
     pop_up_encounter_location.value = ""
     pop_up_encounter_name.value = ""
     pop_up_encounter_pokemon1.value = ""
-    pop_up_encounter_pokemon1_img.value = ""
-    pop_up_encounter_pokemon1_type1.value = ""
-    pop_up_encounter_pokemon1_type2.value = ""
+    pop_up_encounter_pokemon1_img.src = sprite_unknown
+    pop_up_encounter_pokemon1_type1.src = types_location + type_unknown + types_format
+    pop_up_encounter_pokemon1_type2.src = types_location + type_unknown + types_format
     pop_up_encounter_pokemon2.value = ""
-    pop_up_encounter_pokemon2_img.value = ""
-    pop_up_encounter_pokemon2_type1.value = ""
-    pop_up_encounter_pokemon2_type2.value = ""
-    pop_up_encounter_state.value = ""
+    pop_up_encounter_pokemon2_img.src = sprite_unknown
+    pop_up_encounter_pokemon2_type1.src = types_location + type_unknown + types_format
+    pop_up_encounter_pokemon2_type2.src = types_location + type_unknown + types_format
+    pop_up_encounter_state.src = ""
   } else {
     pop_up_encounter_location.value = encounter.location
     pop_up_encounter_name.value = encounter.name
-    pop_up_encounter_pokemon1.value = encounter.pokemon_1.species
-    pop_up_encounter_pokemon1_img.src = encounter.pokemon_1.sprite
-    pop_up_encounter_pokemon1_type1.src = types_location + encounter.pokemon_1.type1 + types_format
-    pop_up_encounter_pokemon1_type2.value = ""
-    pop_up_encounter_pokemon2.value = ""
-    pop_up_encounter_pokemon2_img.value = ""
-    pop_up_encounter_pokemon2_type1.value = ""
-    pop_up_encounter_pokemon2_type2.value = ""
-    pop_up_encounter_state.value = ""
+    render_pokemon_1(encounter.pokemon_1)
+    render_pokemon_2(encounter.pokemon_2)
+    pop_up_encounter_state.src = ""
   }
+
+  // building datalist
+  
 }
 
 function render_pokemon_1(_pokemon) {
-    pop_up_encounter_pokemon1.value = encounter.pokemon_1.species
-    pop_up_encounter_pokemon1_img.src = encounter.pokemon_1.sprite
-    pop_up_encounter_pokemon1_type1.src = types_location + encounter.pokemon_1.type1 + types_format
-    pop_up_encounter_pokemon1_type2.value = ""
+    pop_up_encounter_pokemon1.value = _pokemon.pokemon_1.species
+    pop_up_encounter_pokemon1_img.src = _pokemon.pokemon_1.sprite
+    pop_up_encounter_pokemon1_type1.src = types_location + _pokemon.pokemon_1.type1 + types_format
+    if (_pokemon.pokemon_1.type2 == null){
+      pop_up_encounter_pokemon1_type2.src = types_location + type_null + types_format
+    } else {
+      pop_up_encounter_pokemon1_type2.src = types_location + _pokemon.pokemon_1.type2 + types_format
+    }      
+}
+
+function render_pokemon_2(_pokemon) {
+    pop_up_encounter_pokemon2.value = _pokemon.pokemon_2.species
+    pop_up_encounter_pokemon2_img.src = _pokemon.pokemon_2.sprite
+    pop_up_encounter_pokemon2_type1.src = types_location + _pokemon.pokemon_2.type1 + types_format
+    if (_pokemon.pokemon_2.type2 == null){
+      pop_up_encounter_pokemon2_type2.src = types_location + type_null + types_format
+    } else {
+      pop_up_encounter_pokemon2_type2.src = types_location + _pokemon.pokemon_2.type2 + types_format
+    }      
 }
 
 function close_encounter_pop_up() {
