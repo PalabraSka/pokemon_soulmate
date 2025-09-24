@@ -14,6 +14,7 @@ const run = {
 }
   
 const pokemon = {
+  name: "",
   sprite: "",
   species: "",
   type1: null,
