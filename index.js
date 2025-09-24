@@ -1,4 +1,4 @@
-eslet runs = []
+let runs = []
 let encounters = []
 let pokedex = []
 
