@@ -389,7 +389,6 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
       render_pokemon_2(new_pokemon)
   }
 })
-})
 
 function close_encounter_pop_up() {
   pop_up.style.display = "none"
