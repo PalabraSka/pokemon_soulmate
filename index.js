@@ -123,6 +123,7 @@ function load_datalist_generations() {
 function load_datalist_pokedex() {
   console.log(pokedex)
   for (var i = 0; i < pokedex.length; i++) {
+    console.log(pokedex[i])
     const option = document.createElement("option")
     option.value = pokedex[i].name
     datalist_pokedex.appendChild(option)
