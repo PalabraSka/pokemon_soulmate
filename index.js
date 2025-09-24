@@ -253,7 +253,7 @@ function load_pokedex() {
     load_datalist_pokedex()
   } else {
     build_pokedex(runs[current_run_id].generation_index)
-    wait_pokedex(count_species(runs[current_run_id].generation_index)
+    wait_pokedex(count_species(runs[current_run_id].generation_index))
   }
 }
 
