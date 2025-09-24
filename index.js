@@ -121,6 +121,7 @@ function load_datalist_generations() {
 }
 
 function load_datalist_pokedex() {
+  console.log(pokedex)
   for (var i = 0; i < pokedex.length; i++) {
     const option = document.createElement("option")
     option.value = pokedex[i].species
@@ -361,7 +362,7 @@ function render_pokemon_1(_pokemon) {
 }
 
 pop_up_encounter_pokemon1.addEventListener('input', function (evt) {
-    render_pokemon_1(get_pokemon_data(this.value))
+    render_pokemon_1(get_pokemon_data(pop_up_encounter_pokemon1.value))
 })
 
 function render_pokemon_2(_pokemon) {
