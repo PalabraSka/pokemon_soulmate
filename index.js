@@ -489,14 +489,6 @@ const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
 
 let dex_size = -1
 
-function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
-  this.name = pk_name
-  this.sprite = pk_sprite
-  this.species = pk_species
-  this.type1 = pk_type1
-  this.type2 = pk_type2
-}
-
 function build_pokedex(generation) {
   if (generation < 0 || generation >= generations_array.length) {
     return
@@ -532,8 +524,13 @@ function fetch_pokemon_data(pokemon, gen) {
         const new_sprite = pokeData.sprites.front_default
         const new_type1 = get_type_1(pokeData, gen)
         const new_type2 = get_type_2(pokeData, gen)
-        new_pokemon = new pokemon_(new_name, new_sprite, null, new_type1, new_type2)
-        const new_species = get_first_evolution(pokeData, gen, new_pokemon)
+        new_pokemon = structuredClone(pokemon)
+        new_pokemon.name = new_name
+        new_pokemon.sprite = new_sprite
+        new_pokemon.type1 = new_type1
+        new_pokemon.type2 = new_type2
+        new_pokemon.species = null
+        get_first_evolution(pokeData, gen, new_pokemon)
     })
 }
 
