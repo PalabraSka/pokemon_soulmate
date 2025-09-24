@@ -263,7 +263,6 @@ function load_pokedex() {
     load_datalist_pokedex()
   } else {
     build_pokedex(runs[current_run_id].generation_index)
-    wait_pokedex(count_species(runs[current_run_id].generation_index))
   }
 }
 
@@ -607,6 +606,7 @@ function check_dex_size(generation) {
   if(pokedex.length < dex_size) {
     window.setTimeout(function() { check_dex_size(generation); }, 100); /* this checks the flag every 100 milliseconds*/
   } else {
+    load_datalist_pokedex()
     const string_pokedex = JSON.stringify(pokedex)
     localStorage.setItem(generations_array[generation], string_pokedex)
   }
