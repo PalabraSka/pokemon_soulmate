@@ -39,6 +39,8 @@ const datalist_pokedex = document.getElementById("datalist_pokedex")
 
 /* flat data */
 const generations_array = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
+const sprites_location = "static/images/types/"
+const sprites_format = ".png"
 
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
@@ -292,6 +294,44 @@ function open_encounter_pop_up(idx = -1) {
   }
   pop_up.style.display = "block"
   pop_up_encounter.style.display = "block"
+}
+
+/*********************************************************************
+*  Encounter pop-up functions
+*********************************************************************/
+function render_encounter_pop_up(encounter = null) {
+  if (encounter == null){
+    pop_up_encounter_location.value = ""
+    pop_up_encounter_name.value = ""
+    pop_up_encounter_pokemon1.value = ""
+    pop_up_encounter_pokemon1_img.value = ""
+    pop_up_encounter_pokemon1_type1.value = ""
+    pop_up_encounter_pokemon1_type2.value = ""
+    pop_up_encounter_pokemon2.value = ""
+    pop_up_encounter_pokemon2_img.value = ""
+    pop_up_encounter_pokemon2_type1.value = ""
+    pop_up_encounter_pokemon2_type2.value = ""
+    pop_up_encounter_state.value = ""
+  } else {
+    pop_up_encounter_location.value = encounter.location
+    pop_up_encounter_name.value = encounter.name
+    pop_up_encounter_pokemon1.value = encounter.pokemon_1.species
+    pop_up_encounter_pokemon1_img.src = encounter.pokemon_1.sprite
+    pop_up_encounter_pokemon1_type1.src = types_location + encounter.pokemon_1.type1 + types_format
+    pop_up_encounter_pokemon1_type2.value = ""
+    pop_up_encounter_pokemon2.value = ""
+    pop_up_encounter_pokemon2_img.value = ""
+    pop_up_encounter_pokemon2_type1.value = ""
+    pop_up_encounter_pokemon2_type2.value = ""
+    pop_up_encounter_state.value = ""
+  }
+}
+
+function render_pokemon_1(_pokemon) {
+    pop_up_encounter_pokemon1.value = encounter.pokemon_1.species
+    pop_up_encounter_pokemon1_img.src = encounter.pokemon_1.sprite
+    pop_up_encounter_pokemon1_type1.src = types_location + encounter.pokemon_1.type1 + types_format
+    pop_up_encounter_pokemon1_type2.value = ""
 }
 
 function close_encounter_pop_up() {
