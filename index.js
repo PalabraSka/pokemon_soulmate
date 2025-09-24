@@ -124,7 +124,7 @@ function load_datalist_pokedex() {
   console.log(pokedex)
   for (var i = 0; i < pokedex.length; i++) {
     const option = document.createElement("option")
-    option.value = pokedex[i].species
+    option.value = pokedex[i].name
     datalist_pokedex.appendChild(option)
   }
 }
