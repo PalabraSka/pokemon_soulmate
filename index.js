@@ -398,8 +398,7 @@ function render_pokemon_2(_pokemon) {
 pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
   const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon2.value)
   
-  if (!new_pokemon == null) {
-      console.log('got in!')
+  if (new_pokemon != null) {
       render_pokemon_2(new_pokemon)
   }
 })
