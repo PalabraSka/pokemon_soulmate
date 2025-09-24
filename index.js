@@ -115,8 +115,10 @@ function load_runs() {
 
 function load_datalist_generations() {
   const new_datalist = document.createElement("datalist")
+  new_datalist.id = datalist_generations.id
   datalist_generations.replaceWith(new_datalist)
   datalist_generations = new_datalist
+  
   for (var i = 0; i < generations_array.length; i++) {
     const option = document.createElement("option")
     option.value = generations_array[i]
@@ -126,6 +128,7 @@ function load_datalist_generations() {
 
 function load_datalist_pokedex() {
   const new_datalist = document.createElement("datalist")
+  new_datalist.id = datalist_pokedex.id
   datalist_pokedex.replaceWith(new_datalist)
   datalist_pokedex = new_datalist
   
