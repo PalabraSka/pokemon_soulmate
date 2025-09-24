@@ -42,8 +42,8 @@ let datalist_pokedex = document.getElementById("datalist_pokedex")
 const generations_array = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
 const types_location = "static/images/types/"
 const types_format = ".png"
-const type_unknown = "Unknown"
-const type_null = "Unknown"
+const type_unknown = "unknown"
+const type_null = "unknown"
 const sprite_unknown = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201-question.png"
 
 /* pop-ups items */
