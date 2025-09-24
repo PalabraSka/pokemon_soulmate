@@ -365,7 +365,11 @@ function render_pokemon_1(_pokemon) {
 }
 
 pop_up_encounter_pokemon1.addEventListener('input', function (evt) {
-    render_pokemon_1(get_pokemon_data(pop_up_encounter_pokemon1.value))
+  const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon1.value)
+  if (!new_pokemon == null) {
+      console.log(new_pokemon)
+      render_pokemon_1(new_pokemon)
+  }
 })
 
 function render_pokemon_2(_pokemon) {
@@ -380,7 +384,11 @@ function render_pokemon_2(_pokemon) {
 }
 
 pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
-    render_pokemon_2(get_pokemon_data(this.value))
+    const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon2.value)
+  if (!new_pokemon == null) {
+      render_pokemon_2(new_pokemon)
+  }
+})
 })
 
 function close_encounter_pop_up() {
