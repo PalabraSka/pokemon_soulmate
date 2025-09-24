@@ -164,13 +164,15 @@ function get_generation_index(generation) {
 }
 
 function get_pokemon_data(name) {
-  console.log(name)
+  console.log("got :'", name, "', return :")
   for (let i = 0; i < pokedex.length; i++) {
     if (pokedex[i].name == name) {
       console.log(pokedex[i])
       return pokedex[i]
     }
   }
+  console.log(null)
+  return null
 }
 
 /*********************************************************************
@@ -378,7 +380,6 @@ pop_up_encounter_pokemon1.addEventListener('input', function(evt) {
   const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon1.value)
   
   if (new_pokemon != null) {
-    console.log(new_pokemon)
     render_pokemon_1(new_pokemon)
   }
 })
@@ -396,7 +397,7 @@ function render_pokemon_2(_pokemon) {
 
 pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
   const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon2.value)
-  console.log(new_pokemon)
+  
   if (!new_pokemon == null) {
       render_pokemon_2(new_pokemon)
   }
