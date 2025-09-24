@@ -123,7 +123,7 @@ function load_datalist_generations() {
 function load_datalist_pokedex() {
   for (var i = 0; i < pokedex.length; i++) {
     const option = document.createElement("option")
-    option.value = pokedex[i]
+    option.value = pokedex[i].name
     datalist_pokedex.appendChild(option)
   }
 }
@@ -147,6 +147,14 @@ function get_generation_index(generation) {
     return generations_array.indexOf(generation)
   } else {
     return -1
+  }
+}
+
+function get_pokemon_data(name) {
+  for (let i = 0; i < pokedex.length; i++) {
+    if (pokedex[i].name = name) {
+      return pokedex[i]
+    }
   }
 }
 
@@ -338,10 +346,7 @@ function render_encounter_pop_up(encounter = null) {
     render_pokemon_1(encounter.pokemon_1)
     render_pokemon_2(encounter.pokemon_2)
     pop_up_encounter_state.src = ""
-  }
-
-  // building datalist
-  
+  }  
 }
 
 function render_pokemon_1(_pokemon) {
@@ -355,6 +360,10 @@ function render_pokemon_1(_pokemon) {
     }      
 }
 
+pop_up_encounter_pokemon1.addEventListener('input', function (evt) {
+    render_pokemon_1(get_pokemon_data(this.value))
+})
+
 function render_pokemon_2(_pokemon) {
     pop_up_encounter_pokemon2.value = _pokemon.pokemon_2.species
     pop_up_encounter_pokemon2_img.src = _pokemon.pokemon_2.sprite
@@ -365,6 +374,10 @@ function render_pokemon_2(_pokemon) {
       pop_up_encounter_pokemon2_type2.src = types_location + _pokemon.pokemon_2.type2 + types_format
     }      
 }
+
+pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
+    render_pokemon_2(get_pokemon_data(this.value))
+})
 
 function close_encounter_pop_up() {
   pop_up.style.display = "none"
