@@ -1,4 +1,4 @@
-let runs = []
+eslet runs = []
 let encounters = []
 let pokedex = []
 
@@ -123,7 +123,7 @@ function load_datalist_generations() {
 function load_datalist_pokedex() {
   for (var i = 0; i < pokedex.length; i++) {
     const option = document.createElement("option")
-    option.value = pokedex[i].name
+    option.value = pokedex[i].species
     datalist_pokedex.appendChild(option)
   }
 }
@@ -152,7 +152,7 @@ function get_generation_index(generation) {
 
 function get_pokemon_data(name) {
   for (let i = 0; i < pokedex.length; i++) {
-    if (pokedex[i].name = name) {
+    if (pokedex[i].species = name) {
       return pokedex[i]
     }
   }
