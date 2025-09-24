@@ -364,17 +364,17 @@ function render_encounter_pop_up(encounter = null) {
 }
 
 function render_pokemon_1(_pokemon) {
-    pop_up_encounter_pokemon1.value = _pokemon.pokemon_1.species
-    pop_up_encounter_pokemon1_img.src = _pokemon.pokemon_1.sprite
-    pop_up_encounter_pokemon1_type1.src = types_location + _pokemon.pokemon_1.type1 + types_format
-    if (_pokemon.pokemon_1.type2 == null){
+    pop_up_encounter_pokemon1.value = _pokemon.name
+    pop_up_encounter_pokemon1_img.src = _pokemon.sprite
+    pop_up_encounter_pokemon1_type1.src = types_location + _pokemon.type1 + types_format
+    if (_pokemon.type2 == null){
       pop_up_encounter_pokemon1_type2.src = types_location + type_null + types_format
     } else {
-      pop_up_encounter_pokemon1_type2.src = types_location + _pokemon.pokemon_1.type2 + types_format
+      pop_up_encounter_pokemon1_type2.src = types_location + _pokemon.type2 + types_format
     }      
 }
 
-pop_up_encounter_pokemon1.addEventListener('input', function (evt) {
+pop_up_encounter_pokemon1.addEventListener('input', function(evt) {
   const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon1.value)
   
   if (new_pokemon != null) {
@@ -384,13 +384,13 @@ pop_up_encounter_pokemon1.addEventListener('input', function (evt) {
 })
 
 function render_pokemon_2(_pokemon) {
-    pop_up_encounter_pokemon2.value = _pokemon.pokemon_2.species
-    pop_up_encounter_pokemon2_img.src = _pokemon.pokemon_2.sprite
-    pop_up_encounter_pokemon2_type1.src = types_location + _pokemon.pokemon_2.type1 + types_format
-    if (_pokemon.pokemon_2.type2 == null){
+    pop_up_encounter_pokemon2.value = _pokemon.species
+    pop_up_encounter_pokemon2_img.src = _pokemon.sprite
+    pop_up_encounter_pokemon2_type1.src = types_location + _pokemon.type1 + types_format
+    if (_pokemon.type2 == null){
       pop_up_encounter_pokemon2_type2.src = types_location + type_null + types_format
     } else {
-      pop_up_encounter_pokemon2_type2.src = types_location + _pokemon.pokemon_2.type2 + types_format
+      pop_up_encounter_pokemon2_type2.src = types_location + _pokemon.type2 + types_format
     }      
 }
 
