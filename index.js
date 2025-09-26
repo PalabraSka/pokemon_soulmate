@@ -22,6 +22,7 @@ const pokemon = {
 }
 
 const encounter = {
+  idx: -1,
   location: "",
   name: "",
   pokemon_1: Object.create(pokemon),
@@ -45,6 +46,12 @@ const types_format = ".png"
 const type_unknown = "unknown"
 const type_null = "unknown"
 const sprite_unknown = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201-question.png"
+
+/* rules */
+let rule_cross_player_dupe = true
+let rule_different_type_encounter = true
+let rule_different_type_team = true
+let rule_different_type_team_cross_player = true
 
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
@@ -113,6 +120,7 @@ function load_runs() {
   }
 }
 
+// Datalists
 function load_datalist_generations() {
   const new_datalist = document.createElement("datalist")
   new_datalist.id = datalist_generations.id
@@ -141,6 +149,7 @@ function load_datalist_pokedex() {
   }
 }
 
+// Encounters
 function save_encounters() {
   const string_encounters = JSON.stringify(encounters)
 
@@ -154,6 +163,10 @@ function load_encounters(_run = -1) {
     render_encounters()
   }
 }
+
+/*********************************************************************
+*  Data get/set/check functions
+*********************************************************************/
 
 function get_generation_index(generation) {
   if (generations_array.includes(generation)) {
@@ -173,6 +186,31 @@ function get_pokemon_data(name) {
   }
   console.log(null)
   return null
+}
+
+function is_encounter_valid(pokemon_1, pokemon_2) {
+  if (!is_pokemon_dupe(pokemon_1) {
+    return false
+  }
+  if (!is_pokemon_dupe(pokemon_2) {
+    return false
+  }
+  if (pokemon_1.type1 == pokemon_2.type1) {
+    return false
+  }
+  if (pokemon_1.species == pokemon_2.species) {
+    return false
+  }
+  
+  return true
+}
+
+function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
+  for (let i = 0; runs[current_run_id].encounters.length; i++) {
+    if (i != encounter_idx) {
+      return true
+    }
+  return true
 }
 
 /*********************************************************************
