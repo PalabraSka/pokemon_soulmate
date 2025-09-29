@@ -75,6 +75,9 @@ const pop_up_encounter_pokemon2_type1 = document.getElementById("encounter_pokem
 const pop_up_encounter_pokemon2_type2 = document.getElementById("encounter_pokemon_2_type_2")
 const pop_up_encounter_state = document.getElementById("encounter_state")
 
+/* Pop-up encounter values */
+let pop_up_encounter_object = Object.create(encounter)
+
 /* Pop-up new run items */
 const pop_up_new_run_name = document.getElementById("new_run_name")
 const pop_up_new_run_generation = document.getElementById("new_run_generation_input")
@@ -382,8 +385,10 @@ function render_encounters() {
 function open_encounter_pop_up(idx = -1) {
   if (idx < 0) {
     render_encounter_pop_up()
+    pop_up_encounter_obect = Object.create(encounter)
   } else {
     render_encounter_pop_up(runs[current_run_id].encounters[idx])
+    pop_up_encounter_object = runs[current_run_id].encounters[idx]
   }
   toggle_pop_up(pop_up_encounter)
 }
@@ -421,14 +426,6 @@ function render_pokemon_1(_pokemon) {
     }      
 }
 
-pop_up_encounter_pokemon1.addEventListener('input', function(evt) {
-  const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon1.value)
-  
-  if (new_pokemon != null) {
-    render_pokemon_1(new_pokemon)
-  }
-})
-
 function render_pokemon_2(_pokemon) {
     pop_up_encounter_pokemon2.value = _pokemon.species
     pop_up_encounter_pokemon2_img.src = _pokemon.sprite
@@ -439,14 +436,6 @@ function render_pokemon_2(_pokemon) {
       pop_up_encounter_pokemon2_type2.src = types_location + _pokemon.type2 + types_format
     }      
 }
-
-pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
-  const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon2.value)
-  
-  if (new_pokemon != null) {
-      render_pokemon_2(new_pokemon)
-  }
-})
 
 function close_encounter_pop_up() {
   pop_up.style.display = "none"
@@ -476,6 +465,35 @@ function save_encounter(idx = -1) {
   save_encounters()
   encounter_name.value = ""
 }
+
+/* pop-up encounter event listeners */
+pop_up_encounter_location.addEventListener('input', function(evt) {
+  const new_location = pop_up_encounter_location.value
+  pop_up_encounter_object.location = new_location
+})
+
+pop_up_encounter_name.addEventListener('input', function(evt) {
+  const new_name = pop_up_encounter_name.value
+  pop_up_encounter_object.name = new_name
+})
+
+pop_up_encounter_pokemon1.addEventListener('input', function(evt) {
+  const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon1.value)
+  
+  if (new_pokemon != null) {
+    render_pokemon_1(new_pokemon)
+    pop_up_encounter_object.pokemon_1 = new_pokemon
+  }
+})
+
+pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
+  const new_pokemon = get_pokemon_data(pop_up_encounter_pokemon2.value)
+  
+  if (new_pokemon != null) {
+      render_pokemon_2(new_pokemon)
+      pop_up_encounter_object.pokemon_2 = new_pokemon
+  }
+})
 
 /*********************************************************************
 *  Teams tab functions
