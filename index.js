@@ -219,7 +219,7 @@ function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
         return true
       }
     }
-  
+  }
   return false
 }
 
