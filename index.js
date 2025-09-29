@@ -188,17 +188,17 @@ function get_pokemon_data(name) {
   return null
 }
 
-function is_encounter_valid(pokemon_1, pokemon_2) {
-  if (!is_pokemon_dupe(pokemon_1) {
+function is_encounter_valid(encounter) {
+  if (!is_pokemon_dupe(encounter.pokemon_1, encounter.idx)) {
     return false
   }
-  if (!is_pokemon_dupe(pokemon_2) {
+  if (!is_pokemon_dupe(encounter.pokemon_2, encounter.idx)) {
     return false
   }
-  if (pokemon_1.type1 == pokemon_2.type1) {
+  if (encounter.pokemon_1.type1 == encounter.pokemon_2.type1) {
     return false
   }
-  if (pokemon_1.species == pokemon_2.species) {
+  if (encounter.pokemon_1.species == encounter.pokemon_2.species) {
     return false
   }
   
@@ -208,9 +208,16 @@ function is_encounter_valid(pokemon_1, pokemon_2) {
 function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
   for (let i = 0; runs[current_run_id].encounters.length; i++) {
     if (i != encounter_idx) {
-      return true
+      if (runs[current_run_id].encounters[i].pokemon_1.species == pokemon_.species || runs[current_run_id].encounters[i].pokemon_2.species == pokemon_.species) {
+        return true
+      }
+    } else {
+      if (runs[current_run_id].encounters[i].pokemon_1.species == pokemon_.species && runs[current_run_id].encounters[i].pokemon_2.species == pokemon_.species) {
+        return true
+      }
     }
-  return true
+  
+  return false
 }
 
 /*********************************************************************
