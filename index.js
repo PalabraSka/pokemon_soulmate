@@ -452,18 +452,16 @@ function edit_encounter(idx) {
   encounters[idx] = document.getElementById(encounter_id + toString(idx) + "_input").value
 }
 
-function save_encounter(idx = -1) {
-  const location = encounter_name.value;
+function save_encounter() {
+  // check data
 
-  if (!value) {
-    alert("Not a pokemon !")
-    return
+  // add encounter
+  if (pop_up_encounter_object.idx < 0) {
+    pop_up_encounter_object.idx = runs[current_run_id].encounters.length
+    runs[current_run_id].encounters.push(pop_up_encounter_object)
   }
 
-  encounters.push(value)
-  render_encounters()
-  save_encounters()
-  encounter_name.value = ""
+  // save data
 }
 
 /* pop-up encounter event listeners */
