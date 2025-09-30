@@ -548,7 +548,7 @@ function load_page() {
     tab_teams.disabled = true   
   } else {
     load_current_run_display()
-    render_encounter()
+    render_encounters()
     generate_teams()
   }
 
