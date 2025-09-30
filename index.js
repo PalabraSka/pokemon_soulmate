@@ -1,5 +1,4 @@
 let runs = []
-let encounters = []
 let pokedex = []
 
 const run = {
@@ -152,19 +151,10 @@ function load_datalist_pokedex() {
   }
 }
 
-// Encounters
-function save_encounters() {
-  const string_encounters = JSON.stringify(encounters)
-
-  localStorage.setItem(encounters_key, string_encounters)
-}
-
-function load_encounters(_run = -1) {
-  const old_encounters = localStorage.getItem(encounters_key)
-  if (old_encounters) {
-    encounters = JSON.parse(old_encounters)
-    render_encounters()
-  }
+// Saves
+function save_data() {
+  const string_data = JSON.stringify(runs)
+  localStorage.setItem(key_runs, string_data)
 }
 
 /*********************************************************************
@@ -227,7 +217,6 @@ function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
 *  Menu tab functions
 *********************************************************************/
 function load_menu() {
-
   /* toggle current run info and continue button */
   if (current_run_id >= 0 && current_run_id < runs.length) {
     bt_menu_continue.disabled = false
@@ -289,6 +278,7 @@ function start_new_run() {
   runs.push(new_run)
 
   load_run(new_run.idx)
+  save_data()
   close_all_pop_ups()
   tab_encounters.click()
 }
@@ -302,6 +292,8 @@ function close_runs_pop_up() {
 }
 
 function load_run(idx) {
+  save_data()
+  
   for (var i = 0; i < runs.length; i++) {
     runs[i].is_active = false
   }
@@ -443,9 +435,9 @@ function close_encounter_pop_up() {
 }
 
 function remove_encounter(idx) {
-  encounters.splice(idx, 1)
+  runs[current_run_id].encounters.splice(idx, 1)
   render_encounters()
-  save_encounters()
+  save_data()
 }
 
 function edit_encounter(idx) {
@@ -481,6 +473,7 @@ function save_encounter() {
   }
 
   // save data
+  save_data()
 }
 
 /* pop-up encounter event listeners */
