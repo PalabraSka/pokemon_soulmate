@@ -98,6 +98,7 @@ const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
 const encounter_id = "encounter_"
 const encounter_class = "encounter"
+const encounter_pokemon_class = "encounter_pokemon_div"
 
 
 /*********************************************************************
@@ -354,24 +355,62 @@ function wait_pokedex(dex_size) {
 function render_encounters() {
   encounters_div.innerHTML = null;
 
-  for (const [idx, item] of Object.entries(runs[current_run_id].encounters)) {
+  for (let idx = 0;runs[current_run_id].encounters.length; i++) {
     const container = document.createElement("div")
     container.id = encounter_id + idx.toString()
     container.className = encounter_class
+
+    // encounter info content
     
-    //const text = document.createElement("input")
-    //text.textContent = item
-    //text.style.display = "inline"
-    //text.style.marginRight = "10px"
+    // pokemon 1 div content
+    const pokemon_1 = document.createElement("div")
+    pokemon_1.style.display = "inline"
+    pokemon_1.className = encounter_pokemon_class
 
-    const input = document.createElement("input")
-    input.type = "text"
-    input.id = encounter_id + idx.toString() + "_input"
-    input.placeholder = item
-    input.value = item
-    input.style.display = "inline"
-    input.className = encounter_class
+    const img_pokemon1 = document.createElement("img")
+    img_pokemon1.style.display = "block"
+    img_pokemon1.src = runs[current_run_id].encounters[idx].pokemon_1.sprites
+    img_pokemon1.className = encounter_pokemon_class + "_img"
 
+    const img_pokemon1_type1 = document.createElement("img")
+    img_pokemon1_type1.style.display = "inline"
+    img_pokemon1_type1.src = types_location + runs[current_run_id].encounters[idx].pokemon_1.type1 + types_format
+    img_pokemon1_type1.className = encounter_pokemon_class + "_type"
+
+    const img_pokemon1_type2 = document.createElement("img")
+    img_pokemon1_type2.style.display = "inline"
+    img_pokemon1_type2.src = types_location + runs[current_run_id].encounters[idx].pokemon_1.type2 + types_format
+    img_pokemon1_type2.className = encounter_pokemon_class + "_type"
+
+    pokemon_1.appendChild(img_pokemon1)
+    pokemon_1.appendChild(img_pokemon1_type1)
+    pokemon_1.appendChild(img_pokemon1_type2)
+
+    // pokemon 2 div content
+    const pokemon_2 = document.createElement("div")
+    pokemon_2.style.display = "inline"
+    pokemon_2.className = encounter_pokemon_class
+
+    const img_pokemon2 = document.createElement("img")
+    img_pokemon2.style.display = "block"
+    img_pokemon2.src = runs[current_run_id].encounters[idx].pokemon_1.sprites
+    img_pokemon2.className = encounter_pokemon_class + "_img"
+
+    const img_pokemon2_type1 = document.createElement("img")
+    img_pokemon2_type1.style.display = "inline"
+    img_pokemon2_type1.src = types_location + runs[current_run_id].encounters[idx].pokemon_2.type1 + types_format
+    img_pokemon2_type1.className = encounter_pokemon_class + "_type"
+
+    const img_pokemon2_type2 = document.createElement("img")
+    img_pokemon2_type2.style.display = "inline"
+    img_pokemon2_type2.src = types_location + runs[current_run_id].encounters[idx].pokemon_2.type2 + types_format
+    img_pokemon2_type2.className = encounter_pokemon_class + "_type"
+    
+    pokemon_2.appendChild(img_pokemon2)
+    pokemon_2.appendChild(img_pokemon2_type1)
+    pokemon_2.appendChild(img_pokemon2_type2)
+    
+    // encounter buttons/options
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
     button_edit.onclick = () => open_encounter_pop_up(idx)
@@ -382,7 +421,10 @@ function render_encounters() {
     button_del.onclick = () => remove_encounter(idx)
     button_del.className = encounter_class
 
-    container.appendChild(input)
+    container.appendChild(encounter_location)
+    container.appendChild(encounter_name)
+    container.appendChild(pokemon_1)
+    container.appendChild(pokemon_2)
     container.appendChild(button_edit)
     container.appendChild(button_del)
     
