@@ -355,6 +355,10 @@ function wait_pokedex(dex_size) {
 function render_encounters() {
   encounters_div.innerHTML = null;
 
+  if (runs[current_run_id].encounters.length == 0) {
+    return
+  }
+  
   for (let idx = 0;runs[current_run_id].encounters.length; idx++) {
     const container = document.createElement("div")
     container.id = encounter_id + idx.toString()
