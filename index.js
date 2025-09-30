@@ -324,6 +324,7 @@ function load_run(idx) {
   
   load_menu()
   load_pokedex()
+  load_current_run_display()
   render_encounters()
   generate_teams()
   
@@ -547,9 +548,7 @@ function load_page() {
     tab_encounters.disabled = true
     tab_teams.disabled = true   
   } else {
-    load_current_run_display()
-    render_encounters()
-    generate_teams()
+    load_run(current_run_id)
   }
 
   // prepare tabs
