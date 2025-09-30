@@ -489,10 +489,15 @@ function save_encounter() {
   if (pop_up_encounter_object.idx < 0) {
     pop_up_encounter_object.idx = runs[current_run_id].encounters.length
     runs[current_run_id].encounters.push(pop_up_encounter_object)
+  } else {
+    runs[current_run_id].encounters[pop_up_encounter_object.idx] = pop_up_encounter_object
   }
 
   // save data
   save_data()
+
+  // close pop-up
+  toggle_pop_up()
 }
 
 /* pop-up encounter event listeners */
@@ -557,10 +562,13 @@ function load_page() {
 }
 
 // Pop-up management
-function toggle_pop_up(target) {
+function toggle_pop_up(target = null) {
   close_all_pop_ups()
-  pop_up.style.display = "block"
-  target.style.display = "block"
+
+  if (target != null) {
+    pop_up.style.display = "block"
+    target.style.display = "block"
+  }
 }
 
 function close_all_pop_ups() {
