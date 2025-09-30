@@ -454,7 +454,26 @@ function edit_encounter(idx) {
 
 function save_encounter() {
   // check data
+  if (!check_encounter_location(pop_up_encounter_object)) {
+    alert("You need to chose a unique location !")
+    return
+  }
 
+  if (!check_encounter_name(pop_up_encounter_object)) {
+    alert("You need to chose a unique nickname !")
+    return
+  }
+
+  if (get_pokemon_data(pop_up_encounter_pokemon1.value) == null) {
+    alert("Pokemon 1 isn't in the dex !")
+    return
+  }
+
+  if (get_pokemon_data(pop_up_encounter_pokemon2.value) == null) {
+    alert("Pokemon 2 isn't in the dex !")
+    return
+  }
+  
   // add encounter
   if (pop_up_encounter_object.idx < 0) {
     pop_up_encounter_object.idx = runs[current_run_id].encounters.length
