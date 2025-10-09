@@ -373,16 +373,19 @@ function wait_pokedex(dex_size) {
 *********************************************************************/
 function render_encounters() {
   encounters_div.innerHTML = null;
-
+  
   if (runs[current_run_id].encounters.length == 0) {
+    console.log("render_encounters(): No encounters for this run !")
     return
   }
+
+  console.log("render_encounters(): Starting to render the " + runs[current_run_id].encounters.length + " encounters !")
   
   for (let idx = 0;runs[current_run_id].encounters.length - 1; idx++) {
     const container = document.createElement("div")
     container.id = encounter_id + idx.toString()
     container.className = encounter_class
-
+    
     // encounter info content
     
     // pokemon 1 div content
