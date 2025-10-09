@@ -583,6 +583,9 @@ function save_encounter() {
   // save data
   save_data()
 
+  // render encounters
+  render_encounters()
+  
   // close pop-up
   toggle_pop_up()
 }
