@@ -187,11 +187,11 @@ function is_encounter_valid(encounter) {
     alert("Both pokemons share the same species !")   
     return false
   }
-  if (!is_pokemon_dupe(encounter.pokemon_1, encounter.idx)) {
+  if (is_pokemon_dupe(encounter.pokemon_1, encounter.idx)) {
     alert("Pokemon 1 is a dupe !")
     return false
   }
-  if (!is_pokemon_dupe(encounter.pokemon_2, encounter.idx)) {
+  if (is_pokemon_dupe(encounter.pokemon_2, encounter.idx)) {
     alert("Pokemon 2 is a dupe !")    
     return false
   }
