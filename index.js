@@ -135,6 +135,8 @@ function load_datalist_generations() {
     option.value = generations_array[i]
     datalist_generations.appendChild(option)
   }
+
+  console.log("Generations datalist loaded !")
 }
 
 function load_datalist_pokedex() {
@@ -143,13 +145,13 @@ function load_datalist_pokedex() {
   datalist_pokedex.replaceWith(new_datalist)
   datalist_pokedex = new_datalist
   
-  console.log(pokedex)
   for (var i = 0; i < pokedex.length; i++) {
-    console.log(pokedex[i])
     const option = document.createElement("option")
     option.value = pokedex[i].name
     datalist_pokedex.appendChild(option)
   }
+
+  console.log("Pokedex datalist loaded !")
 }
 
 // Saves
@@ -173,7 +175,7 @@ function get_generation_index(generation) {
 }
 
 function get_pokemon_data(name) {
-  console.log("got :", name, "| return :")
+  console.log("get_pokemon_data(name = '", name, "') | return : ")
   for (let i = 0; i < pokedex.length; i++) {
     if (pokedex[i].name == name) {
       console.log(pokedex[i])
@@ -533,7 +535,7 @@ function edit_encounter(idx) {
 }
 
 function save_encounter() {
-  console.log("Checking data for encounter : ")
+  console.log("save_encounter(): Checking data for encounter : ")
   console.log(pop_up_encounter_object)
   
   // check data
@@ -566,16 +568,16 @@ function save_encounter() {
     return
   }
 
-  console.log("Data is correct.")
+  console.log("save_encounter(): Data is correct.")
   
   // add encounter
   if (pop_up_encounter_object.idx < 0) {
     pop_up_encounter_object.idx = runs[current_run_id].encounters.length
     runs[current_run_id].encounters.push(pop_up_encounter_object)
-    console.log("Encounter added as a new encounter with idx = " + pop_up_encounter_object.idx.toString() + " !")
+    console.log("save_encounter(): Encounter added as a new encounter with idx = " + pop_up_encounter_object.idx.toString() + " !")
   } else {
     runs[current_run_id].encounters[pop_up_encounter_object.idx] = pop_up_encounter_object
-    console.log("Encounter idx = " + pop_up_encounter_object.idx.toString() + " updated !")
+    console.log("save_encounter(): Encounter idx = " + pop_up_encounter_object.idx.toString() + " updated !")
   }
 
   // save data
@@ -700,6 +702,8 @@ function build_pokedex(generation) {
     return
   }
 
+  console.log("build_pokedex(generation = '" + generation + "')")
+  
   pokedex = []
   const nb_species = count_species(generation)
   dex_size = nb_species
@@ -707,7 +711,7 @@ function build_pokedex(generation) {
   fetch(api_url + "/pokemon?limit=" + nb_species.toString())
     .then(response => response.json())
     .then(function(allpokemon) {
-      console.log(allpokemon.results)
+      //console.log(allpokemon.results)
       allpokemon.results.forEach(function(pokemon) {
         fetch_pokemon_data(pokemon, generation)
       })
@@ -720,8 +724,8 @@ function fetch_pokemon_data(pokemon, gen) {
   let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
   let new_pokemon
 
-  console.log("processing data for pokemon :")
-  console.log(pokemon)
+  //console.log("processing data for pokemon :")
+  //console.log(pokemon)
   
   fetch(url)
     .then(response => response.json())
@@ -751,7 +755,7 @@ function get_first_evolution(pokemon, gen, poke_obj){
         .then(response => response.json())
         .then(function(pokeData2) {
           poke_obj.species = pokeData2.chain.species.name
-          console.log(poke_obj)
+          //console.log(poke_obj)
           pokedex.push(poke_obj)
         })
       }
