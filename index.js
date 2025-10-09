@@ -183,6 +183,10 @@ function get_pokemon_data(name) {
 }
 
 function is_encounter_valid(encounter) {
+  if (encounter.pokemon_1.species == encounter.pokemon_2.species) {
+    alert("Both pokemons share the same species !")   
+    return false
+  }
   if (!is_pokemon_dupe(encounter.pokemon_1, encounter.idx)) {
     alert("Pokemon 1 is a dupe !")
     return false
@@ -193,10 +197,6 @@ function is_encounter_valid(encounter) {
   }
   if (encounter.pokemon_1.type1 == encounter.pokemon_2.type1) {
     alert("Both pokemons share the same type 1 !")   
-    return false
-  }
-  if (encounter.pokemon_1.species == encounter.pokemon_2.species) {
-    alert("Both pokemons share the same species !")   
     return false
   }
   
