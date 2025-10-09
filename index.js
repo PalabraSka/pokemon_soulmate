@@ -523,6 +523,11 @@ function save_encounter() {
   console.log(pop_up_encounter_object)
   
   // check data
+  if (pop_up_encounter_object.location == "") {
+    alert("Must enter a location name !")
+    return
+  }
+  
   if (!check_encounter_location(pop_up_encounter_object)) {
     alert("You need to chose a unique location !")
     return
