@@ -443,6 +443,12 @@ function open_encounter_pop_up(idx = -1) {
   if (idx < 0) {
     render_encounter_pop_up()
     pop_up_encounter_object = Object.create(encounter)
+    pop_up_encounter_object.pokemon_1 = null
+    pop_up_encounter_object.pokemon_2 = null
+    pop_up_encounter_object.location = ""
+    pop_up_encounter_object.alive = true
+    pop_up_encounter_object.idx = -1
+    pop_up_encounter_object.name = ""
   } else {
     render_encounter_pop_up(runs[current_run_id].encounters[idx])
     pop_up_encounter_object = runs[current_run_id].encounters[idx]
