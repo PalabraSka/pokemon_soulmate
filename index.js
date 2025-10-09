@@ -204,6 +204,9 @@ function is_encounter_valid(encounter) {
 }
 
 function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
+  if (runs[current_run_id].encounters.length == 0) {
+    return false
+  }
   for (let i = 0; runs[current_run_id].encounters.length -1; i++) {
     if (i != encounter_idx) {
       if (runs[current_run_id].encounters[i].pokemon_1.species == pokemon_.species || runs[current_run_id].encounters[i].pokemon_2.species == pokemon_.species) {
