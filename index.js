@@ -381,7 +381,7 @@ function render_encounters() {
 
   console.log("render_encounters(): Starting to render the " + runs[current_run_id].encounters.length + " encounters !")
   
-  for (let idx = 0;runs[current_run_id].encounters.length - 1; idx++) {
+  for (let idx = 0;idx < runs[current_run_id].encounters.length; idx++) {
     const container = document.createElement("div")
     container.id = encounter_id + idx.toString()
     container.className = encounter_class
