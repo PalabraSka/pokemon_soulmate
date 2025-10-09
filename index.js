@@ -510,6 +510,8 @@ function edit_encounter(idx) {
 }
 
 function save_encounter() {
+  console.Log(pop_up_encounter_object)
+  
   // check data
   if (!check_encounter_location(pop_up_encounter_object)) {
     alert("You need to chose a unique location !")
