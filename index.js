@@ -385,7 +385,8 @@ function render_encounters() {
     const container = document.createElement("div")
     container.id = encounter_id + idx.toString()
     container.className = encounter_class
-    
+
+    console.log(idx)
     // encounter info content
     
     // pokemon 1 div content
