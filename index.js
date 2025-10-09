@@ -208,10 +208,7 @@ function is_encounter_valid(encounter) {
 }
 
 function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
-  if (runs[current_run_id].encounters.length == 0) {
-    return false
-  }
-  for (let i = 0; runs[current_run_id].encounters.length -1; i++) {
+  for (let i = 0; i < runs[current_run_id].encounters.length; i++) {
     if (i != encounter_idx) {
       if (runs[current_run_id].encounters[i].pokemon_1.species == pokemon_.species || runs[current_run_id].encounters[i].pokemon_2.species == pokemon_.species) {
         return true
@@ -225,12 +222,8 @@ function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
   return false
 }
 
-function check_encounter_location(encounter) {
-  if (runs[current_run_id].encounters.length == 0) {
-    return true
-  }
-  
-  for (let i = 0; runs[current_run_id].encounters.length - 1; i++) {
+function check_encounter_location(encounter) {  
+  for (let i = 0; i < runs[current_run_id].encounters.length; i++) {
     if (encounter.idx != i && encounter.location == runs[current_run_id].encounters[i].location) {
       return false
     }
@@ -238,12 +231,8 @@ function check_encounter_location(encounter) {
   return true
 }
 
-function check_encounter_name(encounter) {
-  if (runs[current_run_id].encounters.length == 0) {
-    return true
-  }
-  
-  for (let i = 0; runs[current_run_id].encounters.length -1; i++) {
+function check_encounter_name(encounter) {  
+  for (let i = 0; i < runs[current_run_id].encounters.length; i++) {
     if (encounter.idx != i && encounter.name == runs[current_run_id].encounters[i].name) {
       return false
     }
@@ -381,12 +370,10 @@ function render_encounters() {
 
   console.log("render_encounters(): Starting to render the " + runs[current_run_id].encounters.length + " encounters !")
   
-  for (let idx = 0;idx < runs[current_run_id].encounters.length; idx++) {
+  for (let idx = 0; idx < runs[current_run_id].encounters.length; idx++) {
     const container = document.createElement("div")
-    container.id = encounter_id + idx.toString()
     container.className = encounter_class
 
-    console.log(idx)
     // encounter info content
     
     // pokemon 1 div content
