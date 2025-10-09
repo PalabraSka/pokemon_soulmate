@@ -156,6 +156,8 @@ function load_datalist_pokedex() {
 function save_data() {
   const string_data = JSON.stringify(runs)
   localStorage.setItem(key_runs, string_data)
+
+  console.log("Data saved locally !")
 }
 
 /*********************************************************************
@@ -531,6 +533,7 @@ function edit_encounter(idx) {
 }
 
 function save_encounter() {
+  console.log("Checking data for encounter : ")
   console.log(pop_up_encounter_object)
   
   // check data
@@ -562,13 +565,17 @@ function save_encounter() {
   if (!is_encounter_valid(pop_up_encounter_object)) {
     return
   }
+
+  console.log("Data is correct.")
   
   // add encounter
   if (pop_up_encounter_object.idx < 0) {
     pop_up_encounter_object.idx = runs[current_run_id].encounters.length
     runs[current_run_id].encounters.push(pop_up_encounter_object)
+    console.log("Encounter added as a new encounter with idx = " + pop_up_encounter_object.idx.toString() + " !")
   } else {
     runs[current_run_id].encounters[pop_up_encounter_object.idx] = pop_up_encounter_object
+    console.log("Encounter idx = " + pop_up_encounter_object.idx.toString() + " updated !")
   }
 
   // save data
