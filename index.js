@@ -442,7 +442,7 @@ function render_encounters() {
 function open_encounter_pop_up(idx = -1) {
   if (idx < 0) {
     render_encounter_pop_up()
-    pop_up_encounter_obect = Object.create(encounter)
+    pop_up_encounter_object = Object.create(encounter)
   } else {
     render_encounter_pop_up(runs[current_run_id].encounters[idx])
     pop_up_encounter_object = runs[current_run_id].encounters[idx]
