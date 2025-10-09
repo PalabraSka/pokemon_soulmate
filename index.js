@@ -219,6 +219,10 @@ function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
 }
 
 function check_encounter_location(encounter) {
+  if (runs[current_run_id].encounters.length == 0) {
+    return true
+  }
+  
   for (let i = 0; runs[current_run_id].encounters.length - 1; i++) {
     if (encounter.idx != i && encounter.location == runs[current_run_id].encounters[i].location) {
       return false
@@ -228,7 +232,11 @@ function check_encounter_location(encounter) {
 }
 
 function check_encounter_name(encounter) {
-  for (let i = 0; runs[current_run_id].encounters.length -1 ; i++) {
+  if (runs[current_run_id].encounters.length == 0) {
+    return true
+  }
+  
+  for (let i = 0; runs[current_run_id].encounters.length -1; i++) {
     if (encounter.idx != i && encounter.name == runs[current_run_id].encounters[i].name) {
       return false
     }
