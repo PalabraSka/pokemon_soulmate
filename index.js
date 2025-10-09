@@ -359,7 +359,7 @@ function render_encounters() {
     return
   }
   
-  for (let idx = 0;runs[current_run_id].encounters.length; idx++) {
+  for (let idx = 0;runs[current_run_id].encounters.length - 1; idx++) {
     const container = document.createElement("div")
     container.id = encounter_id + idx.toString()
     container.className = encounter_class
