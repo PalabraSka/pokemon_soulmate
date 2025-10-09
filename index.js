@@ -184,15 +184,19 @@ function get_pokemon_data(name) {
 
 function is_encounter_valid(encounter) {
   if (!is_pokemon_dupe(encounter.pokemon_1, encounter.idx)) {
+    alert("Pokemon 1 is a dupe !")
     return false
   }
   if (!is_pokemon_dupe(encounter.pokemon_2, encounter.idx)) {
+    alert("Pokemon 2 is a dupe !")    
     return false
   }
   if (encounter.pokemon_1.type1 == encounter.pokemon_2.type1) {
+    alert("Both pokemons share the same type 1 !")   
     return false
   }
   if (encounter.pokemon_1.species == encounter.pokemon_2.species) {
+    alert("Both pokemons share the same species !")   
     return false
   }
   
@@ -200,7 +204,7 @@ function is_encounter_valid(encounter) {
 }
 
 function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
-  for (let i = 0; runs[current_run_id].encounters.length; i++) {
+  for (let i = 0; runs[current_run_id].encounters.length -1; i++) {
     if (i != encounter_idx) {
       if (runs[current_run_id].encounters[i].pokemon_1.species == pokemon_.species || runs[current_run_id].encounters[i].pokemon_2.species == pokemon_.species) {
         return true
@@ -536,6 +540,10 @@ function save_encounter() {
 
   if (get_pokemon_data(pop_up_encounter_pokemon2.value) == null) {
     alert("Pokemon 2 isn't in the dex !")
+    return
+  }
+
+  if (!is_encounter_valid(pop_up_encounter_object)) {
     return
   }
   
