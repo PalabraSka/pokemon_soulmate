@@ -414,7 +414,7 @@ function render_encounters() {
 
     const img_pokemon2 = document.createElement("img")
     img_pokemon2.style.display = "block"
-    img_pokemon2.src = runs[current_run_id].encounters[idx].pokemon_1.sprite
+    img_pokemon2.src = runs[current_run_id].encounters[idx].pokemon_2.sprite
     img_pokemon2.className = encounter_pokemon_class + "_img"
 
     const img_pokemon2_type1 = document.createElement("img")
