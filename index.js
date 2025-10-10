@@ -97,7 +97,7 @@ const bt_menu_load = document.getElementById("bt_menu_load_run")
 const encounters_div = document.getElementById("encounters_div")
 const encounter_name = document.getElementById("encounter_name")
 const encounter_id = "encounter_"
-const encounter_class = "encounter"
+const encounter_class = "encounter_"
 const encounter_pokemon_class = "encounter_pokemon_div"
 
 
@@ -368,13 +368,18 @@ function render_encounters() {
     return
   }
 
-  console.log("render_encounters(): Starting to render the " + runs[current_run_id].encounters.length + " encounters !")
+  console.log("render_encounters(): Starting to render the " + runs[current_run_id].encounters.length + " encounter(s)...")
   
   for (let idx = 0; idx < runs[current_run_id].encounters.length; idx++) {
     const container = document.createElement("div")
     container.className = encounter_class
 
     // encounter info content
+    const encounter_location_p = document.createElement("p")
+    encounter_location_p.appendChild(runs[current_run_id].encounters[idx].location)
+    
+    const encounter_name_p = document.createElement("p")
+    encounter_name_p.appendChild(runs[current_run_id].encounters[idx].name)
     
     // pokemon 1 div content
     const pokemon_1 = document.createElement("div")
@@ -435,8 +440,8 @@ function render_encounters() {
     button_del.onclick = () => remove_encounter(idx)
     button_del.className = encounter_class
 
-    container.appendChild(encounter_location)
-    container.appendChild(encounter_name)
+    container.appendChild(encounter_location_p)
+    container.appendChild(encounter_name_p)
     container.appendChild(pokemon_1)
     container.appendChild(pokemon_2)
     container.appendChild(button_edit)
