@@ -400,7 +400,7 @@ function render_encounters() {
     img_pokemon1.className = encounter_pokemon_class + "_img"
 
     const div_pokemon1_types = document.createElement("div")
-    div_pokemon1_types.class = encounter_class + "_div_types"
+    div_pokemon1_types.class = encounter_class + "div_types"
     
     const img_pokemon1_type1 = document.createElement("img")
     img_pokemon1_type1.src = types_location + runs[current_run_id].encounters[idx].pokemon_1.type1 + types_format
@@ -425,7 +425,7 @@ function render_encounters() {
     img_pokemon2.className = encounter_pokemon_class + "_img"
 
     const div_pokemon2_types = document.createElement("div")
-    div_pokemon2_types.class = encounter_class + "_div_types"
+    div_pokemon2_types.class = encounter_class + "div_types"
     
     const img_pokemon2_type1 = document.createElement("img")
     img_pokemon2_type1.src = types_location + runs[current_run_id].encounters[idx].pokemon_2.type1 + types_format
