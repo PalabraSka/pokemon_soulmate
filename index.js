@@ -376,11 +376,11 @@ function render_encounters() {
 
     // encounter info content
     const encounter_location_p = document.createElement("p")
-    const location_text = document.createTextNode(runs[current_run_id].encounters[idx].location))
+    const location_text = document.createTextNode(runs[current_run_id].encounters[idx].location)
     encounter_location_p.appendChild(location_text)
     
     const encounter_name_p = document.createElement("p")
-    const name_text = document.createTextNode(runs[current_run_id].encounters[idx].name))
+    const name_text = document.createTextNode(runs[current_run_id].encounters[idx].name)
     encounter_name_p.appendChild(name_text)
     
     // pokemon 1 div content
