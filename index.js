@@ -815,6 +815,7 @@ function check_dex_size(generation) {
   if(pokedex.length < dex_size) {
     window.setTimeout(function() { check_dex_size(generation); }, 100); /* this checks the flag every 100 milliseconds*/
   } else {
+    console.log("Pokedex fully built !")
     load_datalist_pokedex()
     const string_pokedex = JSON.stringify(pokedex)
     localStorage.setItem(generations_array[generation], string_pokedex)
