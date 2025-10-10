@@ -442,7 +442,7 @@ function render_encounters() {
     
     // encounter buttons/options
     const div_buttons = document.createElement("div")
-    div_buttons.class = encounter_class + "div_buttons"
+    div_buttons.className = encounter_class + "div_buttons"
     
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
