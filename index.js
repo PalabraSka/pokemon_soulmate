@@ -375,37 +375,45 @@ function render_encounters() {
     container.className = encounter_class
 
     // encounter info content
+    const encounter_infos = document.createElement("div")
+    encounter_infos.className = encounter_class + "infos"
+    
     const encounter_location_p = document.createElement("p")
     const location_text = document.createTextNode(runs[current_run_id].encounters[idx].location)
     encounter_location_p.appendChild(location_text)
+    encounter_location_p.className = encounter_class + "location"
     
     const encounter_name_p = document.createElement("p")
     const name_text = document.createTextNode(runs[current_run_id].encounters[idx].name)
     encounter_name_p.appendChild(name_text)
+    encounter_name_p.className = encounter_class + "name"
+
+    encounter_infos.appendChild(encounter_location_p)
+    encounter_infos.appendChild(encounter_name_p)
     
     // pokemon 1 div content
     const pokemon_1 = document.createElement("div")
-    pokemon_1.style.display = "inline"
     pokemon_1.className = encounter_pokemon_class
 
     const img_pokemon1 = document.createElement("img")
-    img_pokemon1.style.display = "block"
     img_pokemon1.src = runs[current_run_id].encounters[idx].pokemon_1.sprite
     img_pokemon1.className = encounter_pokemon_class + "_img"
 
+    const div_pokemon1_types = document.createElement("div")
+    div_pokemon1_types.class = encounter_class + "_div_types"
+    
     const img_pokemon1_type1 = document.createElement("img")
-    img_pokemon1_type1.style.display = "inline"
     img_pokemon1_type1.src = types_location + runs[current_run_id].encounters[idx].pokemon_1.type1 + types_format
     img_pokemon1_type1.className = encounter_pokemon_class + "_type"
 
     const img_pokemon1_type2 = document.createElement("img")
-    img_pokemon1_type2.style.display = "inline"
     img_pokemon1_type2.src = types_location + runs[current_run_id].encounters[idx].pokemon_1.type2 + types_format
     img_pokemon1_type2.className = encounter_pokemon_class + "_type"
 
     pokemon_1.appendChild(img_pokemon1)
-    pokemon_1.appendChild(img_pokemon1_type1)
-    pokemon_1.appendChild(img_pokemon1_type2)
+    div_pokemon1_types.appendChild(img_pokemon1_type1)
+    div_pokemon1_types.appendChild(img_pokemon1_type2)
+    pokemon_1.appendChild(div_pokemon1_types)
 
     // pokemon 2 div content
     const pokemon_2 = document.createElement("div")
@@ -413,41 +421,45 @@ function render_encounters() {
     pokemon_2.className = encounter_pokemon_class
 
     const img_pokemon2 = document.createElement("img")
-    img_pokemon2.style.display = "block"
     img_pokemon2.src = runs[current_run_id].encounters[idx].pokemon_2.sprite
     img_pokemon2.className = encounter_pokemon_class + "_img"
 
+    const div_pokemon2_types = document.createElement("div")
+    div_pokemon2_types.class = encounter_class + "_div_types"
+    
     const img_pokemon2_type1 = document.createElement("img")
-    img_pokemon2_type1.style.display = "inline"
     img_pokemon2_type1.src = types_location + runs[current_run_id].encounters[idx].pokemon_2.type1 + types_format
     img_pokemon2_type1.className = encounter_pokemon_class + "_type"
 
     const img_pokemon2_type2 = document.createElement("img")
-    img_pokemon2_type2.style.display = "inline"
     img_pokemon2_type2.src = types_location + runs[current_run_id].encounters[idx].pokemon_2.type2 + types_format
     img_pokemon2_type2.className = encounter_pokemon_class + "_type"
     
     pokemon_2.appendChild(img_pokemon2)
-    pokemon_2.appendChild(img_pokemon2_type1)
-    pokemon_2.appendChild(img_pokemon2_type2)
+    div_pokemon2_types.appendChild(img_pokemon2_type1)
+    div_pokemon2_types.appendChild(img_pokemon2_type2)
+    pokemon_2.appendChild(div_pokemon2_types)
     
     // encounter buttons/options
+    const div_buttons = document.createElement("div")
+    div_buttons.class = encounter_class + "div_buttons"
+    
     const button_edit = document.createElement("button")
     button_edit.textContent = "edit"
     button_edit.onclick = () => open_encounter_pop_up(idx)
-    button_edit.className = encounter_class
+    button_edit.className = encounter_class + "buttons"
     
     const button_del = document.createElement("button")
     button_del.textContent = "delete"
     button_del.onclick = () => remove_encounter(idx)
-    button_del.className = encounter_class
+    button_del.className = encounter_class + "buttons"
 
-    container.appendChild(encounter_location_p)
-    container.appendChild(encounter_name_p)
+    container.appendChild(encounter_infos)
     container.appendChild(pokemon_1)
     container.appendChild(pokemon_2)
-    container.appendChild(button_edit)
-    container.appendChild(button_del)
+    div_buttons.appendChild(button_edit)
+    div_buttons.appendChild(button_del)
+    container.appendChild(div_buttons)
     
     encounters_div.appendChild(container)
   }
