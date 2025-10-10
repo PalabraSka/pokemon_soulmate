@@ -390,7 +390,7 @@ function render_encounters() {
 
     const img_pokemon1 = document.createElement("img")
     img_pokemon1.style.display = "block"
-    img_pokemon1.src = runs[current_run_id].encounters[idx].pokemon_1.sprites
+    img_pokemon1.src = runs[current_run_id].encounters[idx].pokemon_1.sprite
     img_pokemon1.className = encounter_pokemon_class + "_img"
 
     const img_pokemon1_type1 = document.createElement("img")
@@ -414,7 +414,7 @@ function render_encounters() {
 
     const img_pokemon2 = document.createElement("img")
     img_pokemon2.style.display = "block"
-    img_pokemon2.src = runs[current_run_id].encounters[idx].pokemon_1.sprites
+    img_pokemon2.src = runs[current_run_id].encounters[idx].pokemon_1.sprite
     img_pokemon2.className = encounter_pokemon_class + "_img"
 
     const img_pokemon2_type1 = document.createElement("img")
@@ -780,13 +780,13 @@ function get_type_2(pokemon, gen) {
           return pokemon.past_types["0"].types[1].type.name
         }
       }
-      return null
+      return "unknown"
     }    
   }
   if (pokemon.types.length > 1) {
     return pokemon.types["1"].type.name
   }
-  return null
+  return "unknown"
 }
 
 function is_this_gen_included(generation_to_check, generation_index) {
