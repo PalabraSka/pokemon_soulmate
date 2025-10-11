@@ -277,7 +277,8 @@ button.pop-up_new_run_elements {
     display: flex;
     font-size: 0.8rem;
     margin: 10px;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-style: solid;
     border-color: #5555;
     border-radius: 10px;
@@ -299,8 +300,11 @@ button.pop-up_new_run_elements {
 .encounter_pokemon_div {
     display: flex;
     height: 100%;
-    width: 600px;
-    background-color: black;
+    width: 150px;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
 }
 
 img.encounter_pokemon_div_img {
@@ -309,22 +313,31 @@ img.encounter_pokemon_div_img {
 
 .encounter_pokemon_div_types {
     display: block;
+
     width: 100%;
     height: 100%;
 }
 
 img.encounter_pokemon_div_type {
     display: block;
-    margin: 10%;
+    margin-top: 25%;
     width: 100%;
-    height: 40%;
+    height: 25%;
 }
 
 .encounter_div_buttons {
+    display: block;
     height: 100%;
-    background-color: blue;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: auto;
+    background-color: #f1f1f1;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .encounter_buttons {
     height: 30px;
+    width: 100%;
+    margin-bottom: 5px;    
 }
