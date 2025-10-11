@@ -373,3 +373,9 @@ img.encounter_pokemon_div_type {
     width: 100%;
     margin-bottom: 3px;    
 }
+
+#new_encounter_button {
+    position: relative;
+    margin: auto;
+    width: 200px;
+}
