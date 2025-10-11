@@ -417,7 +417,6 @@ function render_encounters() {
 
     // pokemon 2 div content
     const pokemon_2 = document.createElement("div")
-    pokemon_2.style.display = "inline"
     pokemon_2.className = encounter_pokemon_class
 
     const img_pokemon2 = document.createElement("img")
