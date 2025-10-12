@@ -487,7 +487,7 @@ function toggle_encounter_state(idx = null, state = null) {
     runs[current_run_id].encounters[idx].alive = state
   }
   
-  render_encounter()
+  render_encounters()
 }
 
 /*********************************************************************
