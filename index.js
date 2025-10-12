@@ -453,8 +453,8 @@ function render_encounters() {
     button_edit.className = encounter_class + "buttons"
 
     const button_toggle_state = document.createElement("button")
-    button_revive.onclick = () => toggle_encounter_state(idx)
-    button_revive.className = encounter_class + "buttons"
+    button_toggle_state.onclick = () => toggle_encounter_state(idx)
+    button_toggle_state.className = encounter_class + "buttons"
     if (runs[current_run_id].encounters[idx].alive) {    
       button_toggle_state.textContent = "kill"
     } else {
