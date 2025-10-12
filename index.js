@@ -465,7 +465,7 @@ function render_encounters() {
     container.appendChild(pokemon_1)
     container.appendChild(pokemon_2)
     div_buttons.appendChild(button_edit)
-    div_buttons.appendChild(button_del)
+    div_buttons.appendChild(button_toggle_state)
     container.appendChild(div_buttons)
     
     encounters_div.appendChild(container)
