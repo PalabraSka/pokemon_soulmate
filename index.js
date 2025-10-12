@@ -374,6 +374,10 @@ function render_encounters() {
     const container = document.createElement("div")
     container.className = encounter_class
 
+    if (!runs[current_run_id].encounters[idx].alive) {
+      container.style.background = "#555555";
+    }
+    
     // encounter info content
     const encounter_infos = document.createElement("div")
     encounter_infos.className = encounter_class + "infos"
@@ -447,12 +451,16 @@ function render_encounters() {
     button_edit.textContent = "edit"
     button_edit.onclick = () => open_encounter_pop_up(idx)
     button_edit.className = encounter_class + "buttons"
-    
-    const button_del = document.createElement("button")
-    button_del.textContent = "delete"
-    button_del.onclick = () => remove_encounter(idx)
-    button_del.className = encounter_class + "buttons"
 
+    const button_toggle_state = document.createElement("button")
+    button_revive.onclick = () => toggle_encounter_state(idx)
+    button_revive.className = encounter_class + "buttons"
+    if (runs[current_run_id].encounters[idx].alive) {    
+      button_toggle_state.textContent = "kill"
+    } else {
+      button_toggle_state.textContent = "revive"
+    }
+    
     container.appendChild(encounter_infos)
     container.appendChild(pokemon_1)
     container.appendChild(pokemon_2)
@@ -462,6 +470,24 @@ function render_encounters() {
     
     encounters_div.appendChild(container)
   }
+}
+
+function toggle_encounter_state(idx = null, state = null) {
+  if (idx == null) {
+    return
+  }
+
+  if (idx < 0 || idx >= runs[current_run_id].encounters.length){
+    return
+  }
+
+  if (typeof state != "boolean") {
+    runs[current_run_id].encounters[idx].alive = !runs[current_run_id].encounters[idx].alive
+  } else {
+    runs[current_run_id].encounters[idx].alive = state
+  }
+  
+  render_encounter()
 }
 
 /*********************************************************************
