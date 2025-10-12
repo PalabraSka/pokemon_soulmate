@@ -207,7 +207,7 @@ function is_encounter_valid(encounter) {
   return true
 }
 
-function is_pokemon_dupe(pokemon_, soulmate, encounter_idx = -1) {
+function is_pokemon_dupe(pokemon_, encounter_idx = -1) {
   for (let i = 0; i < runs[current_run_id].encounters.length; i++) {
     if (i != encounter_idx) {
       if (runs[current_run_id].encounters[i].pokemon_1.species == pokemon_.species || runs[current_run_id].encounters[i].pokemon_2.species == pokemon_.species) {
@@ -468,8 +468,9 @@ function render_encounters() {
 *  Encounter pop-up functions
 *********************************************************************/
 function open_encounter_pop_up(idx = -1) {
+  console.log("open_encounter_pop_up(idx = " + idx.toString() + ")")
+  
   if (idx < 0) {
-    render_encounter_pop_up()
     pop_up_encounter_object = Object.create(encounter)
     pop_up_encounter_object.pokemon_1 = null
     pop_up_encounter_object.pokemon_2 = null
@@ -477,10 +478,12 @@ function open_encounter_pop_up(idx = -1) {
     pop_up_encounter_object.alive = true
     pop_up_encounter_object.idx = -1
     pop_up_encounter_object.name = ""
+    render_encounter_pop_up()    
   } else {
-    render_encounter_pop_up(runs[current_run_id].encounters[idx])
     pop_up_encounter_object = runs[current_run_id].encounters[idx]
+    render_encounter_pop_up(pop_up_encounter_object)   
   }
+  
   toggle_pop_up(pop_up_encounter)
 }
 
