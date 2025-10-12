@@ -329,6 +329,7 @@ button.pop-up_new_run_elements {
 
 .encounter_name {
     display: block;
+    padding-left: 10px;
 }
 
 
@@ -374,6 +375,7 @@ img.encounter_pokemon_div_type {
 .encounter_buttons {
     height: 25px;
     width: 100%;
+    min-width: 80px;
     margin-bottom: 3px;    
 }
 
