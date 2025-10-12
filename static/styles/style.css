@@ -273,10 +273,13 @@ button.pop-up_new_run_elements {
 }
 
 /* encounter tab styles */
+#tab_encounters {
+    align-self: center;
+}
 .encounter_ {
     display: flex;
     font-size: 0.8rem;
-    margin: 30px;
+    margin: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-style: solid;
@@ -376,6 +379,7 @@ img.encounter_pokemon_div_type {
 
 #new_encounter_button {
     position: relative;
-    margin: auto;
-    width: 200px;
+    align-self: center;
+    margin-left: 30%;
+    width: 40%;
 }
