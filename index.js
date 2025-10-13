@@ -547,7 +547,7 @@ function render_pokemon_1(_pokemon) {
 }
 
 function render_pokemon_2(_pokemon) {
-    pop_up_encounter_pokemon2.value = _pokemon.species
+    pop_up_encounter_pokemon2.value = _pokemon.name
     pop_up_encounter_pokemon2_img.src = _pokemon.sprite
     pop_up_encounter_pokemon2_type1.src = types_location + _pokemon.type1 + types_format
     if (_pokemon.type2 == null){
