@@ -661,7 +661,38 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
 *  Teams tab functions
 *********************************************************************/
 function generate_teams() {
-  return
+  if (runs[current_run_id].encounters.length == 0) {
+    console.log("generate_teams(): No encounters found. Can't generate team.")
+    return null
+  }
+
+  let teams_array = []
+  let types_array = []
+  let encounters_array = runs[current_run_id].encounters
+  let team_size_max_adjusted = Math.min(...[team_size_max, encounters_array.length)
+
+  while (encounters_array.length > 0) {
+    let current_encounter = encounters_array.pop()
+
+    // add team of 1
+    teams_array.push([current_encounter])
+
+    // check every possible teams from 2 to team_size_max_adjusted
+    for (let team_size = 2; team_size > team_size_max_adjusted; team_size++) {
+      
+    }
+  }
+
+  return teams_array
+}
+
+function render_teams() {
+  const teams_array = generate_teams()
+
+  if (teams_array == null) {
+    return
+  }
+  
 }
 
 /*********************************************************************
