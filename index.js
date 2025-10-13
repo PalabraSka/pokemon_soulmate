@@ -660,26 +660,28 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
 /*********************************************************************
 *  Teams tab functions
 *********************************************************************/
-function generate_teams() {
-  if (runs[current_run_id].encounters.length == 0) {
+function generate_teams(encounters_array = [], team_array = []) {  
+  if (encounters_array.length == 0) {
     console.log("generate_teams(): No encounters found. Can't generate team.")
     return null
-  }
+  } else if (encounters_array.length = runs[current_run_id].encounters.length) {
+    
+    // clear dead pokemon if first iteration of the recursive function
+    for (let i = encounters_array.length-1; i >= 0; i--) {
+      if (!encounters_array[i].alive) {
+        encounters_array.pop(i)
+      }
+    }
+  }  
 
   let teams_array = []
-  let types_array = []
-  let encounters_array = runs[current_run_id].encounters
   let team_size_max_adjusted = Math.min(...[team_size_max, encounters_array.length)
-
-  while (encounters_array.length > 0) {
-    let current_encounter = encounters_array.pop()
-
-    // add team of 1
-    teams_array.push([current_encounter])
-
-    // check every possible teams from 2 to team_size_max_adjusted
-    for (let team_size = 2; team_size > team_size_max_adjusted; team_size++) {
-      
+  
+  teams_array.push([encounters_array.pop())
+  
+  for (let i = 2; i <= team_size_max_adjusted; i++) {
+    for (idx = 0; i < encouters_array.length; idx++) {
+      if (teams_arrays
     }
   }
 
