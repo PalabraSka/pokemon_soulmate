@@ -160,6 +160,8 @@ function save_data() {
   localStorage.setItem(key_runs, string_data)
 
   console.log("Data saved locally !")
+
+  build_tab_teams()
 }
 
 /*********************************************************************
@@ -677,19 +679,29 @@ function build_tab_teams() {
     return
   }
 
+  // Since there are some encounters... We can proceed to build teams
+  let teams_array = []
+  let team_size_max_adjusted = Math.min(...team_size_max, encounters_array.length)
   
+  for (let i = 1; i <= team_size_max_adjusted; i++) {
+    teams_array.concat(generate_teams(encounters_array, i)
+  }
+
+  console.log(teams_array)
 }
 
-function generate_teams(encounters_array = [], team_array = []) {
+function generate_teams(encounters_array = [], teams_size = team_size_max, current_team = []) {
   let teams_array = []
-  let team_size_max_adjusted = Math.min(...[team_size_max, encounters_array.length)
   
-  teams_array.push([encounters_array.pop())
+  current_team.push(encounters_array.pop())
+
+  if (current_team.length == team_size_max) {
+    teams_array.push(current_team)
+    return teams_array
+  }
   
-  for (let i = 2; i <= team_size_max_adjusted; i++) {
-    for (idx = 0; i < encouters_array.length; idx++) {
-      if (teams_arrays
-    }
+  for (idx = 0; i < encouters_array.length; idx++) {
+      teams_array.push(current_team.concat(generate_teams(encounters_array, teams_size, current_team)))
   }
 
   return teams_array
@@ -722,6 +734,7 @@ function load_page() {
     tab_teams.disabled = true   
   } else {
     load_run(current_run_id)
+    build_tab_teams()
   }
 
   // prepare tabs
