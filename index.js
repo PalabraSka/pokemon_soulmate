@@ -693,7 +693,11 @@ function build_tab_teams() {
   
   for (let i = 1; i <= team_size_max_adjusted; i++) {
     console.log("build_tab_teams(): Start building teams of " + i.toString() + " pokemon(s).")
-    teams_array.concat(generate_teams(encounters_array, i))
+    let encounters_array_temp = encounters_array
+    while (encounters_array_temp.length > 0) {
+      teams_array.concat(generate_teams(encounters_array_temp, i))
+      encounters_array_temp.pop()
+    }
   }
 
   
@@ -706,7 +710,7 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
   
   current_team.push(encounters_array.pop())
 
-  if (current_team.length == team_size_max) {
+  if (current_team.length == team_size) {
     teams_array.push(current_team)
     console.log(teams_array)
     return teams_array
