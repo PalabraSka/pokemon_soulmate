@@ -664,6 +664,8 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
 *********************************************************************/
 function build_tab_teams() {
   let encounters_array = runs[current_run_id].encounters
+
+  console.log("build_tab_teams(): Prepare team building algorithm")
   
   // clear dead encounters if any
   for (let i = encounters_array.length-1; i >= 0; i--) {
@@ -684,6 +686,7 @@ function build_tab_teams() {
   let team_size_max_adjusted = Math.min(...team_size_max, encounters_array.length)
   
   for (let i = 1; i <= team_size_max_adjusted; i++) {
+    console.log("build_tab_teams(): Start building teams of " + i.toString() + " pokemons.")
     teams_array.concat(generate_teams(encounters_array, i))
   }
 
@@ -700,7 +703,7 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
     return teams_array
   }
   
-  for (idx = 0; i < encouters_array.length; idx++) {
+  for (idx = 0; idx < encouters_array.length; idx++) {
       teams_array.push(current_team.concat(generate_teams(encounters_array, teams_size, current_team)))
   }
 
