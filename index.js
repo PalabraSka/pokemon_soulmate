@@ -684,7 +684,7 @@ function build_tab_teams() {
   }
 
   // Since there are some encounters... We can proceed to build teams
-  let teams_array = []
+  let total_teams_array = [[]]
   let team_size_max_adjusted = encounters_array.length
 
   if (encounters_array.length > team_size_max) {
@@ -697,13 +697,13 @@ function build_tab_teams() {
     let encounters_array_temp = [...encounters_array]
     
     while (encounters_array_temp.length > 0 && encounters_array_temp.length >= i) {
-      teams_array.concat(generate_teams([...encounters_array_temp], i))
+      total_teams_array.concat(generate_teams([...encounters_array_temp], i))
       encounters_array_temp.pop()
     }
-    console.log(teams_array.length)
+    console.log(total_teams_array.length)
   }
   
-  console.log(teams_array)
+  console.log(total_teams_array)
 }
 
 function generate_teams(encounters_array = [], teams_size = team_size_max, current_team = []) {
@@ -746,7 +746,7 @@ function load_page() {
 
   // load tabs content
   load_menu()
-  current_run_id = 1
+  //current_run_id = 1
   if (current_run_id == -1) {
     tab_encounters.disabled = true
     tab_teams.disabled = true   
