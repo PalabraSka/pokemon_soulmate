@@ -710,7 +710,7 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
   
   current_team.push(encounters_array.pop())
 
-  if (current_team.length == team_size) {
+  if (current_team.length == teams_size) {
     teams_array.push(current_team)
     console.log(teams_array)
     return teams_array
