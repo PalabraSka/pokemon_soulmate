@@ -161,13 +161,11 @@ function save_data() {
 
   console.log("Data saved locally !")
 
-  build_tab_teams()
 }
 
 /*********************************************************************
 *  Data get/set/check functions
 *********************************************************************/
-
 function get_generation_index(generation) {
   if (generations_array.includes(generation)) {
     return generations_array.indexOf(generation)
@@ -337,7 +335,7 @@ function load_run(idx) {
   load_pokedex()
   load_current_run_display()
   render_encounters()
-  generate_teams()
+  build_tab_teams()
   
 }
 
@@ -625,6 +623,9 @@ function save_encounter() {
 
   // render encounters
   render_encounters()
+
+  // build teams
+  build_tab_teams()
   
   // close pop-up
   toggle_pop_up()
@@ -732,6 +733,7 @@ function load_page() {
 
   // load tabs content
   load_menu()
+  current_run_id = 1
   if (current_run_id == -1) {
     tab_encounters.disabled = true
     tab_teams.disabled = true   
