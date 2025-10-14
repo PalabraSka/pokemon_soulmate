@@ -685,7 +685,11 @@ function build_tab_teams() {
 
   // Since there are some encounters... We can proceed to build teams
   let teams_array = []
-  let team_size_max_adjusted = Math.min(...team_size_max, encounters_array.length)
+  let team_size_max_adjusted = encounters_array.length
+
+  if (encounters_array.length > team_size_max) {
+    team_size_max_adjusted = team_size_max
+  }
   
   for (let i = 1; i <= team_size_max_adjusted; i++) {
     console.log("build_tab_teams(): Start building teams of " + i.toString() + " pokemons.")
