@@ -51,6 +51,7 @@ let rule_cross_player_dupe = true
 let rule_different_type_encounter = true
 let rule_different_type_team = true
 let rule_different_type_team_cross_player = true
+let team_size_max = 6
 
 /* pop-ups items */
 const pop_up = document.getElementById("pop-up_main")
