@@ -684,7 +684,7 @@ function build_tab_teams() {
   let team_size_max_adjusted = Math.min(...team_size_max, encounters_array.length)
   
   for (let i = 1; i <= team_size_max_adjusted; i++) {
-    teams_array.concat(generate_teams(encounters_array, i)
+    teams_array.concat(generate_teams(encounters_array, i))
   }
 
   console.log(teams_array)
