@@ -678,7 +678,7 @@ function build_tab_teams() {
 
   // if no team, skip the rest of the function
   if (encounters_array.length == 0) {
-    console.log("render_teams(): No encounters found. Can't generate teams.")
+    console.log("build_tab_teams(): No encounters found. Can't generate teams.")
     render_teams()
     return
   }
@@ -692,10 +692,12 @@ function build_tab_teams() {
   }
   
   for (let i = 1; i <= team_size_max_adjusted; i++) {
-    console.log("build_tab_teams(): Start building teams of " + i.toString() + " pokemons.")
+    console.log("build_tab_teams(): Start building teams of " + i.toString() + " pokemon(s).")
     teams_array.concat(generate_teams(encounters_array, i))
   }
 
+  
+  
   console.log(teams_array)
 }
 
@@ -706,6 +708,7 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
 
   if (current_team.length == team_size_max) {
     teams_array.push(current_team)
+    console.log(teams_array)
     return teams_array
   }
   
@@ -717,7 +720,7 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
 }
 
 function render_teams(teams = []) {
-  const teams_array = generate_teams()
+  const teams_array = []
 
   if (teams_array == null) {
     return
