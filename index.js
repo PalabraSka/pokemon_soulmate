@@ -755,7 +755,6 @@ function load_page() {
     tab_teams.disabled = true   
   } else {
     load_run(current_run_id)
-    build_tab_teams()
   }
 
   // prepare tabs
