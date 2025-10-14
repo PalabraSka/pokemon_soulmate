@@ -709,7 +709,7 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
     return teams_array
   }
   
-  for (idx = 0; idx < encouters_array.length; idx++) {
+  for (idx = 0; idx < encounters_array.length; idx++) {
       teams_array.push(current_team.concat(generate_teams(encounters_array, teams_size, current_team)))
   }
 
