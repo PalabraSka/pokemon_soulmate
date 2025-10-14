@@ -697,7 +697,10 @@ function build_tab_teams() {
     let encounters_array_temp = [...encounters_array]
     
     while (encounters_array_temp.length > 0 && encounters_array_temp.length >= i) {
-      total_teams_array.concat(generate_teams([...encounters_array_temp], i))
+      let temp = generate_teams([...encounters_array_temp], i)
+      
+      print(temp)
+      total_teams_array.concat(temp)
       encounters_array_temp.pop()
     }
     console.log(total_teams_array.length)
