@@ -1,4 +1,4 @@
- y let runs = []
+let runs = []
 let pokedex = []
 
 const run = {
