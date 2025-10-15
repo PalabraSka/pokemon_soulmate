@@ -716,7 +716,8 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
 
   if (current_team.length == teams_size) {
     teams_array.push(current_team)
-    //console.log(teams_array)
+    console.log("Teams_array value is returned :")
+    console.log(teams_array)
     return teams_array
   }
   
@@ -724,6 +725,8 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
       teams_array.push(current_team.concat(generate_teams([...encounters_array], teams_size, [...current_team])))
   }
 
+  console.log("Teams_array value is returned after the loop :")
+  console.log(teams_array)
   return teams_array
 }
 
