@@ -675,33 +675,35 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
 /*********************************************************************
 *  Teams tab functions
 *********************************************************************/
-function update_teams(encounter, is_new) {  
+function update_teams(encounter, is_new) {
+  console.log("update_teams(" + encounter + ", " + is_new + ")")
+  
   // if encounter isnt new, update team list
   if (!is_new) {
-    for (let i = 0; i < runs[current_run_id].teams.length; i++) {
-      for (let j = 0; j < runs[current_run_id].teams[i].length; j++) {
+    for (let i = runs[current_run_id].teams.length; i > 0; i--) {
+      for (let j = runs[current_run_id].teams[i].length; j > 0; j--) {
         if (runs[current_run_id].teams[i][j].idx == encounter.idx) {
           runs[current_run_id].teams[i][j] = encounter
+          
+          if (!check_team(runs[current_run_id].teams[i].slice()) {
+            runs[current_run_id].teams.pop(i)
+          }
         }
       }
     }
   // else copy all teams that are not max size and add new encounter to it
   } else {
     let new_teams = runs[current_run_id].teams.slice()
-    let id_array = []
     
     for (let i = 0; i < new_teams.length; i++) {
       if (new_teams[i].length < team_size_max) {
         new_teams[i].push(encounter)
-      } else {
-        id_array.push(i)
+        runs[current_run_id].teams.push(new_teams[i])
       }
     }
-    for (let j = id_array.length; j > 0; j--) {
-      new_teams.pop(j)
-    }
-    new_teams.push([encounter])
-    runs[current_run_id].teams.concat(new_teams)
+    
+    runs[current_run_id].teams.push([encounter])
+    //runs[current_run_id].teams.concat(new_teams)
   }
 
   // check if team is legal
