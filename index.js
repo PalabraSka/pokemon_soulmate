@@ -104,7 +104,6 @@ const encounter_pokemon_class = "encounter_pokemon_div"
 
 /* Teams tab content */
 const teams_div = document.getElementById("teams_div")
-const encounter_name = document.getElementById("encounter_name")
 const team_id = "team_"
 const team_class = "team_"
 const team_pokemon_class = "team_pokemon_div"
