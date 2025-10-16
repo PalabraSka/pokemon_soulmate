@@ -9,7 +9,8 @@ const run = {
   is_active: false,
   generation_index: "",
   pokedex_key: "",
-  encounters: []
+  encounters: [],
+  teams: []
 }
   
 const pokemon = {
@@ -100,6 +101,13 @@ const encounter_name = document.getElementById("encounter_name")
 const encounter_id = "encounter_"
 const encounter_class = "encounter_"
 const encounter_pokemon_class = "encounter_pokemon_div"
+
+/* Teams tab content */
+const teams_div = document.getElementById("teams_div")
+const encounter_name = document.getElementById("encounter_name")
+const team_id = "team_"
+const team_class = "team_"
+const team_pokemon_class = "team_pokemon_div"
 
 
 /*********************************************************************
@@ -302,6 +310,7 @@ function start_new_run() {
   new_run.generation_index = get_generation_index(pop_up_new_run_generation.value)
   new_run.pokedex_key = pop_up_new_run_generation.value
   new_run.encounters = []
+  new_run.teams = []
 
   runs.push(new_run)
 
@@ -336,7 +345,7 @@ function load_run(idx) {
   load_pokedex()
   load_current_run_display()
   render_encounters()
-  build_tab_teams()
+  render_teams()
   
 }
 
@@ -608,9 +617,12 @@ function save_encounter() {
   }
 
   console.log("save_encounter(): Data is correct.")
+
+  let is_new_encounter = false
   
   // add encounter
   if (pop_up_encounter_object.idx < 0) {
+    is_new_encounter = true
     pop_up_encounter_object.idx = runs[current_run_id].encounters.length
     runs[current_run_id].encounters.push(pop_up_encounter_object)
     console.log("save_encounter(): Encounter added as a new encounter with idx = " + pop_up_encounter_object.idx.toString() + " !")
@@ -619,14 +631,14 @@ function save_encounter() {
     console.log("save_encounter(): Encounter idx = " + pop_up_encounter_object.idx.toString() + " updated !")
   }
 
+  // updates teams
+  update_teams(pop_up_encounter_object, is_new_encounter)
+  
   // save data
   save_data()
 
   // render encounters
   render_encounters()
-
-  // build teams
-  build_tab_teams()
   
   // close pop-up
   toggle_pop_up()
@@ -664,6 +676,60 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
 /*********************************************************************
 *  Teams tab functions
 *********************************************************************/
+function update_teams(encounter, is_new) {  
+  // if encounter isnt new, update team list
+  if (!is_new) {
+    for (let i = 0; i < runs[current_run_id].teams.length; i++) {
+      for (let j = 0; j < runs[current_run_id].teams[i].length; j++) {
+        if (runs[current_run_id].teams[i][j].idx == encounter.idx) {
+          runs[current_run_id].teams[i][j] = encounter
+        }
+      }
+    }
+  // else copy all teams that are not max size and add new encounter to it
+  } else {
+    let new_teams = [..runs[current_run_id].teams]
+    let id_array = []
+    for (let i = 0; i < new_teams.length; i++) {
+      if (new_teams[i].length < team_size_max) {
+        new_teams[i].push(encounter)
+      } else {
+        id_array.push(i)
+      }
+    }
+    for (let j = id_array.length; j > 0; j--) {
+      new_teams.pop(j)
+    }
+    new_teams.push([encounter])
+    runs[current_run_id].teams.concat(new_teams)
+  }
+
+  // check if team is legal
+  for (let idx = runs[current_run_id].teams.length; idx > 0; idx--) {
+    if (!check_team([..runs[current_run_id].teams[idx]])) {
+      runs[current_run_id].teams.pop(idx)
+    }
+  }
+  
+  // render teams tab
+  render_teams()
+}
+
+function check_team(team) {
+  let types_array = []
+  
+  for (let i = 0; i < team.length; i++) {
+    if (!team[i].alive || types_array.includes(team[i].pokemon_1.type_1) || types_array.includes(team[i].pokemon_2.type_1)) {
+      return false
+    } else {
+      types_array.push(team[i].pokemon_1.type_1)
+      types_array.push(team[i].pokemon_2.type_1)
+    }
+  }
+  
+  return true
+}
+
 function build_tab_teams() {
   let encounters_array = runs[current_run_id].encounters
 
@@ -730,14 +796,58 @@ function generate_teams(encounters_array = [], teams_size = team_size_max, curre
   return teams_array
 }
 
-function render_teams(teams = []) {
-  const teams_array = []
-
-  if (teams_array == null) {
+function render_teams() {
+  teams_div.innerHTML = null;
+  
+  if (runs[current_run_id].teams.length == 0) {
+    console.log("render_teams(): No teams available for this run !")
     return
   }
+
+  console.log("render_teams(): Starting to render the " + runs[current_run_id].teams.length + " team(s)...")
   
-}
+  for (let idx = 0; idx < runs[current_run_id].teams.length; idx++) {
+    const container = document.createElement("div")
+    container.className = team_class
+    
+    // players div
+    const div_player_1 = document.createElement("div")
+    div_player_1.className = team_class + "player_1"
+
+    const div_player_2 = document.createElement("div")
+    div_player_2.className = team_class + "player_2"
+    
+    // adding pokemons to players div
+    for (let i = 0; i < runs[current_run_id].teams[idx].length; i++) {
+      // player 1
+      const pokemon_player_1 = document.createElement("div")
+      pokemon_player_1.className = team_pokemon_class
+
+      const img_pokemon1 = document.createElement("img")
+      img_pokemon1.src = runs[current_run_id].teams[idx][i].pokemon_1.sprite
+      img_pokemon1.className = team_pokemon_class + "_img"
+
+      // player 2
+      const pokemon_player_2 = document.createElement("div")
+      pokemon_player_2.className = team_pokemon_class
+
+      const img_pokemon2 = document.createElement("img")
+      img_pokemon2.src = runs[current_run_id].teams[idx][i].pokemon_2.sprite
+      img_pokemon2.className = team_pokemon_class + "_img"
+
+      pokemon_player_1.appendChild(img_pokemon1)
+      pokemon_player_2.appendChild(img_pokemon2)
+      div_player_1.appendChild(pokemon_player_1)
+      div_player_2.appendChild(pokemon_player_2)
+    }
+    
+    container.appendChild(div_player_1)
+    container.appendChild(div_player_2)
+    
+    teams_div.appendChild(container)
+  }
+}  
+
 
 /*********************************************************************
 *  Main page functions
