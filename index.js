@@ -680,8 +680,8 @@ function update_teams(encounter, is_new) {
   
   // if encounter isnt new, update team list
   if (!is_new) {
-    for (let i = runs[current_run_id].teams.length; i > 0; i--) {
-      for (let j = runs[current_run_id].teams[i].length; j > 0; j--) {
+    for (let i = runs[current_run_id].teams.length-1; i >= 0; i--) {
+      for (let j = runs[current_run_id].teams[i].length-1; j >= 0; j--) {
         if (runs[current_run_id].teams[i][j].idx == encounter.idx) {
           runs[current_run_id].teams[i][j] = encounter
           
@@ -707,7 +707,7 @@ function update_teams(encounter, is_new) {
   }
 
   // check if team is legal
-  for (let idx = runs[current_run_id].teams.length; idx > 0; idx--) {
+  for (let idx = runs[current_run_id].teams.length-1; idx >= 0; idx--) {
     if (!check_team(runs[current_run_id].teams[idx].slice())) {
       runs[current_run_id].teams.pop(idx)
     }
