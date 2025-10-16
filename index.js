@@ -685,7 +685,7 @@ function update_teams(encounter, is_new) {
         if (runs[current_run_id].teams[i][j].idx == encounter.idx) {
           runs[current_run_id].teams[i][j] = encounter
           
-          if (!check_team(runs[current_run_id].teams[i].slice()) {
+          if (!check_team(runs[current_run_id].teams[i].slice())) {
             runs[current_run_id].teams.pop(i)
           }
         }
