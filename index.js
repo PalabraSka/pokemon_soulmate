@@ -706,7 +706,7 @@ function update_teams(encounter, is_new) {
 
   // check if team is legal
   for (let idx = runs[current_run_id].teams.length; idx > 0; idx--) {
-    if (!check_team([..runs[current_run_id].teams[idx]])) {
+    if (!check_team(runs[current_run_id].teams[idx].slice())) {
       runs[current_run_id].teams.pop(idx)
     }
   }
