@@ -687,7 +687,8 @@ function update_teams(encounter, is_new) {
     }
   // else copy all teams that are not max size and add new encounter to it
   } else {
-    let new_teams = [..runs[current_run_id].teams]
+    let new_teams_tmp = runs[current_run_id].teams
+    let new_teams = [..new_teams_tmp]
     let id_array = []
     for (let i = 0; i < new_teams.length; i++) {
       if (new_teams[i].length < team_size_max) {
