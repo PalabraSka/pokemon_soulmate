@@ -700,12 +700,9 @@ function update_teams(encounter, is_new) {
     console.log(runs[current_run_id].teams)
     console.log(new_teams)
     
-    for (let i = new_teams.length-1; i >= 0; i--) {
-      if (new_teams[i].length < team_size_max) {
-        new_teams[i].push(encounter)
-        runs[current_run_id].teams.push(new_teams[i])
-      } else {
-        new_teams.pop(i)
+    for (let i = runs[current_run_id].teams.length-1; i >= 0; i--) {
+      if (runs[current_run_id].teams[i].length < team_size_max) {
+        runs[current_run_id].teams[i].push(runs[current_run_id].teams[i].push(encounter))
       }
     }
     
