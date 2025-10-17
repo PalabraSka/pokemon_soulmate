@@ -702,7 +702,8 @@ function update_teams(encounter, is_new) {
     
     for (let i = runs[current_run_id].teams.length-1; i >= 0; i--) {
       if (runs[current_run_id].teams[i].length < team_size_max) {
-        runs[current_run_id].teams[i].push(runs[current_run_id].teams[i].push(encounter))
+        let new_team = runs[current_run_id].teams[i].push(encounter)
+        runs[current_run_id].teams[i].push(new_team)
       }
     }
     
