@@ -697,6 +697,7 @@ function update_teams(encounter, is_new) {
   } else {
     console.log("update_teams(): new encounter... generating new teams")
     let new_teams = runs[current_run_id].teams.slice()
+    console.log(runs[current_run_id].teams)
     console.log(new_teams)
     
     for (let i = new_teams.length-1; i >= 0; i--) {
