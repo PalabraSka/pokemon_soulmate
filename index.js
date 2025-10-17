@@ -705,6 +705,7 @@ function update_teams(encounter, is_new) {
         runs[current_run_id].teams.push(new_teams[i])
       } else {
         new_teams.pop(i)
+      }
     }
     
     runs[current_run_id].teams.push([encounter])
