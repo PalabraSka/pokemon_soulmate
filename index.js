@@ -816,14 +816,14 @@ function render_teams() {
     const div_player_1 = document.createElement("div")
     div_player_1.className = team_class + "player_1"
 
-    const div_player_1_infos = document.createElement("p")
+    const div_player_1_infos = document.createElement("div")
     div_player_1_infos.className = team_class + "player_infos"
     div_player_1_infos.textContent = runs[current_run_id].player_1
 
     const div_player_2 = document.createElement("div")
     div_player_2.className = team_class + "player_2"
 
-    const div_player_2_infos = document.createElement("p")
+    const div_player_2_infos = document.createElement("div")
     div_player_2_infos.className = team_class + "player_infos"
     div_player_2_infos.textContent = runs[current_run_id].player_2
 
