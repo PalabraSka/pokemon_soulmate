@@ -695,14 +695,14 @@ function update_teams(encounter, is_new) {
     }
   // else copy all teams that are not max size and add new encounter to it
   } else {
-    console.log("update_teams(): new encounter... generating new teams")
-    let new_teams = runs[current_run_id].teams.slice()
+    console.log("update_teams(): new encounter... generating new teams")   
     console.log(runs[current_run_id].teams)
-    console.log(new_teams)
     
     for (let i = runs[current_run_id].teams.length-1; i >= 0; i--) {
       if (runs[current_run_id].teams[i].length < team_size_max) {
         let new_team = runs[current_run_id].teams[i].push(encounter)
+        console.log("Adding new team")
+        console.log(new_team)
         runs[current_run_id].teams[i].push(new_team)
       }
     }
