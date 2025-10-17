@@ -385,3 +385,39 @@ img.encounter_pokemon_div_type {
     margin-left: 30%;
     width: 40%;
 }
+
+/* teams tab */
+.teams_div {
+    background-color: black;
+}
+
+.team_ {
+    background-color: yellow;
+    display: block;
+}
+
+.team_:hover {
+    background-color: #f1f1f1;
+}
+
+.team_player_1 {
+    display: block;
+    background-color: blue;
+}
+
+.team_player_2 {
+    display: block;
+    background-color: red;
+}
+
+.team_player_infos {
+    display: inline;
+}
+
+.team_pokemon_div {
+    display: block;
+}
+
+.team_pokemon_div_img {
+    width: 60px;
+}
