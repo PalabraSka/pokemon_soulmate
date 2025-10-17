@@ -736,72 +736,6 @@ function check_team(team) {
   return true
 }
 
-function build_tab_teams() {
-  let encounters_array = runs[current_run_id].encounters
-
-  console.log("build_tab_teams(): Prepare team building algorithm")
-  
-  // clear dead encounters if any
-  for (let i = encounters_array.length-1; i >= 0; i--) {
-    if (!encounters_array[i].alive) {
-      encounters_array.pop(i)
-    }
-  }
-
-  // if no team, skip the rest of the function
-  if (encounters_array.length == 0) {
-    console.log("build_tab_teams(): No encounters found. Can't generate teams.")
-    render_teams()
-    return
-  }
-
-  // Since there are some encounters... We can proceed to build teams
-  let total_teams_array = [[]]
-  let team_size_max_adjusted = encounters_array.length
-
-  if (encounters_array.length > team_size_max) {
-    team_size_max_adjusted = team_size_max
-  }
-  
-  for (let i = 1; i <= team_size_max_adjusted; i++) {
-    console.log("build_tab_teams(): Start building teams of " + i.toString() + " pokemon(s).")
-    
-    let encounters_array_temp = [...encounters_array]
-    
-    while (encounters_array_temp.length > 0 && encounters_array_temp.length >= i) {
-      let temp = generate_teams([...encounters_array_temp], i)
-      
-      console.log(temp)
-      total_teams_array.concat(temp)
-      encounters_array_temp.pop()
-    }
-    console.log(total_teams_array.length)
-  }
-  
-  console.log(total_teams_array)
-}
-
-function generate_teams(encounters_array = [], teams_size = team_size_max, current_team = []) {
-  let teams_array = []
-  
-  current_team.push(encounters_array.pop())
-
-  if (current_team.length == teams_size) {
-    teams_array.push(current_team)
-    console.log("Teams_array value is returned :")
-    console.log(teams_array)
-    return teams_array
-  }
-  
-  for (idx = 0; idx < encounters_array.length; idx++) {
-      teams_array.push(current_team.concat(generate_teams([...encounters_array], teams_size, [...current_team])))
-  }
-
-  console.log("Teams_array value is returned after the loop :")
-  console.log(teams_array)
-  return teams_array
-}
-
 function render_teams() {
   teams_div.innerHTML = null;
   
@@ -811,6 +745,7 @@ function render_teams() {
   }
 
   console.log("render_teams(): Starting to render the " + runs[current_run_id].teams.length + " team(s)...")
+  console.log(runs[current_run_id].teams)
   
   for (let idx = 0; idx < runs[current_run_id].teams.length; idx++) {
     const container = document.createElement("div")
