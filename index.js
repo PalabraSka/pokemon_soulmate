@@ -828,7 +828,7 @@ function render_teams() {
     div_player_2_infos.textContent = runs[current_run_id].player_2
 
     div_player_1.appendChild(div_player_1_infos)
-    div_palyer_2.appendChild(div_player_2_infos)
+    div_player_2.appendChild(div_player_2_infos)
     
     // adding pokemons to players div
     for (let i = 0; i < runs[current_run_id].teams[idx].length; i++) {
