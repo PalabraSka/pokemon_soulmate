@@ -677,29 +677,34 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
 *********************************************************************/
 function update_teams(encounter, is_new) {
   console.log("update_teams(" + encounter + ", " + is_new + ")")
+  console.log(encounter)
   
   // if encounter isnt new, update team list
   if (!is_new) {
+    console.log("update_teams(): encounter is not new. this won't work much but at least we update the teams in which the encounter exists")
     for (let i = runs[current_run_id].teams.length-1; i >= 0; i--) {
       for (let j = runs[current_run_id].teams[i].length-1; j >= 0; j--) {
         if (runs[current_run_id].teams[i][j].idx == encounter.idx) {
           runs[current_run_id].teams[i][j] = encounter
           
-          if (!check_team(runs[current_run_id].teams[i].slice())) {
+          /*if (!check_team(runs[current_run_id].teams[i].slice())) {
             runs[current_run_id].teams.pop(i)
-          }
+          }*/
         }
       }
     }
   // else copy all teams that are not max size and add new encounter to it
   } else {
+    console.log("update_teams(): new encounter... generating new teams")
     let new_teams = runs[current_run_id].teams.slice()
+    console.log(new_teams)
     
-    for (let i = 0; i < new_teams.length; i++) {
+    for (let i = new_teams.length-1; i >= 0; i--) {
       if (new_teams[i].length < team_size_max) {
         new_teams[i].push(encounter)
         runs[current_run_id].teams.push(new_teams[i])
-      }
+      } else {
+        new_teams.pop(i)
     }
     
     runs[current_run_id].teams.push([encounter])
