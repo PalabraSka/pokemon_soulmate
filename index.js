@@ -900,6 +900,33 @@ function build_pokedex(generation) {
   check_dex_size(generation)
 }
 
+function fetch_pokemon_species(pokemon, gen) {
+  let url = pokemon.species.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
+  let new_pokemon
+
+  //console.log("processing data for pokemon :")
+  //console.log(pokemon)
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(function(pokeData){
+        fetch_pokemon_varieties(pokeData, gen)
+    })
+}
+
+function fetch_pokemon_varieties(pokemon, gen) {
+  //console.log("processing data for pokemon :")
+  //console.log(pokemon)
+  for (let i = 0; i < pokemon.varietes.length; i++) {
+    let url = pokemon.varieties[i].pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
+    fetch(url)
+      .then(response => response.json())
+      .then(function(pokeData){
+          fetch_pokemon_data(pokeData, gen)
+      })
+  }
+}
+
 function fetch_pokemon_data(pokemon, gen) {
   let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
   let new_pokemon
