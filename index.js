@@ -873,6 +873,7 @@ function open_tab(evt, tab_name) {
 *********************************************************************/
 const api_url = "https://pokeapi.co/api/v2/"
 const generation_url = "generation/"
+const pokemon_species_url = "pokemon-species/"
 const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
 
 let dex_size = -1
@@ -888,6 +889,16 @@ function build_pokedex(generation) {
   const nb_species = count_species(generation)
   dex_size = nb_species
 
+  for (let idx = 1; idx <= nb_species; idx++) {
+    fetch(api_url + pokemon_species_url + idx.toString())
+    .then(response => response.json())
+    .then(function(pokemon_species) {
+      //console.log(allpokemon.results)
+      pokemon_species.results.varieties.forEach(function(pokemon_varieties) {
+        fetch_pokemon_data(pokemon_varieties, generation)
+      })
+    })
+  /*  
   fetch(api_url + "/pokemon?limit=" + nb_species.toString())
     .then(response => response.json())
     .then(function(allpokemon) {
@@ -896,7 +907,7 @@ function build_pokedex(generation) {
         fetch_pokemon_data(pokemon, generation)
       })
     })
-  
+  */
   check_dex_size(generation)
 }
 
