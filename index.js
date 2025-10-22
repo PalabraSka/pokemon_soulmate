@@ -894,7 +894,8 @@ function build_pokedex(generation) {
     .then(response => response.json())
     .then(function(pokemon_species) {
       //console.log(allpokemon.results)
-      pokemon_species.results.varieties.forEach(function(pokemon_varieties) {
+      console.log(pokemon_species)
+      pokemon_species.varieties.forEach(function(pokemon_varieties) {
         fetch_pokemon_data(pokemon_varieties, generation)
       })
     })
