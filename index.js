@@ -908,6 +908,7 @@ function build_pokedex(generation) {
       })
     })
   */
+  }
   check_dex_size(generation)
 }
 
