@@ -75,7 +75,7 @@
         <div class="menu_div">
             <button class="bt_menu" id="bt_menu_continue" onclick="continue_run()">continue</button>
             <button class="bt_menu" id="bt_menu_new_run" onclick="new_run()">new run</button>
-            <button class="bt_menu" id="bt_menu_load_run" onclick="load_run()">load run</button>
+            <button class="bt_menu" id="bt_menu_load_run" onclick="open_runs_pop_up()">load run</button>
         </div>
     </div>
     
@@ -88,7 +88,36 @@
     
     <!-- Teams tab -->
     <div class="tab" id="tab_teams">
+        <div class="teams_tab_filter">
+            <input type="text-input" id="teams_filter_1" class="filter-list" placeholder="Pokemon" list="encounters_pokemons_datalist" />
+            <input type="text-input" id="teams_filter_2" class="filter-list" placeholder="Pokemon" list="encounters_pokemons_datalist" />
+            <input type="text-input" id="teams_filter_3" class="filter-list" placeholder="Pokemon" list="encounters_pokemons_datalist" />
+            <input type="text-input" id="teams_filter_4" class="filter-list" placeholder="Pokemon" list="encounters_pokemons_datalist" />
+            <input type="text-input" id="teams_filter_5" class="filter-list" placeholder="Pokemon" list="encounters_pokemons_datalist" />
+            <button type="button" id="teams_filter_button" class="filter-button" onclick="build_filter_array()">filter</button>
+        </div>
+
+        <datalist id="encounters_pokemons_datalist"></datalist>
+
         <div id="teams_div" class="teams_div">
+            <div id="teams_div_6" class="teams_div_section">
+                <p>Teams of 6</p>
+            </div>
+            <div id="teams_div_5" class="teams_div_section">
+                <p>Teams of 5</p>
+            </div>
+            <div id="teams_div_4" class="teams_div_section">
+                <p>Teams of 4</p>
+            </div>
+            <div id="teams_div_3" class="teams_div_section">
+                <p>Teams of 3</p>
+            </div>
+            <div id="teams_div_2" class="teams_div_section">
+                <p>Teams of 2</p>
+            </div>
+            <div id="teams_div_1" class="teams_div_section">
+                <p>Teams of 1</p>
+            </div>
         </div>
     </div>
 

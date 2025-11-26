@@ -30,10 +30,16 @@ const encounter = {
   alive: true
 } 
 
+let pokemon_pool = []
+
 let current_run_id = -1
 
 /* saves keys */
 const key_runs = "runs"
+
+/* urls */
+const app_url = "https://palabraska.github.io/pokemon_soulmate/"
+const generation_data_url = "static/data/"
 
 /* data lists */
 let datalist_generations = document.getElementById("datalist_generations")
@@ -104,6 +110,23 @@ const encounter_pokemon_class = "encounter_pokemon_div"
 
 /* Teams tab content */
 const teams_div = document.getElementById("teams_div")
+const teams_div_array = [
+  document.getElementById("teams_div_1"),
+  document.getElementById("teams_div_2"),
+  document.getElementById("teams_div_3"),
+  document.getElementById("teams_div_4"),
+  document.getElementById("teams_div_5"),
+  document.getElementById("teams_div_6")
+]
+const teams_filter_array = [
+  document.getElementById("teams_filter_1"),
+  document.getElementById("teams_filter_2"),
+  document.getElementById("teams_filter_3"),
+  document.getElementById("teams_filter_4"),
+  document.getElementById("teams_filter_5")
+]
+let filters_array = []
+const encounters_pokemons_datalist = document.getElementById("encounters_pokemons_datalist")
 const team_id = "team_"
 const team_class = "team_"
 const team_pokemon_class = "team_pokemon_div"
@@ -319,13 +342,7 @@ function start_new_run() {
   tab_encounters.click()
 }
 
-function open_runs_pop_up() {
-  return
-}
 
-function close_runs_pop_up() {
-  return
-}
 
 function load_run(idx) {
   save_data()
@@ -349,13 +366,20 @@ function load_run(idx) {
 }
 
 function load_pokedex() {
-  const data = localStorage.getItem(runs[current_run_id].pokedex_key)
+  /*const data = localStorage.getItem(runs[current_run_id].pokedex_key)
   if (data != null) {
     pokedex = JSON.parse(data)
     load_datalist_pokedex()
   } else {
     build_pokedex(runs[current_run_id].generation_index)
-  }
+  }*/
+  console.log(runs[current_run_id].pokedex_key)
+  fetch(app_url + generation_data_url + runs[current_run_id].pokedex_key + ".json")
+    .then(response => response.json())
+    .then(function(pokedex_fetched) {
+        pokedex = pokedex_fetched
+        load_datalist_pokedex()
+      })
 }
 
 function wait_pokedex(dex_size) {
@@ -364,6 +388,17 @@ function wait_pokedex(dex_size) {
   } else {
     load_datalist_pokedex()
   }
+}
+
+/*********************************************************************
+*  Load runs pop-up functions
+*********************************************************************/
+function open_runs_pop_up() {
+  return
+}
+
+function close_runs_pop_up() {
+  return
 }
 
 /*********************************************************************
@@ -376,6 +411,10 @@ function render_encounters() {
     console.log("render_encounters(): No encounters for this run !")
     return
   }
+
+  // Reset datalist for teams tab's filters
+  encounters_pokemons_datalist.innerHTML = null
+  pokemon_pool = []
 
   console.log("render_encounters(): Starting to render the " + runs[current_run_id].encounters.length + " encounter(s)...")
   
@@ -466,10 +505,23 @@ function render_encounters() {
     button_toggle_state.className = encounter_class + "buttons"
     if (runs[current_run_id].encounters[idx].alive) {    
       button_toggle_state.textContent = "kill"
+
+      // filter options for teams tab 
+      const option_1 = document.createElement("option")
+      option_1.value = runs[current_run_id].encounters[idx].pokemon_1.name
+      encounters_pokemons_datalist.appendChild(option_1)
+      pokemon_pool.push(runs[current_run_id].encounters[idx].pokemon_1.name)
+
+      const option_2 = document.createElement("option")
+      option_2.value = runs[current_run_id].encounters[idx].pokemon_2.name
+      encounters_pokemons_datalist.appendChild(option_2)
+      pokemon_pool.push(runs[current_run_id].encounters[idx].pokemon_2.name)
     } else {
       button_toggle_state.textContent = "revive"
     }
     
+    
+
     container.appendChild(encounter_infos)
     container.appendChild(pokemon_1)
     container.appendChild(pokemon_2)
@@ -496,7 +548,9 @@ function toggle_encounter_state(idx = null, state = null) {
     runs[current_run_id].encounters[idx].alive = state
   }
   
+  save_data()
   render_encounters()
+  render_teams()
 }
 
 /*********************************************************************
@@ -578,7 +632,7 @@ function remove_encounter(idx) {
 }
 
 function edit_encounter(idx) {
-  encounters[idx] = document.getElementById(encounter_id + toString(idx) + "_input").value
+  encounters[idx] = document.getElementById(encounter_id + idx.toString() + "_input").value
 }
 
 function save_encounter() {
@@ -676,70 +730,108 @@ pop_up_encounter_pokemon2.addEventListener('input', function (evt) {
 *  Teams tab functions
 *********************************************************************/
 function update_teams(encounter, is_new) {
-  console.log("update_teams(" + encounter + ", " + is_new + ")")
+  console.log("update_teams(): with encounter = ")
   console.log(encounter)
-  
-  // if encounter isnt new, update team list
-  if (!is_new) {
-    console.log("update_teams(): encounter is not new. this won't work much but at least we update the teams in which the encounter exists")
-    for (let i = runs[current_run_id].teams.length-1; i >= 0; i--) {
-      for (let j = runs[current_run_id].teams[i].length-1; j >= 0; j--) {
-        if (runs[current_run_id].teams[i][j].idx == encounter.idx) {
-          runs[current_run_id].teams[i][j] = encounter
-          
-          /*if (!check_team(runs[current_run_id].teams[i].slice())) {
-            runs[current_run_id].teams.pop(i)
-          }*/
-        }
-      }
-    }
-  // else copy all teams that are not max size and add new encounter to it
-  } else {
-    console.log("update_teams(): new encounter... generating new teams")   
-    console.log(runs[current_run_id].teams)
+
+  // if encounter IS NEW copy all teams that are not max size and add new encounter to it
+  if (is_new) {
+    console.log("update_teams(): new encounter... generating new teams based on the current team pool")   
+    //console.log(runs[current_run_id].teams)
     
     for (let i = runs[current_run_id].teams.length-1; i >= 0; i--) {
       if (runs[current_run_id].teams[i].length < team_size_max) {
-        let new_team = runs[current_run_id].teams[i].push(encounter)
-        console.log("Adding new team")
-        console.log(new_team)
-        runs[current_run_id].teams[i].push(new_team)
+        let new_team = []
+        runs[current_run_id].teams[i].forEach(element => {
+          new_team.push(element)
+        })
+
+        new_team.push(encounter)
+        
+        //if (is_team_legal(new_team)){
+          //console.log("Adding new team")
+          //console.log(new_team)
+        runs[current_run_id].teams.push(new_team)
+        //}        
       }
     }
     
+    // New encounter is always a team of 1
     runs[current_run_id].teams.push([encounter])
-    //runs[current_run_id].teams.concat(new_teams)
-  }
 
-  // check if team is legal
-  for (let idx = runs[current_run_id].teams.length-1; idx >= 0; idx--) {
-    if (!check_team(runs[current_run_id].teams[idx].slice())) {
-      runs[current_run_id].teams.pop(idx)
+  } else {
+    for (let i = runs[current_run_id].teams.length-1; i >= 0; i--){
+      for (let j = 0; j < runs[current_run_id].teams[i].length; j++){
+        if (runs[current_run_id].teams[i][j].idx == encounter.idx){
+          runs[current_run_id].teams[i][j] = encounter
+        }
+      }
     }
   }
   
   // render teams tab
+  save_data()
   render_teams()
 }
 
-function check_team(team) {
+function is_team_legal(team){
   let types_array = []
-  
-  for (let i = 0; i < team.length; i++) {
-    if (!team[i].alive || types_array.includes(team[i].pokemon_1.type_1) || types_array.includes(team[i].pokemon_2.type_1)) {
+
+  for (idx = 0; idx < team.length; idx++){
+    if (!runs[current_run_id].encounters[team[idx].idx].alive){
+      return false
+    }
+    if (types_array.indexOf(team[idx].pokemon_1.type1) > -1) {
       return false
     } else {
-      types_array.push(team[i].pokemon_1.type_1)
-      types_array.push(team[i].pokemon_2.type_1)
+      types_array.push(team[idx].pokemon_1.type1)
+    }
+    if (types_array.indexOf(team[idx].pokemon_2.type1) > -1) {
+      return false
+    } else {
+      types_array.push(team[idx].pokemon_2.type1)
     }
   }
-  
+
   return true
 }
 
-function render_teams() {
-  teams_div.innerHTML = null;
+function is_team_in_filter(team){
+  let count_filters = 0
+
+  for (idx = 0; idx < team.length; idx++){
+    if (filters_array.indexOf(team[idx].pokemon_1.name) > -1) {
+      count_filters++
+    } 
+    if (filters_array.indexOf(team[idx].pokemon_2.name) > -1) {
+      count_filters++
+    }
+  }
+
+  return count_filters == filters_array.length
+}
+
+function build_filter_array(){
+  filters_array = []
+
+  for (let i = 0; i < teams_filter_array.length; i++){
+    if (pokemon_pool.indexOf(teams_filter_array[i].value) > -1){
+      filters_array.push(teams_filter_array[i].value)
+    } else {
+      teams_filter_array[i].value = ""
+    }
+  }
   
+  render_teams()
+}
+
+function render_teams() {
+  
+  // first reset the page content
+  teams_div_array.forEach(element => {
+    element.innerHTML = null;
+  })
+
+  // Check if any teams
   if (runs[current_run_id].teams.length == 0) {
     console.log("render_teams(): No teams available for this run !")
     return
@@ -749,57 +841,72 @@ function render_teams() {
   console.log(runs[current_run_id].teams)
   
   for (let idx = 0; idx < runs[current_run_id].teams.length; idx++) {
-    const container = document.createElement("div")
-    container.className = team_class
-    
-    // players div
-    const div_player_1 = document.createElement("div")
-    div_player_1.className = team_class + "player_1"
+    if (is_team_legal(runs[current_run_id].teams[idx]) && is_team_in_filter(runs[current_run_id].teams[idx])) {
 
-    const div_player_1_infos = document.createElement("div")
-    div_player_1_infos.className = team_class + "player_infos"
-    div_player_1_infos.textContent = runs[current_run_id].player_1
+      const container = document.createElement("div")
+      container.className = team_class
+      
+      // players div
+      const div_player_1 = document.createElement("div")
+      div_player_1.className = team_class + "player_1"
 
-    const div_player_2 = document.createElement("div")
-    div_player_2.className = team_class + "player_2"
+      const div_player_1_infos = document.createElement("div")
+      div_player_1_infos.className = team_class + "player_infos"
+      div_player_1_infos.textContent = runs[current_run_id].player_1
 
-    const div_player_2_infos = document.createElement("div")
-    div_player_2_infos.className = team_class + "player_infos"
-    div_player_2_infos.textContent = runs[current_run_id].player_2
+      const div_player_2 = document.createElement("div")
+      div_player_2.className = team_class + "player_2"
 
-    div_player_1.appendChild(div_player_1_infos)
-    div_player_2.appendChild(div_player_2_infos)
-    
-    // adding pokemons to players div
-    for (let i = 0; i < runs[current_run_id].teams[idx].length; i++) {
-      // player 1
-      const pokemon_player_1 = document.createElement("div")
-      pokemon_player_1.className = team_pokemon_class
+      const div_player_2_infos = document.createElement("div")
+      div_player_2_infos.className = team_class + "player_infos"
+      div_player_2_infos.textContent = runs[current_run_id].player_2
 
-      const img_pokemon1 = document.createElement("img")
-      img_pokemon1.src = runs[current_run_id].teams[idx][i].pokemon_1.sprite
-      img_pokemon1.className = team_pokemon_class + "_img"
+      div_player_1.appendChild(div_player_1_infos)
+      div_player_2.appendChild(div_player_2_infos)
+      
+      // adding pokemons to players div
+      for (let i = 0; i < runs[current_run_id].teams[idx].length; i++) {
+        // player 1
+        const pokemon_player_1 = document.createElement("div")
+        pokemon_player_1.className = team_pokemon_class
 
-      // player 2
-      const pokemon_player_2 = document.createElement("div")
-      pokemon_player_2.className = team_pokemon_class
+        const img_pokemon1 = document.createElement("img")
+        img_pokemon1.src = runs[current_run_id].teams[idx][i].pokemon_1.sprite
+        img_pokemon1.className = team_pokemon_class + "_img"
 
-      const img_pokemon2 = document.createElement("img")
-      img_pokemon2.src = runs[current_run_id].teams[idx][i].pokemon_2.sprite
-      img_pokemon2.className = team_pokemon_class + "_img"
+        // player 2
+        const pokemon_player_2 = document.createElement("div")
+        pokemon_player_2.className = team_pokemon_class
 
-      pokemon_player_1.appendChild(img_pokemon1)
-      pokemon_player_2.appendChild(img_pokemon2)
-      div_player_1.appendChild(pokemon_player_1)
-      div_player_2.appendChild(pokemon_player_2)
+        const img_pokemon2 = document.createElement("img")
+        img_pokemon2.src = runs[current_run_id].teams[idx][i].pokemon_2.sprite
+        img_pokemon2.className = team_pokemon_class + "_img"
+
+        pokemon_player_1.appendChild(img_pokemon1)
+        pokemon_player_2.appendChild(img_pokemon2)
+        div_player_1.appendChild(pokemon_player_1)
+        div_player_2.appendChild(pokemon_player_2)
+      }
+      
+      container.appendChild(div_player_1)
+      container.appendChild(div_player_2)
+      
+      teams_div_array[runs[current_run_id].teams[idx].length-1].appendChild(container)
     }
-    
-    container.appendChild(div_player_1)
-    container.appendChild(div_player_2)
-    
-    teams_div.appendChild(container)
   }
-}  
+  console.log(document.getElementsByClassName(team_class).length)
+}
+
+function are_encounters_alive(team){
+  console.log(team)
+  for (let i = 0; i < team.length; i++){
+    if (!runs[current_run_id].encounters[team[i].idx].alive){
+      return false
+    }
+  }
+
+  return true
+}
 
 
 /*********************************************************************
@@ -879,87 +986,87 @@ const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
 let dex_size = -1
 
 function build_pokedex(generation) {
+  
+  // check if generation exists
   if (generation < 0 || generation >= generations_array.length) {
     return
   }
 
   console.log("build_pokedex(generation = '" + generation + "')")
   
+  // set pokedex to be empty 
   pokedex = []
-  const nb_species = count_species(generation)
-  dex_size = nb_species
 
+  // count how many pokemon is in the dex
+  const nb_species = count_species(generation)
+  dex_size = 0
+
+  // for each pokemon in the dex, get their species information on the poke api
   for (let idx = 1; idx <= nb_species; idx++) {
     fetch(api_url + pokemon_species_url + idx.toString())
     .then(response => response.json())
     .then(function(pokemon_species) {
+      
       //console.log(allpokemon.results)
-      console.log(pokemon_species)
-      pokemon_species.varieties.forEach(function(pokemon_varieties) {
-        fetch_pokemon_data(pokemon_varieties, generation)
+      //console.log(pokemon_species)
+      //console.log(pokemon_species.varieties.length)
+
+      // for each varieties of the pokemon, build the variety data 
+      pokemon_species.varieties.forEach(function(pokemon_variety) {
+        fetch_pokemon_data(pokemon_variety.pokemon, generation)
       })
     })
-  /*  
-  fetch(api_url + "/pokemon?limit=" + nb_species.toString())
-    .then(response => response.json())
-    .then(function(allpokemon) {
-      //console.log(allpokemon.results)
-      allpokemon.results.forEach(function(pokemon) {
-        fetch_pokemon_data(pokemon, generation)
-      })
-    })
-  */
   }
   check_dex_size(generation)
 }
 
-function fetch_pokemon_species(pokemon, gen) {
-  let url = pokemon.species.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
-  let new_pokemon
+function fetch_pokemon_data(pokemon_variety, gen) {
 
-  //console.log("processing data for pokemon :")
-  //console.log(pokemon)
-  
-  fetch(url)
-    .then(response => response.json())
-    .then(function(pokeData){
-        fetch_pokemon_varieties(pokeData, gen)
-    })
-}
-
-function fetch_pokemon_varieties(pokemon, gen) {
-  //console.log("processing data for pokemon :")
-  //console.log(pokemon)
-  for (let i = 0; i < pokemon.varietes.length; i++) {
-    let url = pokemon.varieties[i].pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
-    fetch(url)
-      .then(response => response.json())
-      .then(function(pokeData){
-          fetch_pokemon_data(pokeData, gen)
-      })
+  // Check if vaeriety isn't a mega, a gmax, a totem or a pikachu form
+  if (pokemon_variety.name.indexOf('-mega') > -1) {
+    return
   }
-}
 
-function fetch_pokemon_data(pokemon, gen) {
-  let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
-  let new_pokemon
+  if (pokemon_variety.name.indexOf('-gmax') > -1) {
+    return
+  }
 
-  //console.log("processing data for pokemon :")
-  //console.log(pokemon)
+  if (pokemon_variety.name.indexOf('pikachu-') > -1) {
+    return
+  }
+
+  if (pokemon_variety.name.indexOf('-totem') > -1) {
+    return
+  }
   
+  let url = pokemon_variety.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
+  let new_pokemon
+  dex_size++
+
+  //console.log("fetch_pokemon_data(): processing data for pokemon variety :")
+  //console.log(pokemon_variety)
+  
+  // fetch the data for the ongoing pokemon variety
   fetch(url)
     .then(response => response.json())
     .then(function(pokeData){
-        const new_name = pokeData.species.name
+
+        // create and prepare the pokemon_object to add to the pokedex
+        const new_name = pokeData.name
         const new_sprite = pokeData.sprites.front_default
+
+        //console.log("Checking types for " + new_name)
         const new_type1 = get_type_1(pokeData, gen)
         const new_type2 = get_type_2(pokeData, gen)
+
         new_pokemon = structuredClone(pokemon)
         new_pokemon.name = new_name
         new_pokemon.sprite = new_sprite
         new_pokemon.type1 = new_type1
         new_pokemon.type2 = new_type2
         new_pokemon.species = null
+
+        // pass on current fetch result and current pokemon object to get the evolution chain for species clause
         get_first_evolution(pokeData, gen, new_pokemon)
     })
 }
@@ -984,7 +1091,7 @@ function get_first_evolution(pokemon, gen, poke_obj){
 
 function get_type_1(pokemon, gen) {
   if (pokemon.past_types["0"]) {
-    if (is_this_gen_included(pokemon.past_types["0"].generation.name, gen)) {
+    if (is_this_gen_included(gen, pokemon.past_types["0"].generation.name)) {
       return pokemon.past_types["0"].types["0"].type.name
     }
   }
@@ -993,11 +1100,9 @@ function get_type_1(pokemon, gen) {
 
 function get_type_2(pokemon, gen) {
   if (pokemon.past_types["0"]) {
-    if (is_this_gen_included(pokemon.past_types["0"].generation.name, gen)) {
-      if (pokemon.past_types["0"].types["1"]) {
-        if (!pokemon.past_types["0"].types["0"].type.name) {
-          return pokemon.past_types["0"].types[1].type.name
-        }
+    if (is_this_gen_included(gen, pokemon.past_types["0"].generation.name)) {
+      if (pokemon.past_types["0"].types.length > 1) {
+        return pokemon.past_types["0"].types[1].type.name
       }
       return "unknown"
     }    
@@ -1008,10 +1113,11 @@ function get_type_2(pokemon, gen) {
   return "unknown"
 }
 
-function is_this_gen_included(generation_to_check, generation_index) {
-  var idx = generations_array.indexOf(generation_to_check)
-
-  if (idx <= generation_index) {
+function is_this_gen_included(generation_to_check, generation) {
+  var idx = generations_array.indexOf(generation)
+  //console.log(generation)
+  //console.log(idx)
+  if (generation_to_check <= idx) {
     return true
   } else {
     return false
@@ -1031,14 +1137,25 @@ function count_species(generation) {
 }
 
 function check_dex_size(generation) {
-  if(pokedex.length < dex_size) {
+  if(pokedex.length < dex_size || dex_size < count_species(generation)) {
     window.setTimeout(function() { check_dex_size(generation); }, 100); /* this checks the flag every 100 milliseconds*/
   } else {
     console.log("Pokedex fully built !")
     load_datalist_pokedex()
     const string_pokedex = JSON.stringify(pokedex)
     localStorage.setItem(generations_array[generation], string_pokedex)
+    download_pokedex(pokedex, generations_array[generation])
   }
+}
+
+function download_pokedex(exportObj, exportName){
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+  var downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("download", exportName + ".json");
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
 }
 
 // loading page

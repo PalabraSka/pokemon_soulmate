@@ -1,79 +1,75 @@
-/*********************************************************************
-*  POKEDEX BUILDER !!!!!!!!!!!
-*********************************************************************/
 const api_url = "https://pokeapi.co/api/v2/"
 const generation_url = "generation/"
-const pokemon_species_url = "pokemon-species/"
+const generations = ["generation-i", "generation-ii", "generation-iii", "generation-iv", "generation-v", "generation-vi", "generation-vii", "generation-viii", "generation-ix"]
 const generations_nb = [151, 100, 135, 107, 156, 72, 88, 96, 120]
+const encounter_class = "encounter"
+const encounters_div = document.getElementById("encounters_div")
 
-let dex_size = -1
+let pokedex = []
+let dex_size = 0
 
-function build_pokedex(generation) {
-  if (generation < 0 || generation >= generations_array.length) {
+function pokemon_(pk_name, pk_sprite, pk_species, pk_type1, pk_type2=null) {
+  this.name = pk_name
+  this.sprite = pk_sprite
+  this.species = pk_species
+  this.type1 = pk_type1
+  this.type2 = pk_type2
+}
+
+function render_page() {
+  for (let i = 0; i < generations.length; i++) {
+    const container = document.createElement("div")
+    container.id = i.toString()
+    container.className = encounter_class
+    
+    const text = document.createElement("p")
+    text.id = i.toString()
+    text.appendChild(document.createTextNode(generations[i]))
+    text.style.display = "inline"
+    text.width = "250px";
+    text.className = encounter_class
+
+    const button_create = document.createElement("button")
+    button_create.textContent = "download"
+    button_create.onclick = () => build_pokedex(i)
+    button_create.className = encounter_class
+    
+    container.appendChild(text)
+    container.appendChild(button_create)
+    
+    encounters_div.appendChild(container)
+  }
+}
+
+function build_pokedex(generation, download = true) {
+  if (generation < 0 || generation >= generations.length) {
     return
   }
 
-  console.log("build_pokedex(generation = '" + generation + "')")
-  
   pokedex = []
   const nb_species = count_species(generation)
   dex_size = nb_species
+  console.log(nb_species)
 
-  for (let idx = 1; idx <= nb_species; idx++) {
-    fetch(api_url + pokemon_species_url + idx.toString())
-    .then(response => response.json())
-    .then(function(pokemon_species) {
-      //console.log(allpokemon.results)
-      pokemon_species.results.varieties.forEach(function(pokemon_varieties) {
-        fetch_pokemon_data(pokemon_varieties, generation)
-      })
-    })
-  /*  
   fetch(api_url + "/pokemon?limit=" + nb_species.toString())
     .then(response => response.json())
     .then(function(allpokemon) {
-      //console.log(allpokemon.results)
+      console.log(allpokemon.results)
       allpokemon.results.forEach(function(pokemon) {
         fetch_pokemon_data(pokemon, generation)
       })
     })
-  */
-  check_dex_size(generation)
-}
-
-function fetch_pokemon_species(pokemon, gen) {
-  let url = pokemon.species.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
-  let new_pokemon
-
-  //console.log("processing data for pokemon :")
-  //console.log(pokemon)
   
-  fetch(url)
-    .then(response => response.json())
-    .then(function(pokeData){
-        fetch_pokemon_varieties(pokeData, gen)
-    })
-}
-
-function fetch_pokemon_varieties(pokemon, gen) {
-  //console.log("processing data for pokemon :")
-  //console.log(pokemon)
-  for (let i = 0; i < pokemon.varietes.length; i++) {
-    let url = pokemon.varieties[i].pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
-    fetch(url)
-      .then(response => response.json())
-      .then(function(pokeData){
-          fetch_pokemon_data(pokeData, gen)
-      })
-  }
+  console.log(download)
+  check_dex_size(generation, download)
 }
 
 function fetch_pokemon_data(pokemon, gen) {
   let url = pokemon.url // <--- this is saving the pokemon url to a variable to use in the fetch. 
   let new_pokemon
 
-  //console.log("processing data for pokemon :")
-  //console.log(pokemon)
+  console.log("processing data for pokemon :")
+  console.log(pokemon)
   
   fetch(url)
     .then(response => response.json())
@@ -82,13 +78,8 @@ function fetch_pokemon_data(pokemon, gen) {
         const new_sprite = pokeData.sprites.front_default
         const new_type1 = get_type_1(pokeData, gen)
         const new_type2 = get_type_2(pokeData, gen)
-        new_pokemon = structuredClone(pokemon)
-        new_pokemon.name = new_name
-        new_pokemon.sprite = new_sprite
-        new_pokemon.type1 = new_type1
-        new_pokemon.type2 = new_type2
-        new_pokemon.species = null
-        get_first_evolution(pokeData, gen, new_pokemon)
+        new_pokemon = new pokemon_(new_name, new_sprite, null, new_type1, new_type2)
+        const new_species = get_first_evolution(pokeData, gen, new_pokemon)
     })
 }
 
@@ -103,7 +94,7 @@ function get_first_evolution(pokemon, gen, poke_obj){
         .then(response => response.json())
         .then(function(pokeData2) {
           poke_obj.species = pokeData2.chain.species.name
-          //console.log(poke_obj)
+          console.log(poke_obj)
           pokedex.push(poke_obj)
         })
       }
@@ -127,23 +118,17 @@ function get_type_2(pokemon, gen) {
           return pokemon.past_types["0"].types[1].type.name
         }
       }
-      return "unknown"
+      return null
     }    
   }
   if (pokemon.types.length > 1) {
     return pokemon.types["1"].type.name
   }
-  return "unknown"
+  return null
 }
 
-function is_this_gen_included(generation_to_check, generation_index) {
-  var idx = generations_array.indexOf(generation_to_check)
-
-  if (idx <= generation_index) {
-    return true
-  } else {
-    return false
-  }
+function is_this_gen_included(text, generation) {
+  return true
 }
 
 function count_species(generation) {
@@ -158,13 +143,34 @@ function count_species(generation) {
     return nb_species
 }
 
-function check_dex_size(generation) {
+function check_dex_size(generation, download) {
   if(pokedex.length < dex_size) {
-    window.setTimeout(function() { check_dex_size(generation); }, 100); /* this checks the flag every 100 milliseconds*/
+    window.setTimeout(function() { check_dex_size(generation, download); }, 100); /* this checks the flag every 100 milliseconds*/
   } else {
-    console.log("Pokedex fully built !")
-    load_datalist_pokedex()
     const string_pokedex = JSON.stringify(pokedex)
-    localStorage.setItem(generations_array[generation], string_pokedex)
+    console.log(pokedex.length)
+    console.log(download)
+
+    
+    
+    if (download == true) {
+      console.log("DOWNLOAD POKEDEX !!")
+      download_pokedex(pokedex, generations[generation])
+    } else {
+      localStorage.setItem(generations[generation], string_pokedex)
+    }
+    
   }
 }
+
+function download_pokedex(exportObj, exportName){
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+  var downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("download", exportName + ".json");
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
+
+render_page()

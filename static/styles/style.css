@@ -388,17 +388,20 @@ img.encounter_pokemon_div_type {
 
 /* teams tab */
 .teams_div {
+    column-fill:revert;
+    padding-top: 10px;
+    display: fill;
 }
 
 .team_ {
     display: block;
     padding-left: 100px;
     padding-bottom: 5px;
-    margin: 10px;
+    margin-bottom: 10px;
     border-radius: 10px;
     border-style: solid;
     border-width: 1px;
-    width: 492px;
+    width: 400px;
 }
 
 .team_:hover {
@@ -407,17 +410,21 @@ img.encounter_pokemon_div_type {
 
 .team_player_1 {
     display: block;
-    margin: 10px;
+    margin-left: 10px;
+    margin-top: -5px;
 }
 
 .team_player_2 {
     display: block;
-    margin: 10px;
+    margin-left: 10px;
+    margin-top: -25px;
+    margin-bottom: -5px;
 }
 
 .team_player_infos {
     display: block;
     position: relative;
+    z-index: -1;
     top: 40px;
     left: -90px;
     width: 100px;
@@ -431,4 +438,14 @@ img.encounter_pokemon_div_type {
 
 .team_pokemon_div_img {
     width: 60px;
+    margin-right: -20px;
+}
+
+.teams_tab_filter{
+    column-width: 100px;
+}
+.filter-list{
+    display: block;
+    width: 100%;
+    margin: 2px;
 }
